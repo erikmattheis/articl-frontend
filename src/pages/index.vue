@@ -56,7 +56,7 @@ export default {
         this.isLoading = true;
 
         const results = await this.fetchData();
-
+        console.log(results);
         if (results.count) {
           this.$store.dispatch("resources/count", results.count);
         }
@@ -95,7 +95,6 @@ export default {
       } catch (error) {
         this.$store.dispatch("errors/setError", error);
       } finally {
-        console.log("is here loading false", process.env.NODE_ENV)
         this.isLoading = false;
       }
     },

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>{{ categoriesLocal.length }}</h1>
     <draggable-items
       v-model="categoriesLocal"
       tag="ul"
@@ -15,7 +16,13 @@
           :tab-name="TabName" />
       </template>
     </draggable-items>
-
+    <template v-for="category in categoriesLocal">
+      <categories-list-item
+        :category="category"
+        class="list-item"
+        :tree-level="treeLevel"
+        :tab-name="TabName" />
+    </template>
   </div>
 </template>
 
