@@ -1,4 +1,4 @@
-const { setTitleAndDescription } = require("@/services/htmlMetaService");
+import { setTitleAndDescription } from "@/services/htmlMetaService";
 
 export default {
   methods: {

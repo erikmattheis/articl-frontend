@@ -1,38 +1,14 @@
-/*
-Coding instructions for Chat GPT:
 
-Can you rewite it in a more consistant style? Such as where variables are deined and stored?
-
-Specifically -
-
-Use Composition API
-Add unit tests with Jest. I keep making edits that break something else, the tests should prevent that.
-Use functional programming whenever possible
-Use async/await
-Use try/catch
-Use global error handler
-Use axios to make requests through an istance caklled axiosService
-Identify places where I could better use the advice "don't repeat yourself" - moving functions that may be used in other to services
-Suggest functions that can be abstracted so they can be used in other files.
-
-What other suggestions do you have to improve the code?
-
-Please include rewriting these instructions if they can be clearer or more distinct.
-
-*/
 
 import { createApp } from "vue";
 import VueCookies from "vue-cookies";
 
 import App from "./App.vue";
+import './assets/global.scss';
 import router from "./router";
 import store from "./store/index";
-
 import isLoggedInMixin from "./mixins/isLoggedInMixin";
 import setTitleAndDescriptionMixin from "./mixins/setTitleAndDescriptionMixin";
-
-
-
 import axiosInstance from "./services/axiosService";
 
 const app = createApp(App);

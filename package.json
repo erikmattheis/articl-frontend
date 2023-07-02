@@ -9,10 +9,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.47"
+    "@picocss/pico": "^1.5.10",
+    "axios": "^1.4.0",
+    "dayjs": "^1.11.8",
+    "lodash": "^4.17.21",
+    "vue": "^3.2.47",
+    "vue-cookies": "^1.8.3",
+    "vue-draggable-next": "^2.2.1",
+    "vue-feather": "^2.0.0",
+    "vue-router": "^4.2.2",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
+    "sass": "^1.63.6",
     "vite": "^4.3.9"
   }
 }

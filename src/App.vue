@@ -62,12 +62,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./assets/variables";
-@import "./assets/_placeholder.scss";
-@import "~/node_modules/@picocss/pico/scss/pico.scss";
-@import "./assets/maxwidth.scss";
-@import "./assets/styles-override.scss";
-@import "//fonts.googleapis.com/css2?family=Open+Sans&display=swap";
+@import "@/assets/global.scss";
 
 .smaller {
   font-size: 0.7rem;
