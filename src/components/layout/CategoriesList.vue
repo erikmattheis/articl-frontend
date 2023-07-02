@@ -1,42 +1,41 @@
 <template>
   <div>
-    <h1>{{ categoriesLocal.length }}</h1>
+    {{ categoriesLocal[0] }}
     <draggable-items
       v-model="categoriesLocal"
-      tag="ul"
-      item-key="id"
-      handle=".handle"
-      ghost-class="ghost"
-      @change="onUpdateOrderValues">
-      <template #item="{ element }">
+      @start="drag = true"
+      @end="drag = false"
+      item-key="id">
+      <template #item="{ item, index }">
         <categories-list-item
-          :category="element"
-          class="list-item"
-          :tree-level="treeLevel"
-          :tab-name="TabName" />
+          :category="item"
+          :item="item"
+          :index="index"
+          :drag="drag"
+          @updateOrderValues="updateOrderValues"
+          @saveOrderValues="saveOrderValues"
+          :tabName="TabName"
+          :treeLevel="treeLevel"
+          :categories="categoriesLocal"
+          :key="item.id" />
       </template>
     </draggable-items>
-    <template v-for="category in categoriesLocal">
-      <categories-list-item
-        :category="category"
-        class="list-item"
-        :tree-level="treeLevel"
-        :tab-name="TabName" />
-    </template>
+    <h1>{{ categoriesLocal.length }}</h1>
+
   </div>
 </template>
 
 <script>
-import { VueDraggableNext } from "vue-draggable-next";
-import { mapGetters } from "vuex";
-import axiosInstance from "@/services/axiosService";
 
+import { mapGetters } from "vuex";
+import DraggableItems from "@/components/layout/DraggableItems.vue";
 import CategoriesListItem from "@/components/layout/CategoriesListItem.vue";
+import axiosInstance from "@/services/axiosService";
 
 export default {
   name: "TabCategories",
   components: {
-    DraggableItems: VueDraggableNext,
+    DraggableItems,
     CategoriesListItem,
   },
   data() {
