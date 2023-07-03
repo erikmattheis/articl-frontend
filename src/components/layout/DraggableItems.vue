@@ -3,23 +3,8 @@
     <div
       v-for="(item, index) in draggableItems"
       :key="item.id">
-      #item#
       <categories-list-item :item="item"></categories-list-item>
     </div>
-    <!--
-    <div
-      v-for="(item, index) in draggableItems"
-      :key="item.id"
-      class="draggable"
-      :class="{ 'is-dragging': draggingIndex === index }"
-      draggable="true"
-      @dragstart="handleDragStart(index)"
-      @dragend="handleDragEnd"
-      @dragover="handleDragOver"
-      @drop="handleDrop(index)">
-      <category-list-item :item="item"></category-list-item>
-    </div>
-    -->
   </div>
 </template>
 
