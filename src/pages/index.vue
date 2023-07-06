@@ -44,7 +44,7 @@ export default {
   },
 
   created() {
-    console.log("created")
+
     this.setTitleAndDescriptionMixin({
       titleHtml: "Articl Home",
     });

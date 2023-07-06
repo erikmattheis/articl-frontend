@@ -1,26 +1,12 @@
 <template>
   <div>
-    {{ categoriesLocal[0] }}
+
     <draggable-items
-      v-model="categoriesLocal"
+      :items="categoriesLocal"
       @start="drag = true"
       @end="drag = false"
       item-key="id">
-      <template #item="{ item, index }">
-        <categories-list-item
-          :category="item"
-          :item="item"
-          :index="index"
-          :drag="drag"
-          @updateOrderValues="updateOrderValues"
-          @saveOrderValues="saveOrderValues"
-          :tabName="TabName"
-          :treeLevel="treeLevel"
-          :categories="categoriesLocal"
-          :key="item.id" />
-      </template>
     </draggable-items>
-    <h1>{{ categoriesLocal.length }}</h1>
 
   </div>
 </template>

@@ -33,13 +33,13 @@ const router = createRouter({
 
     {
       name: "SearchArticls",
-      path: "/articls",
+      path: "/articls/:slug?",
       component: SearchArticls,
     },
 
     {
       name: "ResourcePage",
-      path: "/resource/:slug",
+      path: "/resource",
       component: ResourcePage,
       children: [{
         name: "TabCategories",

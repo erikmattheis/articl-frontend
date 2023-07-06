@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div
-      v-for="(item, index) in draggableItems"
+      v-for="(item, index) in items"
       :key="item.id">
       <categories-list-item :item="item"></categories-list-item>
     </div>
@@ -13,16 +13,20 @@ import CategoriesListItem from '@/components/layout/CategoriesListItem.vue';
 
 export default {
   name: 'DraggableItems',
+  components: {
+    CategoriesListItem,
+  },
 
   data() {
     return {
-      draggableItems: [
-        { id: 1, name: 'Item 1' },
-        { id: 2, name: 'Item 2' },
-        { id: 3, name: 'Item 3' },
-      ],
       draggingIndex: null,
     };
+  },
+  props: {
+    items: {
+      type: Object,
+      default: undefined,
+    },
   },
   methods: {
     handleDragStart(index) {
@@ -36,9 +40,9 @@ export default {
     },
     handleDrop(targetIndex) {
       if (this.draggingIndex !== null) {
-        const draggedItem = this.draggableItems[this.draggingIndex];
-        this.draggableItems.splice(this.draggingIndex, 1);
-        this.draggableItems.splice(targetIndex, 0, draggedItem);
+        const draggedItem = this.items[this.draggingIndex];
+        this.items.splice(this.draggingIndex, 1);
+        this.items.splice(targetIndex, 0, draggedItem);
       }
     },
   },

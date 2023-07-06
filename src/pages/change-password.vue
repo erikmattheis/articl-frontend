@@ -37,6 +37,7 @@
             @show="newPassword2Type = newPassword2Type === 'text' ? 'password' : 'text'" />
         </div>
       </label>
+      <input type="hidden" name="username" autocomplete="username">
       <button
         id="reset"
         type="submit"
