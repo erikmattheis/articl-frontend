@@ -39,7 +39,7 @@ const router = createRouter({
 
     {
       name: "ResourcePage",
-      path: "/resource",
+      path: "/resource/:slug?",
       component: ResourcePage,
       children: [{
         name: "TabCategories",

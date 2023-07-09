@@ -3,7 +3,8 @@
     <div
       v-for="(item, index) in items"
       :key="item.id">
-      <categories-list-item :item="item"></categories-list-item>
+
+      <categories-list-item :category="item"></categories-list-item>
     </div>
   </div>
 </template>

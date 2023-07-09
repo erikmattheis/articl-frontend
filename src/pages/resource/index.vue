@@ -4,7 +4,7 @@
     <the-breadcrumbs />
 
     <h2>{{ title }}</h2>
-
+    ok
     <categories-tabs v-if="treeLevel > 3" />
 
     <router-view :class="{ 'nav-content': treeLevel > 3 }" />
@@ -55,8 +55,6 @@ export default {
     },
   },
   created() {
-
-    console.log("this one created")
 
     this.setTitleAndDescriptionMixin({
       titleHtml: "Resource",

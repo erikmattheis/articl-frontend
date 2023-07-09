@@ -1,5 +1,6 @@
 <template>
   <li class="container">
+    {{ category.slug }} {{ tabName }}
     <router-link
       class="box"
       :to="{ name: tabName, params: { slug: category.slug } }">
@@ -37,9 +38,6 @@ export default {
     tabName() {
       return this.treeLevel !== 3 ? "TabCategories" : "ArticlsList";
     },
-  },
-  created() {
-    console.log("category.slug", this.category.slug);
   },
   methods: {
 

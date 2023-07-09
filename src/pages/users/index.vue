@@ -356,7 +356,6 @@ export default {
           titleHtml: `Articl.net User ${this.username}`
         });
       } catch (error) {
-        console.log("error", error);
         this.$store.dispatch("errors/setError", error);
       } finally {
         this.isLoading = false;

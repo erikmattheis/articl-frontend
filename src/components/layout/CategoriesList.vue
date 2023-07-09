@@ -1,13 +1,11 @@
 <template>
   <div>
-
     <draggable-items
       :items="categoriesLocal"
       @start="drag = true"
       @end="drag = false"
       item-key="id">
     </draggable-items>
-
   </div>
 </template>
 
@@ -45,6 +43,7 @@ export default {
   },
   mounted() {
     this.TabName = this.treeLevel > 3 ? "ArticlsList" : "TabCategories";
+    console.log("this.categories[0] in CategoriesList", this.categories[0]);
   },
   methods: {
     updateOrderValues() {
