@@ -1,6 +1,6 @@
 <template>
   <li class="container">
-    {{ category.slug }} {{ tabName }}
+    c {{ category.slug }} {{ tabName }}
     <router-link
       class="box"
       :to="{ name: tabName, params: { slug: category.slug } }">

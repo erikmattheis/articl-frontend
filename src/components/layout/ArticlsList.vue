@@ -1,5 +1,6 @@
 <template>
   <div>
+    ArticlsList
     <ul class="nav-tabs nav-tabs-inner-margin">
       <li
         v-for="articlType in articlTypes"
@@ -17,17 +18,11 @@
       v-if="articlTypeCurrent"
       class="nav-inner-content">
       <draggable-items
-        v-model="articls[articlTypeCurrent]"
-        tag="li"
+        :items="articls[articlTypeCurrent]"
+        @start="drag = true"
+        @end="drag = false"
         item-key="id"
-        handle=".handle"
-        ghost-class="ghost"
         @change="onUpdateArticlsOrderValues">
-        <template #item="{ element }">
-          <articls-list-item
-            :articl="element"
-            :order="element.order" />
-        </template>
       </draggable-items>
     </ul>
     <div v-if="(articls[articlTypeCurrent]?.length === 0)">
@@ -37,7 +32,7 @@
 </template>
 
 <script>
-import { VueDraggableNext } from "vue-draggable-next";
+import DraggableItems from "@/components/layout/DraggableItems.vue";
 import { mapGetters } from "vuex";
 
 import ArticlsListItem from "@/components/layout/ArticlsListItem.vue";
@@ -46,7 +41,7 @@ import axiosInstance from "@/services/axiosService";
 export default {
   name: "ArticlsList",
   components: {
-    DraggableItems: VueDraggableNext,
+    DraggableItems,
     ArticlsListItem,
   },
   props: {

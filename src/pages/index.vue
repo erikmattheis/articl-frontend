@@ -1,7 +1,7 @@
 <template>
   <article v-if="!isLoading">
     <h2>{{ title }}</h2>
-
+    index
     <categories-list />
 
     <directory-actions
