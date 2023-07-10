@@ -2,9 +2,9 @@
   <article v-if="!isLoading">
 
     <the-breadcrumbs />
-
+    resource/index
     <h2>{{ title }}</h2>
-    ok
+
     <categories-tabs v-if="treeLevel > 3" />
 
     <router-view :class="{ 'nav-content': treeLevel > 3 }" />
@@ -51,17 +51,19 @@ export default {
     "$route.params.slug": {
       handler() {
         this.updateData();
-      }
+      },
+      'immediate': true,
     },
   },
   created() {
-
+    console.log('created')
     this.setTitleAndDescriptionMixin({
       titleHtml: "Resource",
     });
   },
   methods: {
     async updateData() {
+      console.log('updateData')
       try {
         this.isLoading = true;
         const results = await this.fetchData(this.$route.params.slug);
