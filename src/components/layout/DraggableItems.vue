@@ -5,18 +5,20 @@
       :key="item.id">
 
       <categories-list-item v-if="item.oldId" :category="item"></categories-list-item>
-      <articls-list-item v-else-if="item.oldId" :articl="item"></articls-list-item>
+      <articls-list-item v-else :articl="item"></articls-list-item>
     </div>
   </div>
 </template>
 
 <script>
 import CategoriesListItem from '@/components/layout/CategoriesListItem.vue';
+import ArticlsListItem from '@/components/layout/ArticlsListItem.vue';
 
 export default {
   name: 'DraggableItems',
   components: {
     CategoriesListItem,
+    ArticlsListItem,
   },
 
   data() {

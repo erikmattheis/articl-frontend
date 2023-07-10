@@ -1,6 +1,6 @@
 <template>
   <div>
-    ArticlsList
+    ArticlsList: {{ articlTypes.length }}
     <ul class="nav-tabs nav-tabs-inner-margin">
       <li
         v-for="articlType in articlTypes"
@@ -19,15 +19,14 @@
       class="nav-inner-content">
       <draggable-items
         :items="articls[articlTypeCurrent]"
-        @start="drag = true"
-        @end="drag = false"
-        item-key="id"
         @change="onUpdateArticlsOrderValues">
       </draggable-items>
     </ul>
+
     <div v-if="(articls[articlTypeCurrent]?.length === 0)">
       No entries yet.
     </div>
+
   </div>
 </template>
 
@@ -35,14 +34,12 @@
 import DraggableItems from "@/components/layout/DraggableItems.vue";
 import { mapGetters } from "vuex";
 
-import ArticlsListItem from "@/components/layout/ArticlsListItem.vue";
 import axiosInstance from "@/services/axiosService";
 
 export default {
   name: "ArticlsList",
   components: {
     DraggableItems,
-    ArticlsListItem,
   },
   props: {
     items: {
