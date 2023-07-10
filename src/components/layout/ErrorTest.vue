@@ -8,7 +8,6 @@
 export default {
   name: 'ErrorTest',
   created() {
-    console.log("created error", import.meta.env.MODE)
     // This will throw an intentional error
     console.log(undefinedVariable);
   },

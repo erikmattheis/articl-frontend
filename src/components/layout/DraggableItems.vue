@@ -2,7 +2,7 @@
   <div id="app">
     <div
       v-for="(item, index) in items"
-      :key="item.id">draggable
+      :key="item.id">
 
       <categories-list-item v-if="item.oldId" :category="item"></categories-list-item>
       <articls-list-item v-else-if="item.oldId" :articl="item"></articls-list-item>

@@ -20,7 +20,7 @@ const setMetaDescription = (metaDescription) => {
   }
 };
 const setTitleAndDescription = (category) => {
-  try {
+  
     setTitle(category.titleHtml);
 
     setMetaDescription(category.description);
@@ -29,10 +29,6 @@ const setTitleAndDescription = (category) => {
       titleHtml: category.titleHtml,
       description: category.description,
     });
-  }
-  catch (error) {
-    console.log('error', error);
-  }
 
 };
 
