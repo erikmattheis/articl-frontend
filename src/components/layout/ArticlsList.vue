@@ -1,6 +1,5 @@
 <template>
   <div>
-    ArticlsList: {{ articlTypes.length }}
     <ul class="nav-tabs nav-tabs-inner-margin">
       <li
         v-for="articlType in articlTypes"
@@ -16,7 +15,7 @@
 
     <ul
       v-if="articlTypeCurrent"
-      class="nav-inner-content">
+      class="nav-inner-content">ArticlsList: draggable-items (shows when there is articlTypeCurrent)
       <draggable-items
         :items="articls[articlTypeCurrent]"
         @change="onUpdateArticlsOrderValues">
@@ -63,8 +62,10 @@ export default {
     }),
   },
   mounted() {
+
     [this.articlTypeCurrent] = this.articlTypes;
   },
+
   methods: {
 
     updateArticlsOrderValues(articlType) {

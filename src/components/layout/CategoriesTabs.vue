@@ -1,6 +1,6 @@
 <template>
   <ul class="nav-tabs">
-
+    cat tabs
     <router-link
       v-slot="{ isActive, navigate }"
       custom

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>CategoriesList draggable-items:
     <draggable-items
       :items="categoriesLocal"
       @start="drag = true"

@@ -3,6 +3,7 @@
 
     <the-breadcrumbs />
 
+    <h2>treeLevel: {{ treeLevel }}</h2>
     <h2>{{ title }}</h2>
 
     <categories-tabs v-if="treeLevel > 3" />
@@ -25,7 +26,7 @@ import TheBreadcrumbs from "@/components/layout/TheBreadcrumbs.vue";
 import axiosInstance from "@/services/axiosService";
 
 export default {
-  name: "ResourcePage",
+  name: "ResourceIndex",
   components: {
     CategoriesTabs,
     DirectoryActions,
