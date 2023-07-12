@@ -7,7 +7,7 @@ import CreateCategoryPage from "@/pages/categories/index.vue";
 import ResourceIndex from "@/pages/resource/index.vue";
 import ForgotPassPage from "@/pages/forgot-pass.vue";
 import ForgotUsernamePage from "@/pages/forgot-username.vue";
-import HomePage from "@/pages/index.vue";
+import HomePage from "@/pages/resource/index.vue";
 import LoginPage from "@/pages/login.vue";
 import DeleteNote from "@/components/layout/NotesDelete.vue";
 import EditNote from "@/components/layout/NotesForm.vue";
@@ -16,7 +16,7 @@ import TabQuestionsAnswers from "@/components/layout/QAndAList.vue";
 import ResetPasswordPage from "@/pages/change-password.vue";
 import UsersPage from "@/pages/users/index.vue";
 import VerifyEmailPage from "@/pages/verify-email.vue";
-import TabCategories from "@/components/layout/CategoriesList.vue";
+import TabCategories from "@/components/layout/_CategoriesList.vue";
 import TabNotes from "@/components/layout/NotesList.vue";
 import ArticlsList from "@/components/layout/ArticlsList.vue";
 import ForbiddenPage from "@/pages/ForbiddenPage.vue";
@@ -32,12 +32,6 @@ const router = createRouter({
     },
 
     {
-      name: "SearchArticls",
-      path: "/articls/:slug?",
-      component: SearchArticls,
-    },
-
-    {
       name: "ResourceIndex",
       path: "/resource/:slug",
       component: ResourceIndex,
@@ -46,25 +40,7 @@ const router = createRouter({
         path: "",
         component: TabCategories,
       },
-
-  
-      {
-        name: "editCategory",
-        path: "categories/edit/:id?",
-        component: ResourceIndex,
-      },
-
-      {
-        name: "CreateCategoryPage",
-        path: "categories/:id?",
-        component: CreateCategoryPage,
-      },
       
-      {
-        name: "DeleteCategoryPage",
-        path: "categories/delete/:id?",
-        component: DeleteCategoryPage,
-      },
       {
         name: "TabNotes",
         path: "notes",
@@ -87,9 +63,21 @@ const router = createRouter({
           }],
       },
       {
-        name: "TabQuestionsAnswers",
-        path: "qa",
-        component: TabQuestionsAnswers,
+        name: "editCategory",
+        path: "categories/edit/:id?",
+        component: ResourceIndex,
+      },
+
+      {
+        name: "CreateCategoryPage",
+        path: "categories/:id?",
+        component: CreateCategoryPage,
+      },
+      
+      {
+        name: "DeleteCategoryPage",
+        path: "categories/delete/:id?",
+        component: DeleteCategoryPage,
       },
       {
         name: "editArticl",
@@ -165,6 +153,12 @@ const router = createRouter({
       name: "users",
       path: "/users",
       component: UsersPage,
+    },
+
+    {
+      name: "SearchArticls",
+      path: "/articls/:slug?",
+      component: SearchArticls,
     },
 
     {

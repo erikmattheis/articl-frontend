@@ -1,11 +1,6 @@
 <template>
-  <div>CategoriesList draggable-items:
-    <draggable-items
-      :items="categoriesLocal"
-      @start="drag = true"
-      @end="drag = false"
-      item-key="id">
-    </draggable-items>
+  <div>
+    <draggable-items />
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
   <article v-if="!isLoading">
     <h2>{{ title }}</h2>
-    home?
+
     <categories-list />
 
     <directory-actions
@@ -16,7 +16,7 @@
 import { mapGetters } from "vuex";
 
 import DirectoryActions from "@/components/layout/DirectoryActions.vue";
-import CategoriesList from "@/components/layout/CategoriesList.vue";
+import CategoriesList from "@/components/layout/ArticlsList.vue";
 import LoadingPlaceholder from "@/components/ui/LoadingPlaceholder.vue";
 import axiosInstance from "@/services/axiosService";
 

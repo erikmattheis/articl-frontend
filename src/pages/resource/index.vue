@@ -3,7 +3,6 @@
 
     <the-breadcrumbs />
 
-    <h2>treeLevel: {{ treeLevel }}</h2>
     <h2>{{ title }}</h2>
 
     <categories-tabs v-if="treeLevel > 3" />

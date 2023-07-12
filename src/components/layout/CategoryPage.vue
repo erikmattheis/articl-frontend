@@ -1,24 +1,29 @@
 <template>
-  <div id="app">
-    <div
-      v-for="(item, index) in items"
-      :key="item.id">
+  DraggableItems {{ items.length }}
 
-      <categories-list-item v-if="item.oldId" :category="item"></categories-list-item>
-      <articls-list-item v-else :articl="item"></articls-list-item>
-    </div>
+  <div v-for="(item, index) in categories"
+    :key="item.id">
+    <categories-list-item :category="item"></categories-list-item>
   </div>
+
+  <articls-list /
+    </template>
+
+    </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import CategoriesListItem from '@/components/layout/CategoriesListItem.vue';
+import ArticlsList from '@/components/layout/ArticlsList.vue';
+
 import ArticlsListItem from '@/components/layout/ArticlsListItem.vue';
 
 export default {
   name: 'DraggableItems',
   components: {
     CategoriesListItem,
-    ArticlsListItem,
+    ArticlsList,
   },
 
   data() {
@@ -31,6 +36,13 @@ export default {
       type: Object,
       default: undefined,
     },
+  },
+  computed: {
+    ...mapGetters({
+      categories: 'resources/categories',
+      articls: 'resources/articls',
+      treeLevel: 'resources/treeLevel',
+    }),
   },
   methods: {
     handleDragStart(index) {
