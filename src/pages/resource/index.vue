@@ -1,73 +1,54 @@
 <template>
-  <article v-if="!isLoading">
-    resource/index
-    <the-breadcrumbs />
-
-    <h2>{{ title }}</h2>
-
-    <router-view :class="{ 'nav-content': treeLevel > 3 }" />
-
-    <directory-actions
-      v-if="isLoggedInMixin"
-      :tree-level="treeLevel" />
-  </article>
+  <the-breadcrumbs />
+  <CategoriesList />
+  <ArticlsList />
 </template>
-
 <script>
 import { groupBy } from "lodash";
-import { mapGetters } from "vuex";
-
-import ResourcesTabs from "@/components/layout/ResourcesTabs.vue";
-import CategoriesList from "@/components/layout/CategoriesList.vue";
-import ArticlsList from "@/components/layout/ArticlsList.vue";
-import DirectoryActions from "@/components/layout/DirectoryActions.vue";
-import TheBreadcrumbs from "@/components/layout/TheBreadcrumbs.vue";
 import axiosInstance from "@/services/axiosService";
 
+import TheBreadcrumbs from "@/components/layout/TheBreadcrumbs.vue";
+import CategoriesList from "@/components/layout/CategoriesList.vue";
+import ArticlsList from "@/components/layout/ArticlsList.vue";
 export default {
-  name: "ResourceIndex",
   components: {
-    ResourcesTabs,
+    TheBreadcrumbs,
     CategoriesList,
     ArticlsList,
-    DirectoryActions,
-    TheBreadcrumbs,
   },
   data() {
     return {
       isLoading: true,
+      results: {},
       title: "",
       slug: "",
     };
   },
-  computed: {
-    ...mapGetters({
-      treeLevel: "resources/treeLevel",
-      articls: "resources/articls",
-      articlTypes: "resources/articlTypes",
-      categories: "resources/categories",
-      notes: "resources/notes",
-    }),
-  },
   watch: {
     "$route.params.slug": {
       handler() {
-        this.updateData();
+        this.updateData(this.$route.params.slug);
       },
       'immediate': true,
     },
   },
-  created() {
-    this.setTitleAndDescriptionMixin({
-      titleHtml: "Resource",
-    });
-  },
+
   methods: {
-    async updateData() {
+
+    async updateData(slug) {
       try {
         this.isLoading = true;
-        const results = await this.fetchData(this.$route.params.slug);
-
+        const results = await this.fetchData(slug);
+        this.updateValues(results)
+      } catch (error) {
+        this.$store.dispatch("errors/setError", error);
+      }
+      finally {
+        this.isLoading = false;
+      }
+    },
+    updateValues(results) {
+      try {
         if (results.categories?.length) {
           this.$store.dispatch("resources/categories", results.categories);
         } else {
@@ -97,6 +78,7 @@ export default {
 
         this.title = results.category[0]?.title;
 
+
         this.titleHtml = results.category[0]?.titleHtml;
 
         const description = results.category[0]?.description;
@@ -107,10 +89,9 @@ export default {
         });
       } catch (error) {
         this.$store.dispatch("errors/setError", error);
-      } finally {
-        this.isLoading = false;
       }
     },
+
 
     async fetchData(slug) {
       const result = await axiosInstance({
@@ -128,5 +109,6 @@ export default {
       };
     },
   },
-};
+
+}
 </script>

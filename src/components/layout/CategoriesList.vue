@@ -1,19 +1,21 @@
 <template>
-  <div>CategoriesList
-    <draggable-items :categories="categories" />
+  <div
+    v-for="(item, index) in categories"
+    :key="item.id">
+    <categories-list-item :category="item" :tree-level="treeLevel"></categories-list-item>
   </div>
 </template>
 
 <script>
 
 import { mapGetters } from "vuex";
-import DraggableItems from "@/components/layout/DraggableItems.vue";
+import CategoriesListItem from "@/components/layout/CategoriesListItem.vue";
 import axiosInstance from "@/services/axiosService";
 
 export default {
   name: "CategoriesList",
   components: {
-    DraggableItems,
+    CategoriesListItem,
   },
   data() {
     return {
@@ -21,21 +23,10 @@ export default {
     };
   },
   computed: {
-    categoriesLocal: {
-      get() {
-        return this.categories.map((a) => a);
-      },
-      set(newValue) {
-        this.$store.dispatch("resources/categories", newValue);
-      },
-    },
     ...mapGetters({
       categories: "resources/categories",
       treeLevel: "resources/treeLevel",
     }),
-  },
-  mounted() {
-    this.TabName = this.treeLevel > 3 ? "ArticlsList" : "ResourceIndex";
   },
   methods: {
     updateOrderValues() {

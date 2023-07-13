@@ -85,6 +85,8 @@ export default {
 
     articlTypes: (state) => state.articlTypes,
 
+    initialArticlType: (state) => state.articls[0]?.type,
+
     notes: (state) => state.notes,
 
     treeLevel: (state) => state.breadcrumbs.length,

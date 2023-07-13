@@ -32,6 +32,17 @@ export default {
       title: "",
     };
   },
+  components: {
+    LoadingPlaceholder,
+    CategoriesList,
+    DirectoryActions,
+  },
+  data() {
+    return {
+      isLoading: true,
+      title: "",
+    };
+  },
   computed: {
     ...mapGetters({
       articls: "resources/articls",

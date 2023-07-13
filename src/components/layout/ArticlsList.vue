@@ -1,5 +1,5 @@
 <template>
-  <div>ArticlsList
+  <div>
     <ul class="nav-tabs nav-tabs-inner-margin">
       <li
         v-for="articlType in articlTypes"
@@ -8,18 +8,16 @@
         <a
           href
           @click.prevent="articlTypeCurrent = articlType"
-          @keyup.enter.prevent="articlTypeCurrent = articlType">
+          @keyup.enter.prevent="initialArticlType = articlType">
           {{ articlType }}</a>
       </li>
     </ul>
 
     <ul
-      v-if="articlTypeCurrent"
-      class="nav-inner-content">ArticlsList: draggable-items (shows when there is articlTypeCurrent)
-      <draggable-items
-        :items="articls[articlTypeCurrent]"
-        @change="onUpdateArticlsOrderValues">
-      </draggable-items>
+      v-for="articl in articls[articlTypeCurrent]"
+      :key="articl.id"
+      class="nav-inner-content">
+      <articls-list-item :articl="articl" />
     </ul>
 
     <div v-if="(articls[articlTypeCurrent]?.length === 0)">
@@ -30,7 +28,7 @@
 </template>
 
 <script>
-import DraggableItems from "@/components/layout/DraggableItems.vue";
+import ArticlsListItem from "@/components/layout/ArticlsListItem.vue";
 import { mapGetters } from "vuex";
 
 import axiosInstance from "@/services/axiosService";
@@ -38,34 +36,20 @@ import axiosInstance from "@/services/axiosService";
 export default {
   name: "ArticlsList",
   components: {
-    DraggableItems,
-  },
-  props: {
-    items: {
-      default: () => [],
-      type: Array,
-    },
-    type: {
-      default: () => "",
-      type: String,
-    },
+    ArticlsListItem,
   },
   data() {
     return {
-      articlTypeCurrent: undefined,
+      articlTypeCurrent: "",
     };
   },
   computed: {
     ...mapGetters({
       articls: "resources/articls",
       articlTypes: "resources/articlTypes",
+      initialArticlType: "resources/initialArticlType",
     }),
   },
-  mounted() {
-
-    [this.articlTypeCurrent] = this.articlTypes;
-  },
-
   methods: {
 
     updateArticlsOrderValues(articlType) {
@@ -110,9 +94,9 @@ export default {
     },
 
     onUpdateArticlsOrderValues() {
-      this.updateArticlsOrderValues(this.articlTypeCurrent);
+      this.updateArticlsOrderValues(this.initialArticlType);
 
-      this.saveArticlsOrderValues(this.articlTypeCurrent);
+      this.saveArticlsOrderValues(this.initialArticlType);
     },
   },
 };
