@@ -1,5 +1,5 @@
 <template>
-  <div class="articl">
+  <div class="articl">ArticlsListItem
     <ul>
       <li class="title container">xxx
         <a

@@ -1,11 +1,9 @@
 <template>
   <article v-if="!isLoading">
-
+    resource/index
     <the-breadcrumbs />
 
     <h2>{{ title }}</h2>
-
-    <categories-tabs v-if="treeLevel > 3" />
 
     <router-view :class="{ 'nav-content': treeLevel > 3 }" />
 
@@ -19,7 +17,9 @@
 import { groupBy } from "lodash";
 import { mapGetters } from "vuex";
 
-import CategoriesTabs from "@/components/layout/CategoriesTabs.vue";
+import ResourcesTabs from "@/components/layout/ResourcesTabs.vue";
+import CategoriesList from "@/components/layout/CategoriesList.vue";
+import ArticlsList from "@/components/layout/ArticlsList.vue";
 import DirectoryActions from "@/components/layout/DirectoryActions.vue";
 import TheBreadcrumbs from "@/components/layout/TheBreadcrumbs.vue";
 import axiosInstance from "@/services/axiosService";
@@ -27,7 +27,9 @@ import axiosInstance from "@/services/axiosService";
 export default {
   name: "ResourceIndex",
   components: {
-    CategoriesTabs,
+    ResourcesTabs,
+    CategoriesList,
+    ArticlsList,
     DirectoryActions,
     TheBreadcrumbs,
   },
@@ -88,6 +90,9 @@ export default {
 
         if (results.notes?.length) {
           this.$store.dispatch("resources/notes", results.notes);
+        }
+        else {
+          this.$store.dispatch("resources/notes", []);
         }
 
         this.title = results.category[0]?.title;

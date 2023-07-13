@@ -16,7 +16,7 @@ import TabQuestionsAnswers from "@/components/layout/QAndAList.vue";
 import ResetPasswordPage from "@/pages/change-password.vue";
 import UsersPage from "@/pages/users/index.vue";
 import VerifyEmailPage from "@/pages/verify-email.vue";
-import TabCategories from "@/components/layout/_CategoriesList.vue";
+import CategoriesList from "@/components/layout/CategoriesList.vue";
 import TabNotes from "@/components/layout/NotesList.vue";
 import ArticlsList from "@/components/layout/ArticlsList.vue";
 import ForbiddenPage from "@/pages/ForbiddenPage.vue";
@@ -36,9 +36,9 @@ const router = createRouter({
       path: "/resource/:slug",
       component: ResourceIndex,
       children: [{
-        name: "TabCategories",
+        name: "CategoriesList",
         path: "",
-        component: TabCategories,
+        component: CategoriesList,
       },
       
       {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>ArticlsList
     <ul class="nav-tabs nav-tabs-inner-margin">
       <li
         v-for="articlType in articlTypes"
@@ -15,7 +15,7 @@
 
     <ul
       v-if="articlTypeCurrent"
-      class="nav-inner-content">ssArticlsList: draggable-items (shows when there is articlTypeCurrent)
+      class="nav-inner-content">ArticlsList: draggable-items (shows when there is articlTypeCurrent)
       <draggable-items
         :items="articls[articlTypeCurrent]"
         @change="onUpdateArticlsOrderValues">

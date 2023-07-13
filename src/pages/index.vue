@@ -1,7 +1,6 @@
 <template>
-  <article v-if="!isLoading">
+  <article v-if="!isLoading">index
     <h2>{{ title }}</h2>
-
     <categories-list />
 
     <directory-actions

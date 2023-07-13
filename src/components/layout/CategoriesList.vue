@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <draggable-items />
+  <div>CategoriesList
+    <draggable-items :categories="categories" />
   </div>
 </template>
 
@@ -8,14 +8,12 @@
 
 import { mapGetters } from "vuex";
 import DraggableItems from "@/components/layout/DraggableItems.vue";
-import CategoriesListItem from "@/components/layout/CategoriesListItem.vue";
 import axiosInstance from "@/services/axiosService";
 
 export default {
-  name: "TabCategories",
+  name: "CategoriesList",
   components: {
     DraggableItems,
-    CategoriesListItem,
   },
   data() {
     return {
@@ -37,7 +35,7 @@ export default {
     }),
   },
   mounted() {
-    this.TabName = this.treeLevel > 3 ? "ArticlsList" : "TabCategories";
+    this.TabName = this.treeLevel > 3 ? "ArticlsList" : "ResourceIndex";
   },
   methods: {
     updateOrderValues() {

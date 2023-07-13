@@ -18,7 +18,6 @@
     "vue-draggable-next": "^2.2.1",
     "vue-feather": "^2.0.0",
     "vue-router": "^4.2.2",
-    "vuedraggable": "^2.24.3",
     "vuex": "^4.1.0"
   },
   "devDependencies": {

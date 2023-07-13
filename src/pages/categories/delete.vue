@@ -7,7 +7,7 @@
 
     <form>
       <button :aria-busy="buttonDisabled"
-        @click.prevent="$router.push({ name: 'TabCategories', params: { slug } })">Cancel</button>
+        @click.prevent="$router.push({ name: 'ResourceIndex', params: { slug } })">Cancel</button>
       <button
         v-if="slug"
         :aria-busy="buttonDisabled"

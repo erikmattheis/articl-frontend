@@ -1,5 +1,5 @@
 <template>
-  <li class="container">
+  <li class="container">CategoryListItem
     <router-link
       class="box"
       :to="{ name: tabName, params: { slug: category.slug } }">
@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     tabName() {
-      return this.treeLevel !== 3 ? "TabCategories" : "ArticlsList";
+      return this.treeLevel !== 3 ? "ResourceIndex" : "ArticlsList";
     },
   },
   methods: {

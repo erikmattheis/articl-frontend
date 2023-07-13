@@ -1,5 +1,5 @@
 <template>
-  <ul class="nav-tabs">
+  <ul class="nav-tabs">CategoryTabs
     cat tabs
     <router-link
       v-slot="{ isActive, navigate }"
