@@ -33,7 +33,7 @@ const router = createRouter({
 
     {
       name: "ResourceIndex",
-      path: "/resource/:slug",
+      path: "/resource/:slug?",
       component: ResourceIndex,
       children: [{
         name: "CategoriesList",

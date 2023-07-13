@@ -1,5 +1,5 @@
 <template>
-  <div class="vertical-container">App
+  <div class="vertical-container">
     <the-header />
     <main>
       <router-view v-slot="{ Component }">

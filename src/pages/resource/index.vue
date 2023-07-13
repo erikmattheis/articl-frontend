@@ -1,7 +1,7 @@
 <template>
   <the-breadcrumbs />
-  <CategoriesList />
-  <ArticlsList />
+  <categories-list v-if="results.categories?.length" />
+  <articls-list v-if="results.articls?.length" />
 </template>
 <script>
 import { groupBy } from "lodash";
@@ -48,6 +48,7 @@ export default {
       }
     },
     updateValues(results) {
+      this.results = results
       try {
         if (results.categories?.length) {
           this.$store.dispatch("resources/categories", results.categories);
