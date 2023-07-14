@@ -85,7 +85,7 @@ export default {
 
     articlTypes: (state) => state.articlTypes,
 
-    initialArticlType: (state) => state.articls[0]?.type,
+    initialArticlType: (state) => Object.keys(state.articls)?.[0]?.type,
 
     notes: (state) => state.notes,
 

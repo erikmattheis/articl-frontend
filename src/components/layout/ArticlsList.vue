@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>ArticlsList
     <ul class="nav-tabs nav-tabs-inner-margin">
       <li
         v-for="articlType in articlTypes"
@@ -8,7 +8,7 @@
         <a
           href
           @click.prevent="articlTypeCurrent = articlType"
-          @keyup.enter.prevent="initialArticlType = articlType">
+          @keyup.enter.prevent="articlTypeCurrent = articlType">
           {{ articlType }}</a>
       </li>
     </ul>
@@ -49,6 +49,9 @@ export default {
       articlTypes: "resources/articlTypes",
       initialArticlType: "resources/initialArticlType",
     }),
+  },
+  created() {
+    this.articlTypeCurrent = this.initialArticlType;
   },
   methods: {
 
