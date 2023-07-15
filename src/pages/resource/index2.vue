@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { groupBy } from "lodash";
+
 import { mapGetters } from "vuex";
 
 import ResourcesTabs from "@/components/layout/ResourcesTabs.vue";

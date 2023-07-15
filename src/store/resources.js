@@ -42,9 +42,7 @@ export default {
     },
     articls: (context, payload) => {
       context.commit("SET_ARTICLS", payload);
-    },
-    articlTypes: (context, payload) => {
-      context.commit("SET_ARTICL_TYPES", payload);
+      console.log(payload);
     },
     notes: (context, payload) => {
       context.commit("SET_NOTES", payload);
@@ -83,9 +81,9 @@ export default {
 
     QAndAs: (state) => state.QAndAs,
 
-    articlTypes: (state) => state.articlTypes,
+    articlTypes: (state) => state.articls.map((articl) => articl.type),
 
-    initialArticlType: (state) => Object.keys(state.articls)?.[0]?.type,
+    initialArticlType: (state) => state.articlTypes[0],
 
     notes: (state) => state.notes,
 

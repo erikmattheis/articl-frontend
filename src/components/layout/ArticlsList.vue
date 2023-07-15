@@ -1,5 +1,6 @@
 <template>
-  <div>ArticlsList
+  <div>ArticlsList articlTypes {{ articlTypes }}<br>
+    articlTypeCurrent:{{ articlTypeCurrent }}<br>
     <ul class="nav-tabs nav-tabs-inner-margin">
       <li
         v-for="articlType in articlTypes"
@@ -40,6 +41,7 @@ export default {
   },
   data() {
     return {
+      articlType: "",
       articlTypeCurrent: "",
     };
   },

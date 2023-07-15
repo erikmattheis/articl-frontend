@@ -6,7 +6,6 @@
 <script>
 import { groupBy } from "lodash";
 import axiosInstance from "@/services/axiosService";
-
 import TheBreadcrumbs from "@/components/layout/TheBreadcrumbs.vue";
 import CategoriesList from "@/components/layout/CategoriesList.vue";
 import ArticlsList from "@/components/layout/ArticlsList.vue";
@@ -39,7 +38,7 @@ export default {
       try {
         this.isLoading = true;
         const results = await this.fetchData(slug);
-        this.updateValues(results)
+        this.updateValues(results);
       } catch (error) {
         this.$store.dispatch("errors/setError", error);
       }
@@ -62,15 +61,11 @@ export default {
         } else {
           this.$store.dispatch("resources/breadcrumbs", []);
         }
-        console.log('results.articls.length', results.articls);
-        console.log(results.categories.length);
-        if (results.articls?.length) {
-          console.log(results.articls.length);
+
+        if (results.articls.length) {
           this.$store.dispatch("resources/articls", results.articls);
-          this.$store.dispatch("resources/articlTypes", results.articlTypes);
         } else {
           this.$store.dispatch("resources/articls", []);
-          this.$store.dispatch("resources/articlTypes", []);
         }
 
         if (results.notes?.length) {
@@ -107,8 +102,8 @@ export default {
         breadcrumbs: result.data.breadcrumbs,
         categories: result.data.categories,
         category: result.data.category,
-        articlTypes: result.data.articls?.length ? [...new Set(result.data.articls.map((item) => item?.type))] : [],
-        articls: groupBy(result.data.articls, (articl) => articl?.type),
+        articlTypes: Object.keys(result.data.articls),
+        articls: result.data.articls,
         notes: result.data.notes,
       };
     },
