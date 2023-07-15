@@ -1,6 +1,7 @@
 <template>
-  <div>ArticlsList articlTypes {{ articlTypes }}<br>
-    articlTypeCurrent:{{ articlTypeCurrent }}<br>
+  <div>articlTypeCurrent: {{ articlTypeCurrent }}
+    initialArticlType: {{ initialArticlType }}
+    articlTypes: {{ articlTypes }}
     <ul class="nav-tabs nav-tabs-inner-margin">
       <li
         v-for="articlType in articlTypes"
@@ -24,7 +25,6 @@
     <div v-if="(articls[articlTypeCurrent]?.length === 0)">
       No entries yet.
     </div>
-
   </div>
 </template>
 
@@ -52,8 +52,13 @@ export default {
       initialArticlType: "resources/initialArticlType",
     }),
   },
-  created() {
-    this.articlTypeCurrent = this.initialArticlType;
+  watch: {
+    initialArticlType: {
+      handler() {
+        this.articlTypeCurrent = this.initialArticlType;
+      },
+      immediate: true,
+    },
   },
   methods: {
 

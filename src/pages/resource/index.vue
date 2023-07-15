@@ -46,8 +46,8 @@ export default {
         this.isLoading = false;
       }
     },
+
     updateValues(results) {
-      this.results = results;
 
       try {
         if (results.categories?.length) {
@@ -62,8 +62,10 @@ export default {
           this.$store.dispatch("resources/breadcrumbs", []);
         }
 
-        if (results.articls.length) {
+        if (results.articls) {
           this.$store.dispatch("resources/articls", results.articls);
+          this.$store.dispatch("resources/articlTypes", [...new Set(Object.keys(results.articls))]);
+          this.$store.dispatch("resources/initialArticlType", Object.keys(results.articls)[0]);
         } else {
           this.$store.dispatch("resources/articls", []);
         }
@@ -76,7 +78,6 @@ export default {
         }
 
         this.title = results.category[0]?.title;
-
 
         this.titleHtml = results.category[0]?.titleHtml;
 

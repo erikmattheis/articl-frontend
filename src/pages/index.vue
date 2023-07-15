@@ -66,6 +66,7 @@ export default {
         this.isLoading = true;
 
         const results = await this.fetchData();
+
         if (results.count) {
           this.$store.dispatch("resources/count", results.count);
         }
