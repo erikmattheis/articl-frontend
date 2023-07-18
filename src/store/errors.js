@@ -23,6 +23,7 @@ export default {
 
   actions: {
     setError: (context, payload) => {
+      console.log('payload', payload);
       let errorMessage = payload;
       let errorStack = "";
       if (!payload.okFunction) {

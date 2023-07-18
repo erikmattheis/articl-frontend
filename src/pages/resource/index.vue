@@ -64,6 +64,10 @@ export default {
 
         if (results.articls) {
           this.$store.dispatch("resources/articls", results.articls);
+
+          if (results.articls) {
+            this.$store.dispatch("resources/initialArticlType", Object.keys(results.articls)[0]);
+          }
           this.$store.dispatch("resources/articlTypes", [...new Set(Object.keys(results.articls))]);
           this.$store.dispatch("resources/initialArticlType", Object.keys(results.articls)[0]);
         } else {
@@ -88,6 +92,7 @@ export default {
           description,
         });
       } catch (error) {
+        console.log(typeof results.articls)
         this.$store.dispatch("errors/setError", error);
       }
     },
@@ -98,12 +103,12 @@ export default {
         method: "GET",
         url: `/resource/${slug || ""}`,
       });
-
+      const articlTypes = result.articls ? Object.keys(result.data.articls) : [];
       return {
         breadcrumbs: result.data.breadcrumbs,
         categories: result.data.categories,
         category: result.data.category,
-        articlTypes: Object.keys(result.data.articls),
+        articlTypes,
         articls: result.data.articls,
         notes: result.data.notes,
       };

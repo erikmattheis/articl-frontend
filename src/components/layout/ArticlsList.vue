@@ -9,8 +9,8 @@
         :class="{ active: articlTypeCurrent === articlType }">
         <a
           href
-          @click.prevent="articlTypeCurrent = articlType"
-          @keyup.enter.prevent="articlTypeCurrent = articlType">
+          @click.prevent="$router.push({ name: 'ArticlsList', params: { type: articlType } })"
+          @keyup.enter.prevent="$router.push({ name: 'ArticlsList', params: { type: articlType } })">
           {{ articlType }}</a>
       </li>
     </ul>
