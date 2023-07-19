@@ -42,20 +42,16 @@ export default {
       context.commit("SET_COUNT", payload);
     },
     categories: (context, payload) => {
-      console.log('payload', payload)
       context.commit("SET_CATEGORIES", payload);
     },
     articls: (context, payload) => {
       context.commit("SET_ARTICLS", payload);
-      console.log('articls', payload);
     },
     articlTypes: (context, payload) => {
       context.commit("SET_ARTICL_TYPES", payload);
-      console.log('articlTypes', payload);
     },
     initialArticlType: (context, payload) => {
       context.commit("SET_INITIAL_ARTICL_TYPE", payload);
-      console.log('initialArticlType', payload);
     },
     notes: (context, payload) => {
       context.commit("SET_NOTES", payload);
@@ -90,15 +86,20 @@ export default {
 
     categories: (state) => state.categories,
 
-    articls: (state) => (type) => {
-      return state.articles.filter((articl) => articl.type === type);
+    filteredArticls: (state) => (type) => {
+      if (!type) {
+        console.log('filteredArticls returning state.articls', state.articls);
+        return state.articls;
+      }
+      console.log(type, 'returning state.articls.filter((articl) => articl.type === type)', state.articls);
+      return state.articls.filter((articl) => articl.type === type);
     },
 
-    QAndAs: (state) => state.QAndAs,
-
-    articlTypes: (state) => [...new Set(state.articls.map(articl => articl.type))],
+    articlTypes: (state) => [...new Set(state.articls.map(articl => articl.type))] || [],
 
     initialArticlType: (state, getters) => getters.articlTypes[0],
+
+    QAndAs: (state) => state.QAndAs,
 
     notes: (state) => state.notes,
 

@@ -23,17 +23,13 @@ export default {
       slug: "",
     };
   },
-  watch: {
-    "$route.params.slug": {
-      handler() {
-        this.updateData(this.$route.params.slug);
-      },
-      'immediate': true,
-    },
+  created() {
+    this.slug = this.$route.params.slug;
+    this.getCategoryResources(this.slug);
   },
   methods: {
 
-    async updateData(slug) {
+    async getCategoryResources(slug) {
       try {
         this.isLoading = true;
         const results = await this.fetchData(slug);
@@ -63,8 +59,6 @@ export default {
 
         if (results.articls?.length) {
           this.$store.dispatch("resources/articls", results.articls);
-
-
         } else {
           this.$store.dispatch("resources/articls", []);
         }

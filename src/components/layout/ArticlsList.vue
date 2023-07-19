@@ -1,9 +1,5 @@
 <template>
-  <div>articlTypeCurrent: {{ articlTypeCurrent }}<br>
-    initialArticlType: {{ initialArticlType }}<br>
-    articlTypes: {{ articlTypes }}<br>
-    articls: {{ articls }}<br>
-    articl.length: {{ articls.length }}<br>
+  <div>type: {{ articlTypes }}
     <ul class="nav-tabs nav-tabs-inner-margin">
       <li
         v-for="articlType in articlTypes"
@@ -18,13 +14,13 @@
     </ul>
 
     <ul
-      v-for="articl in articls[articlTypeCurrent]"
+      v-for="articl in articls"
       :key="articl.id"
       class="nav-inner-content">
       <articls-list-item :articl="articl" />
     </ul>
 
-    <div v-if="(articls[articlTypeCurrent]?.length === 0)">
+    <div v-if="(articls?.length === 0)">
       No entries yet.
     </div>
   </div>
@@ -43,30 +39,25 @@ export default {
   },
   data() {
     return {
-      articlType: "",
-      articlTypeCurrent: "",
+      slug: this.$route.params.slug,
+      type: this.$route.params.type,
     };
   },
   computed: {
     ...mapGetters({
-      articls: "resources/articls",
+      filteredArticls: "resources/filteredArticls",
       articlTypes: "resources/articlTypes",
       initialArticlType: "resources/initialArticlType",
     }),
-  },
-  watch: {
-    initialArticlType: {
-      handler() {
-        this.articlTypeCurrent = this.initialArticlType;
-      },
-      immediate: true,
-    },
+    articls() {
+      return this.filteredArticls(this.type)
+    }
   },
   methods: {
 
     updateArticlsOrderValues(articlType) {
       try {
-        this.articls[articlType].forEach((obj, index) => {
+        this.articls.forEach((obj, index) => {
           const objRef = obj;
 
           objRef.order = index;
@@ -78,7 +69,7 @@ export default {
 
     async saveArticlsOrderValues(articlType) {
       try {
-        const order = this.articls[articlType].map((obj) => ({
+        const order = this.articls.map((obj) => ({
           id: obj.id,
           order: obj.order,
         }));
@@ -106,9 +97,9 @@ export default {
     },
 
     onUpdateArticlsOrderValues() {
-      this.updateArticlsOrderValues(this.initialArticlType);
+      this.updateArticlsOrderValues(this.type);
 
-      this.saveArticlsOrderValues(this.initialArticlType);
+      this.saveArticlsOrderValues(this.type);
     },
   },
 };
