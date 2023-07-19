@@ -1,6 +1,6 @@
 <template>
   <the-breadcrumbs />
-  <categories-list v-if="results.categories?.length" />
+  <categories-list />
   <articls-list />
 </template>
 <script>
@@ -31,7 +31,6 @@ export default {
       'immediate': true,
     },
   },
-
   methods: {
 
     async updateData(slug) {
@@ -62,14 +61,10 @@ export default {
           this.$store.dispatch("resources/breadcrumbs", []);
         }
 
-        if (results.articls) {
+        if (results.articls?.length) {
           this.$store.dispatch("resources/articls", results.articls);
 
-          if (results.articls) {
-            this.$store.dispatch("resources/initialArticlType", Object.keys(results.articls)[0]);
-          }
-          this.$store.dispatch("resources/articlTypes", [...new Set(Object.keys(results.articls))]);
-          this.$store.dispatch("resources/initialArticlType", Object.keys(results.articls)[0]);
+
         } else {
           this.$store.dispatch("resources/articls", []);
         }
@@ -92,7 +87,6 @@ export default {
           description,
         });
       } catch (error) {
-        console.log(typeof results.articls)
         this.$store.dispatch("errors/setError", error);
       }
     },

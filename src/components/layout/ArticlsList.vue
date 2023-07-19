@@ -1,7 +1,9 @@
 <template>
-  <div>articlTypeCurrent: {{ articlTypeCurrent }}
-    initialArticlType: {{ initialArticlType }}
-    articlTypes: {{ articlTypes }}
+  <div>articlTypeCurrent: {{ articlTypeCurrent }}<br>
+    initialArticlType: {{ initialArticlType }}<br>
+    articlTypes: {{ articlTypes }}<br>
+    articls: {{ articls }}<br>
+    articl.length: {{ articls.length }}<br>
     <ul class="nav-tabs nav-tabs-inner-margin">
       <li
         v-for="articlType in articlTypes"
@@ -9,8 +11,8 @@
         :class="{ active: articlTypeCurrent === articlType }">
         <a
           href
-          @click.prevent="$router.push({ name: 'ArticlsList', params: { type: articlType } })"
-          @keyup.enter.prevent="$router.push({ name: 'ArticlsList', params: { type: articlType } })">
+          @click.prevent="$router.push({ name: 'ArticlsList', params: { slug, type: articlType } })"
+          @keyup.enter.prevent="$router.push({ name: 'ArticlsList', params: { slug, type: articlType } })">
           {{ articlType }}</a>
       </li>
     </ul>
