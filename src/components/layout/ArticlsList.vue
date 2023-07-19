@@ -1,33 +1,24 @@
 <template>
-  <div>type: {{ articlTypes }}
-    <ul class="nav-tabs nav-tabs-inner-margin">
-      <li
-        v-for="articlType in articlTypes"
-        :key="articlType"
-        :class="{ active: articlTypeCurrent === articlType }">
-        <a
-          href
-          @click.prevent="$router.push({ name: 'ArticlsList', params: { slug, type: articlType } })"
-          @keyup.enter.prevent="$router.push({ name: 'ArticlsList', params: { slug, type: articlType } })">
-          {{ articlType }}</a>
-      </li>
-    </ul>
+  slug: {{ slug }}<br>
+  type: {{ type }}<br>
+  <articl-type-tabs />
 
-    <ul
-      v-for="articl in articls"
-      :key="articl.id"
-      class="nav-inner-content">
-      <articls-list-item :articl="articl" />
-    </ul>
+  <ul
+    v-for="articl in articls"
+    :key="articl.id"
+    class="nav-inner-content">
+    <articls-list-item :articl="articl" />
+  </ul>
 
-    <div v-if="(articls?.length === 0)">
-      No entries yet.
-    </div>
+  <div v-if="(articls?.length === 0)">
+    No entries yet.
   </div>
 </template>
 
 <script>
 import ArticlsListItem from "@/components/layout/ArticlsListItem.vue";
+import ArticlTypeTabs from "@/components/layout/ArticlTypeTabs.vue";
+
 import { mapGetters } from "vuex";
 
 import axiosInstance from "@/services/axiosService";
@@ -36,6 +27,7 @@ export default {
   name: "ArticlsList",
   components: {
     ArticlsListItem,
+    ArticlTypeTabs,
   },
   data() {
     return {

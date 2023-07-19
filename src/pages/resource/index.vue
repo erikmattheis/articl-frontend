@@ -27,6 +27,14 @@ export default {
     this.slug = this.$route.params.slug;
     this.getCategoryResources(this.slug);
   },
+  watch: {
+    "$route.params.slug": {
+      handler() {
+        this.getCategoryResources();
+      },
+      immediate: true,
+    },
+  },
   methods: {
 
     async getCategoryResources(slug) {
