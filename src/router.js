@@ -28,7 +28,7 @@ const router = createRouter({
     {
       name: "HomePage",
       path: "/",
-      component: HomePage
+      component: ResourceIndex
     },
 
     {

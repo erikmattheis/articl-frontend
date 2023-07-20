@@ -1,5 +1,4 @@
 <template>
-  articlType:{{ articlType }}
   <ul class="nav-tabs nav-tabs-inner-margin">
     <li v-for="type in articlTypes" :key="type" :class="{ active: type === articlType }">
       <a

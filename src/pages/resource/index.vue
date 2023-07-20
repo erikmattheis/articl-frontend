@@ -4,7 +4,6 @@
   <articls-list />
 </template>
 <script>
-import { mapGetters } from "vuex";
 import axiosInstance from "@/services/axiosService";
 import TheBreadcrumbs from "@/components/layout/TheBreadcrumbs.vue";
 import CategoriesList from "@/components/layout/CategoriesList.vue";
@@ -27,13 +26,11 @@ export default {
     this.getCategoryResources(this.$route.params.slug);
   },
   beforeRouteUpdate(to, from) {
-    console.log("beforeRouteUpdate");
     if (to.params.type !== from.params.type) {
       console.log("type changed", to.params.type);
       this.$store.dispatch("resources/articlType", to.params.type);
     }
     if (to.params.slug !== from.params.slug) {
-      console.log("slug changed", to.params.slug);
       this.$store.dispatch("resources/slug", to.params.slug);
       this.getCategoryResources(to.params.slug);
     }
