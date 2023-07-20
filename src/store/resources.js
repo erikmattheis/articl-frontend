@@ -2,6 +2,8 @@ export default {
   namespaced: true,
 
   state: () => ({
+    slug: "",
+    articlType: "",
     articls: [],
     articlTypes: [],
     currentArticlType: "",
@@ -14,6 +16,12 @@ export default {
   }),
 
   mutations: {
+    SET_SLUG: (state, payload) => {
+      state.slug = payload;
+    },
+    SET_ARTICL_TYPE: (state, payload) => {
+      state.slug = payload;
+    },
     SET_COUNT: (state, payload) => {
       state.count = payload;
     },
@@ -29,6 +37,9 @@ export default {
     SET_INITIAL_ARTICL_TYPE: (state, payload) => {
       state.initialArticlType = payload;
     },
+    SET_CURRENT_ARTICL_TYPE: (state, payload) => {
+      state.currentArticlType = payload;
+    },
     SET_NOTES: (state, payload) => {
       state.notes = payload;
     },
@@ -38,6 +49,12 @@ export default {
   },
 
   actions: {
+    slug: (context, payload) => {
+      context.commit("SET_SLUG", payload);
+    },
+    articlType: (context, payload) => {
+      context.commit("SET_ARTICL_TYPE", payload);
+    },
     count: (context, payload) => {
       context.commit("SET_COUNT", payload);
     },
@@ -82,16 +99,18 @@ export default {
   },
   getters: {
 
+    slug: (state) => state.slug,
+
+    articlType: (state) => state.articlType,
+
     count: (state) => state.count,
 
     categories: (state) => state.categories,
 
     filteredArticls: (state) => (type) => {
       if (!type) {
-        console.log('filteredArticls returning state.articls', state.articls);
         return state.articls;
       }
-      console.log(type, 'returning state.articls.filter((articl) => articl.type === type)', state.articls);
       return state.articls.filter((articl) => articl.type === type);
     },
 

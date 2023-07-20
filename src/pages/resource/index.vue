@@ -35,6 +35,17 @@ export default {
       immediate: true,
     },
   },
+  beforeRouteUpdate(to, from) {
+    this.slug = to.params.slug;
+    this.type = to.params.type;
+    if (this.type !== from.params.type) {
+      this.$store.dispatch("resources/articlType", to.type);
+    }
+    if (this.slug !== from.params.slug) {
+      this.$store.dispatch("resources/slug", to.slug);
+      this.getCategoryResources(this.slug);
+    }
+  },
   methods: {
 
     async getCategoryResources(slug) {

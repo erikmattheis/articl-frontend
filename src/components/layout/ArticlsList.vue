@@ -1,6 +1,4 @@
 <template>
-  slug: {{ slug }}<br>
-  type: {{ type }}<br>
   <articl-type-tabs />
 
   <ul
@@ -29,25 +27,18 @@ export default {
     ArticlsListItem,
     ArticlTypeTabs,
   },
-  data() {
-    return {
-      slug: this.$route.params.slug,
-      type: this.$route.params.type,
-    };
-  },
   computed: {
     ...mapGetters({
       filteredArticls: "resources/filteredArticls",
-      articlTypes: "resources/articlTypes",
-      initialArticlType: "resources/initialArticlType",
+      articlType: "resources/articlType",
     }),
     articls() {
-      return this.filteredArticls(this.type)
+      return this.filteredArticls(this.articlType)
     }
   },
   methods: {
 
-    updateArticlsOrderValues(articlType) {
+    updateArticlsOrderValues() {
       try {
         this.articls.forEach((obj, index) => {
           const objRef = obj;
@@ -59,7 +50,7 @@ export default {
       }
     },
 
-    async saveArticlsOrderValues(articlType) {
+    async saveArticlsOrderValues() {
       try {
         const order = this.articls.map((obj) => ({
           id: obj.id,
