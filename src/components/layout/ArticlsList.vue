@@ -1,6 +1,6 @@
 <template>
   <articl-type-tabs />
-
+  articlType: {{ articlType }}
   <ul
     v-for="articl in articls"
     :key="articl.id"

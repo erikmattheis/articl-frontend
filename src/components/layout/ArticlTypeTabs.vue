@@ -1,17 +1,15 @@
 <template>
   <ul class="nav-tabs nav-tabs-inner-margin">
-    <li
-      v-for="articlType in articlTypes"
-      :key="articlType"
-      :class="{ active: articlType === type }">
+    <li v-for="type in articlTypes" :key="type" :class="{ active: type === articlType }">
       <a
-        href
-        @click.prevent="$router.push({ name: 'ArticlsList', params: { slug, type: articlType } })"
-        @keyup.enter.prevent="$router.push({ name: 'ArticlsList', params: { slug, type: articlType } })">
-        {{ articlType }}</a>
+        href="#"
+        @click.prevent="$router.push({ name: 'ArticlsList', params: { slug, type } })"
+        @keyup.enter.prevent="$router.push({ name: 'ArticlsList', params: { slug, type } })">
+        {{ type }}</a>
     </li>
   </ul>
 </template>
+
 
 <script>
 import { mapGetters } from "vuex";
@@ -20,14 +18,14 @@ export default {
   name: "ArticlTypeTabs",
   data() {
     return {
-      type: this.$route.params.type,
-      slug: this.$route.params.slug,
+
     };
   },
   computed: {
     ...mapGetters({
+      slug: "resources/slug",
       articlTypes: "resources/articlTypes",
-      initialArticlType: "resources/initialArticlType",
+      articlType: "resources/articlType",
     }),
   },
 };
