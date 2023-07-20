@@ -107,14 +107,14 @@ export default {
 
     categories: (state) => state.categories,
 
-    filteredArticls: (state) => (type) => {
-      if (!type) {
+    filteredArticls: (state) => (articlType) => {
+      if (!articlType) {
         return state.articls;
       }
-      return state.articls.filter((articl) => articl.type === type);
+      return state.articls.filter((articl) => articl.articlType === articlType);
     },
 
-    articlTypes: (state) => [...new Set(state.articls.map(articl => articl.type))] || [],
+    articlTypes: (state) => [...new Set(state.articls.map(articl => articl.articlType))] || [],
 
     initialArticlType: (state, getters) => getters.articlTypes[0],
 

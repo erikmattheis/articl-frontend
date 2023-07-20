@@ -98,10 +98,10 @@
             name="abstract"
             autocomplete="off" /></label>
 
-        <label for="type">Link type
-          <select id="type"
-            v-model="type"
-            name="type"
+        <label for="articlType">Resource type
+          <select id="articlType"
+            v-model="articlType"
+            name="articlType"
             autocomplete="off">
             <optgroup value="Resources">
               <option value="Review (OA)">Review (OA)</option>
@@ -183,7 +183,7 @@ export default {
       month: "",
       success: false,
       title: "",
-      type: "Review (OA)",
+      articlType: "Review (OA)",
       year: "",
     };
   },
@@ -259,8 +259,8 @@ export default {
         this.errorMessage = "Please enter author names.";
 
         passed = false;
-      } else if (this.type === "") {
-        this.errorMessage = "Please choose a type.";
+      } else if (this.articlType === "") {
+        this.errorMessage = "Please choose a link type.";
 
         passed = false;
       }
@@ -283,7 +283,7 @@ export default {
             data: {
               abstract: this.abstract,
               url: this.url,
-              type: this.type,
+              articlType: this.articlType,
               authors: this.authors,
               slug: this.slug,
               journal: this.journal,
@@ -302,7 +302,7 @@ export default {
           this.journal = result.data.journal;
           this.month = result.data.month;
           this.title = result.data.title;
-          this.type = result.data.type;
+          this.articlType = result.data.articlType;
 
           this.year = "";
 

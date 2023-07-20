@@ -72,11 +72,9 @@ const extractAuthorsObjectsPubMed = (element) => {
 // Handle the Async fetch of Pubmed Data
 const api = async (surl) => {
   const baseUrl = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
-  const mode = "efetch";
   const database = getDB(surl);
   const id = getId(surl);
-  const type = "xml";
-  const request = new Request(`${baseUrl}${mode}.fcgi?db=${database}&id=${id}&rettype=abstract&retmode=${type}`);
+  const request = new Request(`${baseUrl}efetch.fcgi?db=${database}&id=${id}&rettype=abstract&retmode=xml`);
 
   const results = await fetch(request);
   const str = await results.text();

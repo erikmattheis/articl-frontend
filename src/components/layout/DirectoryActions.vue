@@ -9,7 +9,7 @@
 
     <router-link
       v-if="treeLevel === 4"
-      :to="{ name: 'CreateArticlPage', query: { type: $route.params.type || '', slug: $route.params.slug || '0' } }"
+      :to="{ name: 'CreateArticlPage', query: { articlType: $route.params.articlType || '', slug: $route.params.slug || '0' } }"
       role="button">
       <small>New Articl Here</small>
     </router-link>

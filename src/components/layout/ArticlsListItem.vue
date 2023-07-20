@@ -107,7 +107,7 @@
       </li>
 
       <li
-        v-if="articl.url && articl.type == 'Images'"
+        v-if="articl.url && articl.articlType == 'Images'"
         class="articl-details">
         <img
           :src="articl.url"

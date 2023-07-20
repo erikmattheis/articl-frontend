@@ -96,7 +96,7 @@ const router = createRouter({
       
       {
         name: "ArticlsList",
-        path: "articls/:type?",
+        path: "articls/:articlType?",
         component: ArticlsList,
       }],
 

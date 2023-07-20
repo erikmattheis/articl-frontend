@@ -13,8 +13,9 @@
     <h1>Articl Deleted</h1>
     <a tabindex="0"
       href
-      @click.prevent="$router.push({ name: 'ArticlsList', params: { slug, type } })"
-      @keyup.enter.prevent="$router.push({ name: 'ArticlsList', params: { slug, type } })">Return to Category Page </a>
+      @click.prevent="$router.push({ name: 'ArticlsList', params: { slug, articlType } })"
+      @keyup.enter.prevent="$router.push({ name: 'ArticlsList', params: { slug, articlType } })">Return to Category Page
+    </a>
   </article>
 </template>
 
@@ -28,7 +29,7 @@ export default {
     deleted: false,
     id: "X",
     slug: "",
-    type: "",
+    articlType: "",
     title: "",
   }),
   async mounted() {
@@ -80,7 +81,7 @@ export default {
         this.parentSlug = result.data?.category[0]?.parentSlug;
         this.id = result.data?.category[0]?.id;
         this.slug = this.data.slug;
-        this.type = this.$route.params.type;
+        this.articlType = this.$route.params.articlType;
         this.title = this.$route.params.title;
 
         this.isLoading = false;

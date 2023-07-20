@@ -79,9 +79,9 @@ export default {
     },
 
     onUpdateArticlsOrderValues() {
-      this.updateArticlsOrderValues(this.type);
+      this.updateArticlsOrderValues(this.articlType);
 
-      this.saveArticlsOrderValues(this.type);
+      this.saveArticlsOrderValues(this.articlType);
     },
   },
 };
