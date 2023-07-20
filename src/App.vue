@@ -1,7 +1,8 @@
 <template>
   <div class="vertical-container">
     <the-header />
-    <main>
+    <main>articlType: {{ articlType }}<br>
+      slug: {{ slug }}<br>
       <router-view v-slot="{ Component }">
         <component :is="Component" />
 
@@ -37,6 +38,8 @@ SCSS  4  124  164  64  352
  * total, 4650, 7816
  *** */
 
+import { mapGetters } from "vuex";
+
 import TheFooter from "@/components/layout/TheFooter.vue";
 import TheHeader from "@/components/layout/TheHeader.vue";
 import ModalError from "@/components/ui/ModalError.vue";
@@ -51,10 +54,18 @@ export default {
     ModalSuccess,
   },
   data: () => ({}),
+  computed: {
+    ...mapGetters({
+      slug: "resources/slug",
+      articlType: "resources/articlType",
+    }),
+  },
   mounted() {
     const user = this.$cookies.get("user");
     if (user) {
       this.$store.dispatch("users/setUser", user);
+      this.$store.dispatch("resources/articlType", 'salad');
+      this.$store.dispatch("resources/slug", 'salad');
     }
   },
   methods: {},

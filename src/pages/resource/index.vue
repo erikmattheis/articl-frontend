@@ -4,7 +4,7 @@
   <articls-list />
 </template>
 <script>
-import { groupBy } from "lodash";
+import { mapGetters } from "vuex";
 import axiosInstance from "@/services/axiosService";
 import TheBreadcrumbs from "@/components/layout/TheBreadcrumbs.vue";
 import CategoriesList from "@/components/layout/CategoriesList.vue";
@@ -23,24 +23,19 @@ export default {
       slug: "",
     };
   },
-
-  watch: {
-    "$route.params.slug": {
-      handler() {
-        this.getCategoryResources();
-      },
-      immediate: true,
-    },
+  created() {
+    this.getCategoryResources(this.$route.params.slug);
   },
   beforeRouteUpdate(to, from) {
-    this.slug = to.params.slug;
-    this.type = to.params.type;
-    if (this.type !== from.params.type) {
-      this.$store.dispatch("resources/articlType", to.type);
+    console.log("beforeRouteUpdate");
+    if (to.params.type !== from.params.type) {
+      console.log("type changed", to.params.type);
+      this.$store.dispatch("resources/articlType", to.params.type);
     }
-    if (this.slug !== from.params.slug) {
-      this.$store.dispatch("resources/slug", to.slug);
-      this.getCategoryResources(this.slug);
+    if (to.params.slug !== from.params.slug) {
+      console.log("slug changed", to.params.slug);
+      this.$store.dispatch("resources/slug", to.params.slug);
+      this.getCategoryResources(to.params.slug);
     }
   },
   methods: {

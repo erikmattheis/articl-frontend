@@ -62,6 +62,7 @@ export default {
   },
   methods: {
     async updateData() {
+      /*
       try {
         this.isLoading = true;
 
@@ -107,6 +108,7 @@ export default {
       } finally {
         this.isLoading = false;
       }
+      */
     },
 
     async fetchData() {
