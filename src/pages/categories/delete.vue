@@ -72,7 +72,7 @@ export default {
           `The category "${this.title}" has been permanently deleted.`,
         );
         if (Number(this.parentSlug) === 0) {
-          this.$router.push('/');
+          this.$router.push('');
         } else {
           this.$router.push({ name: "ResourceIndex", params: { slug: this.parentSlug } });
         }

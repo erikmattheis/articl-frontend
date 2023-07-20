@@ -336,7 +336,7 @@ export default {
             `The category was successfully ${titleVerb}.`,
           );
           if (Number(this.parentSlug) === 0) {
-            this.$router.push('/');
+            this.$router.push('');
           } else {
             this.$router.push({ name: "ResourceIndex", params: { slug: this.parentSlug } });
           }

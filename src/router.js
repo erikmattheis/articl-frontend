@@ -33,7 +33,7 @@ const router = createRouter({
         name: "CategoriesList",
         path: "",
         component: CategoriesList,
-        alias: ['/', '0']
+        alias: ['/:slug?']
       },
       
       {
