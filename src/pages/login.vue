@@ -140,9 +140,7 @@ export default {
               path: this.$route.query.redirect,
             });
           } else {
-            this.$router.push({
-              name: "HomePage",
-            });
+            this.$router.push('/');
           }
         } else {
           this.$store.dispatch("errors/setError", this.errorMessage);

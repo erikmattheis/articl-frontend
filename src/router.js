@@ -7,7 +7,6 @@ import CreateCategoryPage from "@/pages/categories/index.vue";
 import ResourceIndex from "@/pages/resource/index.vue";
 import ForgotPassPage from "@/pages/forgot-pass.vue";
 import ForgotUsernamePage from "@/pages/forgot-username.vue";
-import HomePage from "@/pages/resource/index.vue";
 import LoginPage from "@/pages/login.vue";
 import DeleteNote from "@/components/layout/NotesDelete.vue";
 import EditNote from "@/components/layout/NotesForm.vue";
@@ -25,11 +24,6 @@ const router = createRouter({
   history: createWebHistory(),
 
   routes: [
-    {
-      name: "HomePage",
-      path: "/",
-      component: ResourceIndex
-    },
 
     {
       name: "ResourceIndex",
@@ -39,6 +33,7 @@ const router = createRouter({
         name: "CategoriesList",
         path: "",
         component: CategoriesList,
+        alias: ['/', '0']
       },
       
       {
