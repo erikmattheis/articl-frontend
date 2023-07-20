@@ -10,6 +10,7 @@
       <li
         v-for="(breadcrumb, index) in breadcrumbs"
         :key="breadcrumb">
+        {{ index }} !== {{ breadcrumbs.length - 1 }}
         <router-link
           v-if="index !== breadcrumbs.length - 1"
           :to="{ name: index < 3 ? 'ResourceIndex' : 'ArticlsList', params: { slug: breadcrumb.slug } }">

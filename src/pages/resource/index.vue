@@ -23,10 +23,7 @@ export default {
       slug: "",
     };
   },
-  created() {
-    this.slug = this.$route.params.slug;
-    this.getCategoryResources(this.slug);
-  },
+
   watch: {
     "$route.params.slug": {
       handler() {
