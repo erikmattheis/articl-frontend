@@ -1,7 +1,7 @@
 <template>
-  <div class="articl">ArticlsListItem
+  <div class="articl">
     <ul>
-      <li class="title container">xxx
+      <li class="title container">
         <a
           :data-tooltip="linkMessage"
           :href="articl.url"
