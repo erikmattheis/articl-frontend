@@ -101,7 +101,7 @@ export default {
 
     slug: (state) => state.slug,
 
-    articlType: (state) => state.articlType,
+    articlType: (state, getters) => getters.articlTypes[0],
 
     count: (state) => state.count,
 
