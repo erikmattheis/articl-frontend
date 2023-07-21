@@ -1,8 +1,7 @@
 <template>
   <div class="vertical-container">
     <the-header />
-    <main>articlType: {{ articlType }}<br>
-      slug: {{ slug }}<br>
+    <main>
       <router-view v-slot="{ Component }">
         <component :is="Component" />
 

@@ -1,6 +1,5 @@
 <template>
-  <ul class="nav-tabs nav-tabs-inner-margin">slug:{{ slug }}<br>articlType:{{ articlType }}<br>articlTypes:{{ articlTypes
-  }}
+  <ul class="nav-tabs nav-tabs-inner-margin">
     <li :class="{ active: articlType === '' }">
       <a href="#" @click.prevent="changeArticlType('')"
         @keyup.enter.prevent="changeArticlType('')">
