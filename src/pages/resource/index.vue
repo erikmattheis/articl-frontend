@@ -25,6 +25,7 @@ export default {
   created() {
     this.getCategoryResources(this.$route.params.slug);
     this.$store.dispatch("resources/slug", this.$route.params.slug);
+    console.log('this.$route.params.slug', this.$route.params.slug);
     this.$store.dispatch("resources/articlType", this.$route.params.articlType);
   },
   beforeRouteUpdate(to, from) {
@@ -33,6 +34,7 @@ export default {
       this.$store.dispatch("resources/articlType", to.params.articlType);
     }
     if (to.params.slug !== from.params.slug) {
+      console.log("slug changed", to.params.slug);
       this.$store.dispatch("resources/slug", to.params.slug);
       this.getCategoryResources(to.params.slug);
     }

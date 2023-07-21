@@ -1,11 +1,16 @@
 <template>
   <ul class="nav-tabs nav-tabs-inner-margin">slug:{{ slug }}<br>articlType:{{ articlType }}<br>articlTypes:{{ articlTypes
   }}
+    <li :class="{ active: articlType === '' }">
+      <a href="#" @click.prevent="changeArticlType('')"
+        @keyup.enter.prevent="changeArticlType('')">
+        All</a>
+    </li>
     <li v-for="type in articlTypes" :key="type" :class="{ active: type === articlType }">
       <a
         href="#"
-        @click.prevent="$router.push({ name: 'ResourceIndex', params: { slug, articlType: type } })"
-        @keyup.enter.prevent="$router.push({ name: 'ResourceIndex', params: { slug, articlType: type } })">
+        @click.prevent="changeArticlType(type)"
+        @keyup.enter.prevent="changeArticlType(type)">
         {{ type }}</a>
     </li>
   </ul>
@@ -28,6 +33,15 @@ export default {
       articlTypes: "resources/articlTypes",
       articlType: "resources/articlType",
     }),
+  },
+  methods: {
+    changeArticlType(articlType) {
+      this.$store.dispatch("resources/articlType", articlType);
+
+      this.$router.push({ name: 'ArticlsList', params: { slug: this.slug, articlType } });
+
+
+    },
   },
 };
 

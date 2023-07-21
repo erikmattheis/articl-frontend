@@ -20,7 +20,7 @@ export default {
       state.slug = payload;
     },
     SET_ARTICL_TYPE: (state, payload) => {
-      state.slug = payload;
+      state.articlType = payload;
     },
     SET_COUNT: (state, payload) => {
       state.count = payload;
@@ -101,7 +101,7 @@ export default {
 
     slug: (state) => state.slug,
 
-    articlType: (state, getters) => getters.articlTypes[0],
+    articlType: (state) => state.articlType,
 
     count: (state) => state.count,
 
