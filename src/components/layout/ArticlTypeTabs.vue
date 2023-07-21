@@ -5,12 +5,12 @@
         @keyup.enter.prevent="changeArticlType('')">
         All</a>
     </li>
-    <li v-for="type in articlTypes" :key="type" :class="{ active: type === articlType }">
+    <li v-for="t in articlTypes" :key="t" :class="{ active: t === articlType }">
       <a
         href="#"
-        @click.prevent="changeArticlType(type)"
-        @keyup.enter.prevent="changeArticlType(type)">
-        {{ type }}</a>
+        @click.prevent="changeArticlType(t)"
+        @keyup.enter.prevent="changeArticlType(t)">
+        {{ t }}</a>
     </li>
   </ul>
 </template>
