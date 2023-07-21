@@ -1,6 +1,6 @@
 <template>
   <ul class="nav-tabs nav-tabs-inner-margin">
-    <li :class="{ active: articlType === '' }">
+    <li :class="{ active: !articlType }">
       <a href="#" @click.prevent="changeArticlType('')"
         @keyup.enter.prevent="changeArticlType('')">
         All</a>
