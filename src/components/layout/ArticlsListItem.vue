@@ -1,5 +1,5 @@
 <template>
-  <div class="articl">
+  <li class="articl">
     <ul>
       <li class="title container">
         <a
@@ -120,7 +120,7 @@
         v-html="articl.imageCaption">
       </li>
     </ul>
-  </div>
+  </li>
 </template>
 
 <script>

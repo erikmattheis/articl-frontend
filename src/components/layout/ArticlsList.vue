@@ -1,10 +1,7 @@
 <template>
   <articl-type-tabs />
-  <ul
-    v-for="articl in articls"
-    :key="articl.id"
-    class="nav-inner-content">
-    <articls-list-item :articl="articl" />
+  <ul class="nav-inner-content">
+    <articls-list-item :articl="articl" v-for="articl in articls" :key="articl.id" />
   </ul>
 
   <div v-if="(articls?.length === 0)">
