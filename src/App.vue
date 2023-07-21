@@ -143,7 +143,7 @@ export default {
 }
 
 .nav-tabs-margin {
-  margin: calc(var(--nav-element-spacing-vertical) * 0.5) calc(var(--nav-element-spacing-vertical) * 0.5);
+  margin: 0;
 }
 
 .nav-tabs-inner-margin {
@@ -196,6 +196,7 @@ export default {
   padding: 0 1rem;
   text-decoration: none;
   background-color: transparent;
+  font-size: 0.8rem;
 }
 
 .nav-content {
