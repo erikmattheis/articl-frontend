@@ -81,7 +81,7 @@
       </li>
 
       <li
-        v-if="articl.abstract"
+        v-if="1 === 2 && articl.abstract"
         class="articl-details">
         <details>
           <summary>Abstract</summary>
