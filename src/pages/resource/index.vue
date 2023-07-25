@@ -1,5 +1,6 @@
 <template>
   <the-breadcrumbs />
+  <h1>{{ title }}</h1>
   <categories-list />
   <articls-list />
 </template>

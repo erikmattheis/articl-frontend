@@ -48,6 +48,6 @@ body li {
 
 body li a::after {
   content: "/";
-  color: #222;
+  color: #ccc;
 }
 </style>
