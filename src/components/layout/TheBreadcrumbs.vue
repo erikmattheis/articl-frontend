@@ -40,8 +40,14 @@ body ul {
 }
 
 body li {
+  font-size: 0.9rem;
   padding-top: 0;
   padding-bottom: calc(var(--nav-element-spacing-vertical) * 0.5);
   vertical-align: top !important
+}
+
+body li a::after {
+  content: "/";
+  color: #222;
 }
 </style>
