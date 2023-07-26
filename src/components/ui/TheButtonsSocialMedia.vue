@@ -114,7 +114,6 @@ export default {
   background-repeat: no-repeat;
   transition: background-position 0.1s ease-in-out;
   -webkit-transition: background-position 0.1s ease-in-out;
-  -webkit-appearance: none;
   cursor: pointer;
   overflow: hidden;
 }

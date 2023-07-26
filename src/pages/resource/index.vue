@@ -1,10 +1,13 @@
 <template>
-  <the-breadcrumbs />
-  <h1>{{ title }}</h1>
-  <categories-list />
-  <articls-list />
+  <section>
+    <the-breadcrumbs />
+    <h1>{{ title }}</h1>
+    <categories-list />
+    <articls-list v-if="treeLevel === 4" />
+  </section>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import axiosInstance from "@/services/axiosService";
 import TheBreadcrumbs from "@/components/layout/TheBreadcrumbs.vue";
 import CategoriesList from "@/components/layout/CategoriesList.vue";
@@ -22,6 +25,11 @@ export default {
       title: "",
       slug: "",
     };
+  },
+  computed: {
+    ...mapGetters({
+      treeLevel: "resources/treeLevel",
+    }),
   },
   created() {
     this.getCategoryResources(this.$route.params.slug);

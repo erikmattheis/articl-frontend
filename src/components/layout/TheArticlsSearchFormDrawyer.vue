@@ -77,7 +77,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 aside {
   display: flex;
   flex-direction: column;

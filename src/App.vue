@@ -1,13 +1,13 @@
 <template>
   <div class="vertical-container">
     <the-header />
-    <main>
+    <main :class="routeTransitionClass">
       <router-view v-slot="{ Component }">
-        <component :is="Component" />
-
+        <transition name="fade">
+          <component :is="Component" />
+        </transition>
       </router-view>
     </main>
-
     <the-footer />
   </div>
   <modal-error />
@@ -52,12 +52,21 @@ export default {
     ModalError,
     ModalSuccess,
   },
-  data: () => ({}),
+  data() {
+    return {
+      routeTransitionClass: "", // Store the transition class for the main element
+    };
+  },
   computed: {
     ...mapGetters({
       slug: "resources/slug",
       articlType: "resources/articlType",
     }),
+  },
+  beforeRouteLeave(to, from, next) {
+    // Add the fade-out class to the main element before leaving the route
+    this.routeTransitionClass = "fade-leave-active";
+    setTimeout(next, 300); // Adjust the duration to match your transition timing
   },
   mounted() {
     const user = this.$cookies.get("user");
@@ -116,19 +125,6 @@ export default {
   padding: 0 5px !important;
 }
 
-.fade-enter-active {
-  transition: opacity 0.1s ease;
-  transition-delay: 0.1s;
-}
-
-.fade-leave-active {
-  transition: opacity 0.1s ease;
-}
-
-.fade-leave-to,
-.fade-enter-from {
-  opacity: 0;
-}
 
 .ghost {
   border: 2px dashed red !important;
@@ -363,6 +359,16 @@ ul {
 
 ul li {
   list-style-type: none !important;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 3s ease !important;
+}
+
+.fade-leave-to,
+.fade-enter-from {
+  opacity: 0;
 }
 
 @media prefers-reduced-motion {
