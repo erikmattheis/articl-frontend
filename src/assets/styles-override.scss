@@ -31,6 +31,7 @@
 
   // Responsive typography
   @if $enable-responsive-typography {
+    
     @if map-get($breakpoints, "xs") {
       @media (min-width: map-get($breakpoints, "sm")) {
         --font-size: calc(0.5 * --font-size)px;
@@ -95,5 +96,6 @@
 
   h1 {
     margin-bottom: 0.5rem;
+    font-size: 1.2rem;
   }
 }

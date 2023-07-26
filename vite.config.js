@@ -16,6 +16,9 @@ export default defineConfig({
         additionalData: `@import "node_modules/@picocss/pico/scss/pico.scss";`
       },
     },
+    css: {
+      modules: true,
+    },
   }
 })
 
