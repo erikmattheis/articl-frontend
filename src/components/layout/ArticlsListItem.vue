@@ -6,8 +6,7 @@
           :data-tooltip="linkMessage"
           :href="articl.url"
           class="box"
-          target="_blank"
-          v-html="articl.title">
+          target="_blank">{{ articl.title }}
         </a>
 
         <articl-actions
@@ -21,8 +20,7 @@
 
       <li class="articl-details">
         <p class="authors-list"
-          v-if="articl?.authors?.length"
-          v-html="articl.authors">
+          v-if="articl?.authors?.length">{{ articl.authors }}
         </p>
         <details v-if="!articl?.wpPost?.ID">
           <summary>
@@ -33,27 +31,16 @@
               v-for="(author, index) in articl.authors"
               :key="index"
               class="grid">
-              <template v-if="author.nameFirst?.length || author.nameLast?.length">
-                <span v-html="author.nameFirst"></span><span v-html="author.nameLast"></span>
+              <div v-if="author.nameFirst?.length || author.nameLast?.length">
+                {{ author.nameFirst }} {{ author.nameLast }}
                 <ul>
                   <li
                     v-for="affilliation in author.affilliations"
-                    :key="affilliation"
-                    v-html="affilliation">
+                    :key="affilliation">{{ affilliation }}
                   </li>
                 </ul>
-
-                <ul v-if="author.affilliations?.length">
-                  <li
-                    v-for="affilliation in author.affilliations"
-                    :key="affilliation"
-                    v-html="affilliation">
-                  </li>
-                </ul>
-              </template>
-              <template v-else-if="author.length">
-                <span v-html="author"></span>
-              </template>
+              </div>
+              <div v-else-if="author.length">{{ author }}</div>
             </li>
           </ul>
         </details>
@@ -61,23 +48,20 @@
 
       <li
         v-if="articl.journal"
-        class="articl-details"><span v-html="articl.journal"
+        class="articl-details"><a
           data-tooltip="linkMessage"
           :href="articl.url"
-          target="_blank"></span> <span v-if="articl.year"
-          v-html="articl.year"></span>
+          target="_blank">{{ articl.journal }}</a> {{ articl.month }}{{ articlDateSlashOrNot }}{{ articl.year }}
       </li>
 
       <li
         v-if="articl.authorsOrig"
-        class="articl-details"
-        v-html="articl.authorOrig">
+        class="articl-details">{{ articl.authorOrig }}
       </li>
 
       <li
         v-if="articl.source"
-        class="articl-details"
-        v-html="articl.source">
+        class="articl-details">{{ articl.source }}
       </li>
 
       <li
@@ -85,7 +69,7 @@
         class="articl-details">
         <details>
           <summary>Abstract</summary>
-          <div v-html="articl.abstract"></div>
+          <div>{{ articl.abstract }}</div>
         </details>
       </li>
 
@@ -94,7 +78,7 @@
         class="articl-details">
         <details>
           <summary>Full text</summary>
-          <div v-html="articl.fullText"></div>
+          <div>{{ articl.fullText }}</div>
         </details>
       </li>
 
@@ -116,8 +100,7 @@
 
       <li
         v-if="articl.imageCaption"
-        class="articl-details"
-        v-html="articl.imageCaption">
+        class="articl-details">Caption: {{ articl.imageCaption }}
       </li>
     </ul>
   </li>
@@ -150,6 +133,12 @@ export default {
     ...mapGetters({
       params: "articlsParams/params",
     }),
+    articlDateSlashOrNot() {
+      if (this.articl.month && this.articl.year) {
+        return "/";
+      }
+      return "";
+    },
     monthStr() {
       if (!isNumber(Number(this.articl.month))) {
         return this.articl.month;

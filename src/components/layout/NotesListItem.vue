@@ -4,7 +4,7 @@
       <div>
         <p v-if="$route.name === 'EditNoteSuccess' && note?.id === $route.params.id"><ins>Your note was successfully
             updated.</ins></p>
-        <p v-html="note.fullText"></p>
+        <p>{{ note.fullText }}</p>
         <small>–{{ note.author?.nameFirst }} {{ note.author?.nameLast }}<br>
           {{ note.createdAt }}</small>
       </div>
