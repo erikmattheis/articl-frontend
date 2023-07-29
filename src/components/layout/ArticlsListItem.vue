@@ -30,7 +30,7 @@
       </li>
 
       <li
-        v -if=" articl.journal"
+        v-if="articl.journal"
         class="articl-details"><a
           data-tooltip="linkMessage"
           :href="articl.url"
@@ -154,10 +154,10 @@ export default {
         return list;
       }
     },
-    methods: {
-      highlightedSubstring,
-      noCaseIndexOf,
-    },
+  },
+  methods: {
+    highlightedSubstring,
+    noCaseIndexOf,
   },
 };
 

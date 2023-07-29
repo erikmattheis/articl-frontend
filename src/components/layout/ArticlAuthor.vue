@@ -1,5 +1,5 @@
 <template>
-  <span>{{ name }} {{ affilliations }}{{ commaOrEmpty }}</span>
+  <span>{{ name }}</span>
 </template>
 
 <script>
@@ -16,21 +16,21 @@ export default {
     },
     last: {
       type: Boolean,
-      required: false,
+      required: true,
       default: false,
     },
   },
   computed: {
     commaOrEmpty() {
-      return this.last ? '' : ',';
+      return this.last ? '' : ', ';
     },
     affilliations() {
-      return this.author?.affilliations?.length ? `(${this.author?.affilliations?.join(", ")})` : '';
+      return this.author?.affilliations?.length ? ` (${this.author?.affilliations?.join(", ")})` : '';
     },
     name() {
       if (typeof this.author === 'string') return this.author;
       if (!this.author?.nameLast) return 'No nameLast set';
-      return `${this.author.nameFirst} ${this.author.nameLast}`;
+      return `${this.author.nameFirst} ${this.author.nameLast}${this.affilliations}${this.commaOrEmpty}`;
     },
   },
 }
