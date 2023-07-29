@@ -45,9 +45,4 @@ body li {
   padding-bottom: calc(var(--nav-element-spacing-vertical) * 0.5);
   vertical-align: top !important
 }
-
-body li a::after {
-  content: "/";
-  color: #ccc;
-}
 </style>

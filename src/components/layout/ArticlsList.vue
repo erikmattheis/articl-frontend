@@ -1,11 +1,13 @@
 <template>
-  <articl-type-tabs />
-  <ul class="nav-inner-content">
-    <articls-list-item :articl="articl" v-for="articl in articls" :key="articl.id" />
-  </ul>
+  <div>
+    <articl-type-tabs />
+    <ul class="nav-inner-content">
+      <articls-list-item :articl="articl" v-for="articl in articls" :key="articl.id" />
+    </ul>
 
-  <div v-if="(articls?.length === 0)">
-    No entries yet.
+    <div v-if="(articls?.length === 0)">
+      No entries yet.
+    </div>
   </div>
 </template>
 

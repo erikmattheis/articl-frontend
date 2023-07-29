@@ -97,7 +97,7 @@ export default {
 </script>
 
 
-<style lang="scss" module>
+<style lang="scss">
 @import "@/assets/global.scss";
 
 .smaller {
@@ -173,7 +173,7 @@ export default {
   margin-bottom: 0;
   position: relative;
   z-index: 10;
-  display: flex;
+  display: flex !important;
   flex-wrap: nowrap;
   overflow-x: auto;
   width: 100%;

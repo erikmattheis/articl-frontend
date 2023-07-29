@@ -19,35 +19,18 @@
       </li>
 
       <li class="articl-details">
-        <p class="authors-list"
-          v-if="articl?.authors?.length">{{ articl.authors }}
-        </p>
-        <details v-if="!articl?.wpPost?.ID">
-          <summary>
-            Affiliations
-          </summary>
-          <ul>
-            <li
-              v-for="(author, index) in articl.authors"
-              :key="index"
-              class="grid">
-              <div v-if="author.nameFirst?.length || author.nameLast?.length">
-                {{ author.nameFirst }} {{ author.nameLast }}
-                <ul>
-                  <li
-                    v-for="affilliation in author.affilliations"
-                    :key="affilliation">{{ affilliation }}
-                  </li>
-                </ul>
-              </div>
-              <div v-else-if="author.length">{{ author }}</div>
-            </li>
-          </ul>
-        </details>
+
+        <articl-author
+          v-for="(author, index) in articl.authors"
+          v-once
+          :author="author"
+          :key="index"
+          :last="index < articl.authors.length - 1" />
+
       </li>
 
       <li
-        v-if="articl.journal"
+        v -if=" articl.journal"
         class="articl-details"><a
           data-tooltip="linkMessage"
           :href="articl.url"
@@ -65,8 +48,7 @@
       </li>
 
       <li
-        v-if="1 === 2 && articl.abstract"
-        class="articl-details">
+        v-if="1 === 2 && articl.abstract" class="articl-details">
         <details>
           <summary>Abstract</summary>
           <div>{{ articl.abstract }}</div>
@@ -110,11 +92,13 @@
 import { mapGetters } from "vuex";
 
 import ArticlActions from "@/components/layout/ArticlActions.vue";
+import ArticlAuthor from '@/components/layout/ArticlAuthor.vue';
 import { highlightedSubstring, isNumber, noCaseIndexOf } from "@/services/stringsService";
 
 export default {
   components: {
     ArticlActions,
+    ArticlAuthor,
   },
   props: {
     articl: {
@@ -154,27 +138,27 @@ export default {
       }
     },
     authorsList() {
-      if (this.articl?.authors?.map && this.articl?.authors?.length) {
+      if (this.articl?.authors?.map) {
         let list;
         if (typeof this.articl.authors[0] === "string") {
           list = this.articl.authors;
         } else {
-          list = this.articl.authors.map((author) => (author.nameFirst ? `${author.nameFirst} ${author.nameLast}` : author));
+          list = this.articl.authors.map((author) => `${author.nameFirst} ${author.nameLast}`);
+          list = list.join(", ");
+          return list;
         }
 
-        return list.join(", ");
+        if (this.articl?.authorsOrig?.length) {
+          list = this.articl.authorsOrig;
+        }
+        return list;
       }
-      if (this.articl?.authorsOrig?.length) {
-        return this.articl.authorsOrig;
-      }
-      return [];
+    },
+    methods: {
+      highlightedSubstring,
+      noCaseIndexOf,
     },
   },
-  methods: {
-    highlightedSubstring,
-    noCaseIndexOf,
-  },
-
 };
 
 </script>
