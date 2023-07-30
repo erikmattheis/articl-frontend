@@ -74,11 +74,6 @@
           @keyup.enter="$router.go()">Create another category</a>
       </template>
     </template>
-    <transition
-      name="fade"
-      mode="out-in">
-      <loading-placeholder v-if="isLoading || true" />
-    </transition>
   </article>
 </template>
 

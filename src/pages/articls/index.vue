@@ -138,10 +138,6 @@
         </button>
       </form>
     </template>
-    <transition name="fade"
-      mode="out-in">
-      <loading-placeholder v-if="isLoading" />
-    </transition>
   </article>
 </template>
 
