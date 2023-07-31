@@ -1,8 +1,16 @@
 <template>
   <div>
     <articl-type-tabs />
+    <select
+      class="form-control"
+      v-model="sortBy"
+      @change="sortArticlsBy">
+      <option value="title">Title</option>
+      <option value="year">Year Published</option>
+      <option value="createdAt">Date Added</option>
+    </select>
     <ul class="nav-inner-content">
-      <articls-list-item :articl="articl" v-for="articl in articls" :key="articl.id" />
+      <articls-list-item :articl="articl" v-for="(articl, index) in articls" :key="index" />
     </ul>
 
     <div v-if="(articls?.length === 0)">
@@ -21,6 +29,12 @@ import axiosInstance from "@/services/axiosService";
 
 export default {
   name: "ArticlsList",
+  data() {
+    return {
+      sortBy: "createdAt",
+      isLoading: false,
+    };
+  },
   components: {
     ArticlsListItem,
     ArticlTypeTabs,
@@ -35,7 +49,13 @@ export default {
     }
   },
   methods: {
-
+    sortArticlsBy(e) {
+      console.log(e);
+      this.sortArticlsByAnyKey(this.sortBy);
+    },
+    sortArticlsByAnyKey(key) {
+      this.$store.dispatch("resources/sortArticlsByAnyKey", key);
+    },
     updateArticlsOrderValues() {
       try {
         this.articls.forEach((obj, index) => {

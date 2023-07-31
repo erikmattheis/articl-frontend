@@ -96,6 +96,19 @@ export default {
       const newNotes = notes.filter((note) => note.id !== payload);
       context.commit("SET_NOTES", newNotes);
     },
+    sortArticlsByAnyKey: (state) => (key) => {  
+      
+      return state.articls.sort((a, b) => {
+        if (a[key] > b[key]) {
+          return 1;
+        }
+        if (a[key] < b[key]) {
+          return -1;
+        }
+        return 0;
+      });
+
+    },
   },
   getters: {
 
@@ -106,6 +119,8 @@ export default {
     count: (state) => state.count,
 
     categories: (state) => state.categories,
+
+
 
     filteredArticls: (state) => (articlType) => {
       if (!articlType) {

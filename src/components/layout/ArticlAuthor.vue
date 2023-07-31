@@ -8,6 +8,7 @@ export default {
     key: {
       type: Number,
       required: true,
+      default: () => 0,
     },
     author: {
       type: [Object, String],
