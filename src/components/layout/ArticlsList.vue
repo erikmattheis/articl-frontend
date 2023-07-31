@@ -1,15 +1,14 @@
 <template>
   <div>
     <articl-type-tabs />
-    <select
-      class="form-control"
-      v-model="sortBy"
-      @change="sortArticlsBy">
-      <option value="title">Title</option>
-      <option value="year">Year Published</option>
-      <option value="createdAt">Date Added</option>
-    </select>
     <ul class="nav-inner-content">
+      <li><select
+          v-model="sortBy"
+          @change="sortArticlsBy">
+          <option value="title">Title</option>
+          <option value="year">Year Published</option>
+          <option value="createdAt">Date Added</option>
+        </select></li>
       <articls-list-item :articl="articl" v-for="(articl, index) in articls" :key="index" />
     </ul>
 
@@ -50,8 +49,8 @@ export default {
   },
   methods: {
     sortArticlsBy(e) {
-      console.log(e);
-      this.sortArticlsByAnyKey(this.sortBy);
+      this.sortBy = e.target.value;
+      this.sortArticlsByAnyKey(e.target.value);
     },
     sortArticlsByAnyKey(key) {
       this.$store.dispatch("resources/sortArticlsByAnyKey", key);
@@ -106,3 +105,18 @@ export default {
 };
 
 </script>
+
+<style scoped>
+select {
+  max-width: 250px;
+  margin: 0 0 0.5rem 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: inherit;
+  background-color: #fff;
+  cursor: pointer;
+}
+</style>

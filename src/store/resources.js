@@ -98,7 +98,7 @@ export default {
     },
     sortArticlsByAnyKey: (state) => (key) => {  
       
-      return state.articls.sort((a, b) => {
+      const articls = state.articls.sort((a, b) => {
         if (a[key] > b[key]) {
           return 1;
         }
@@ -108,6 +108,7 @@ export default {
         return 0;
       });
 
+      context.commit("SET_ARTICLS", articls);
     },
   },
   getters: {
