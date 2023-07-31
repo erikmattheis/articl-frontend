@@ -30,7 +30,7 @@ export default {
   name: "ArticlsList",
   data() {
     return {
-      sortBy: "title",
+      sortBy: "createdAt",
       isLoading: false,
     };
   },
@@ -111,13 +111,5 @@ export default {
 select {
   max-width: 250px;
   margin: 0 0 0.5rem 0.5rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-family: inherit;
-  color: inherit;
-  background-color: #fff;
-  cursor: pointer;
 }
 </style>
