@@ -22,7 +22,6 @@
 
         <articl-author
           v-for="(author, index) in articl.authors"
-          v-once
           :author="author"
           :key="index"
           :last="index < articl.authors.length - 1" />

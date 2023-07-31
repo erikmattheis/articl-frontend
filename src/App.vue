@@ -63,28 +63,7 @@ export default {
       articlType: "resources/articlType",
     }),
   },
-  beforeRouteUpdate(to, from, next) {
-    console.log("beforeRouteUpdate");
-    // Add the fade-out class to the main element before leaving the route
-    this.routeTransitionClass = styles.fadeLeave;
-    // Use a timeout to ensure the class is applied before the transition
-    setTimeout(() => {
-      next();
-    }, 300); // Adjust the duration to match your transition timing
-  },
-  beforeRouteLeave(to, from, next) {
-    // Add the fade-out class to the main element before leaving the route
-    this.routeTransitionClass = styles.fadeLeave;
-    // Use a timeout to ensure the class is applied before the transition
-    setTimeout(() => {
-      next();
-    }, 300); // Adjust the duration to match your transition timing
-  },
-  beforeRouteEnter(to, from, next) {
-    // Add the fade-in class to the main element when entering the route
-    this.routeTransitionClass = styles.fadeEnter;
-    next();
-  },
+
   mounted() {
     const user = this.$cookies.get("user");
     if (user) {

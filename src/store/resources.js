@@ -96,9 +96,10 @@ export default {
       const newNotes = notes.filter((note) => note.id !== payload);
       context.commit("SET_NOTES", newNotes);
     },
-    sortArticlsByAnyKey: (state) => (key) => {  
-      
-      const articls = state.articls.sort((a, b) => {
+    sortArticlsByAnyKey: (context) => (key) => {  
+      console.log('sortArticlsByAnyKey', key  )
+      const articls = context.state.articls.slice(); // Create a shallow copy of the original array
+      articls.sort((a, b) => {
         if (a[key] > b[key]) {
           return 1;
         }
@@ -107,7 +108,7 @@ export default {
         }
         return 0;
       });
-
+    
       context.commit("SET_ARTICLS", articls);
     },
   },
@@ -121,13 +122,27 @@ export default {
 
     categories: (state) => state.categories,
 
-
-
-    filteredArticls: (state) => (articlType) => {
+    filteredArticls: (state) => (articlType, sortBy) => {
+      console.log('filteredArticls', articlType, sortBy)
+      let articls;
       if (!articlType) {
-        return state.articls;
+        articls = state.articls;
       }
-      return state.articls.filter((articl) => articl.articlType === articlType);
+      else {
+        articls = state.articls.filter((articl) => articl.articlType === articlType);
+      }
+      if (sortBy) {
+        articls.sort((a, b) => {
+          if (a[sortBy] > b[sortBy]) {
+            return 1;
+          }
+          if (a[sortBy] < b[sortBy]) {
+            return -1;
+          }
+          return 0;
+        } );
+      }
+      return articls; 
     },
 
     articlTypes: (state) => [...new Set(state.articls.map(articl => articl.articlType))] || [],

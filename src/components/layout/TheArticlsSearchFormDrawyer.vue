@@ -170,17 +170,4 @@ button.toggle-button {
   top: 0;
   transform: translateX(-100%);
 }
-
-
-.fade-enter-active,
-.fade-leave-active {
-  transition-property: opacity, transform;
-  transition-duration: 300ms;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-  transform: translateX(-100%);
-}
 </style>

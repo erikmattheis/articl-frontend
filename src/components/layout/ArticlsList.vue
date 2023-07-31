@@ -30,7 +30,7 @@ export default {
   name: "ArticlsList",
   data() {
     return {
-      sortBy: "createdAt",
+      sortBy: "title",
       isLoading: false,
     };
   },
@@ -44,16 +44,17 @@ export default {
       articlType: "resources/articlType",
     }),
     articls() {
-      return this.filteredArticls(this.articlType)
+      return this.filteredArticls(this.articlType, this.sortBy);
     }
   },
   methods: {
     sortArticlsBy(e) {
       this.sortBy = e.target.value;
-      this.sortArticlsByAnyKey(e.target.value);
+      this.sortArticlsByAnyKey(this.articlType, e.target.value);
     },
-    sortArticlsByAnyKey(key) {
-      this.$store.dispatch("resources/sortArticlsByAnyKey", key);
+    sortArticlsByAnyKey(key, sortBy) {
+      console.log("dispatch", key);
+      this.$store.dispatch("resources/sortArticlsByAnyKey", key, sortBy);
     },
     updateArticlsOrderValues() {
       try {
