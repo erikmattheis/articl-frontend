@@ -176,8 +176,8 @@ export default {
 
     document.documentElement.setAttribute("data-theme", this.theme);
 
-    if (VueCookies.isKey("font-size")) {
-      this.changeTextSize(VueCookies.get("font-size"));
+    if (VueCookies.isKey("font-size-factor")) {
+      this.changeTextSize(VueCookies.get("font-size-factor"));
     } else {
       this.changeTextSize(1);
     }
@@ -214,20 +214,14 @@ export default {
       return defaultStyles[prop];
     },
     changeTextSize(factor) {
-      let newSize;
-      if (factor === 1) {
-        newSize = this.getDefaultProperty("body", "--font-size");
-        newSize = parseFloat(newSize) || 16;
-      } else {
-        let currentSize = getComputedStyle(document.documentElement).getPropertyValue("--font-size");
-        currentSize = currentSize || 16;
-        newSize = parseFloat(currentSize) * factor;
-      }
+      const pixelSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--font-size")) || 16;
+      const sizeFactor = factor === 1 ? 1 : factor * (VueCookies.get("font-size-factor") || 1);
+      const newSize = sizeFactor * pixelSize;
       document.documentElement.style.setProperty(
         "--font-size",
         `${newSize}px`,
       );
-      VueCookies.set("font-size", factor);
+      VueCookies.set("font-size-factor", sizeFactor);
     },
     clearLocalData() {
       this.$store.dispatch("tokens/clearTokens", false);

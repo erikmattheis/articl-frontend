@@ -2,6 +2,7 @@ export default {
   namespaced: true,
 
   state: () => ({
+    lastPath: "",
     slug: "",
     articlType: "",
     articls: [],
@@ -16,6 +17,9 @@ export default {
   }),
 
   mutations: {
+    SET_LAST_PATH: (state, payload) => {
+      state.lastPath = payload;
+    },
     SET_SLUG: (state, payload) => {
       state.slug = payload;
     },
@@ -48,7 +52,11 @@ export default {
     },
   },
 
+
   actions: {
+    lastPath: (context, payload) => {
+      context.commit("SET_LAST_PATH", payload);
+    },
     slug: (context, payload) => {
       context.commit("SET_SLUG", payload);
     },
@@ -123,7 +131,7 @@ export default {
     categories: (state) => state.categories,
 
     filteredArticls: (state) => (articlType, sortBy) => {
-      console.log('filteredArticls', articlType, sortBy)
+      
       let articls;
       if (!articlType) {
         articls = state.articls;

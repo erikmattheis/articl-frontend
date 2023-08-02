@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import store from "@/store";
 import CreateArticlPage from "@/pages/articls/index.vue";
 import DeleteArticlPage from "@/pages/articls/delete.vue";
 import SearchArticls from "@/pages/articls/search.vue";
@@ -175,5 +176,15 @@ const router = createRouter({
       component: importCategoriesPage,
     },
 */
+router.beforeEach((to, from, next) => {
+  if (to.name !== "LoginPage") {
+    store.dispatch("resources/lastPath", to.fullPath);
+  }
+  else {
+    store.dispatch("resources/lastPath", "/");
+  }
+  next();
+});
+
 
 export default router;

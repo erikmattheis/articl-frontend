@@ -45,6 +45,7 @@
 </template>
 
 <script>
+
 import { mapGetters } from "vuex";
 import theButtonToggleHidden from "@/components/ui/TheButtonToggleHidden.vue";
 
@@ -66,6 +67,7 @@ export default {
     ...mapGetters({
       user: "users/user",
       tokens: "tokens/tokens",
+      lastPath: "resources/lastPath",
     }),
   },
   mounted() {
@@ -73,6 +75,22 @@ export default {
       titleHtml: "Articl Login",
     });
   },
+  beforeRouteLeave(to, from, next) {
+    const lastVisitedRoute = this.lastPath === "/login" ? "/" : this.lastPath;
+    console.log("beforeRouteLeave", lastVisitedRoute)
+    next(lastVisitedRoute);
+    /*
+  console.log("beforeRouteLeave")
+  if (this.$route.meta.keepAlive && !this.user.isAuthenticated) {
+    // If the previous route is kept alive and the user is not authenticated,
+    // allow navigation without redirecting to the previous route.
+    next();
+  } else {
+    
+  }
+  */
+  },
+
   methods: {
     resetFormErrors() {
       this.errorMessage = "";
@@ -125,23 +143,17 @@ export default {
             theme,
           );
 
-          const fontSize = this.user?.fontSize !== 16 ? this.user?.fontSize : 16;
+          const fontSize = this.user?.fontSize ? this.user?.fontSize : 16;
 
           this.$cookies.set(
             "font-size",
             fontSize,
           );
 
-          if (
-            this.$route.query.redirect
-            && this.$route.query.redirect !== "/login"
-          ) {
-            this.$router.push({
-              path: this.$route.query.redirect,
-            });
-          } else {
-            this.$router.push('');
-          }
+          const redirectTo = this.$store.state.lastPath || "/";
+          console.log("redirectTo", redirectTo);
+          this.$router.push(redirectTo);
+
         } else {
           this.$store.dispatch("errors/setError", this.errorMessage);
         }

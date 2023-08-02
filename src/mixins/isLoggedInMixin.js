@@ -1,7 +1,7 @@
 export default {
   data() {
     return {
-      currentTime: Date.now(),
+      currentTime: 0,
     };
   },
   computed: {
@@ -10,8 +10,18 @@ export default {
     },
   },
   mounted() {
-    setInterval(() => {
+    this.updateCurrentTime();
+  },
+  methods: {
+    updateCurrentTime() {
       this.currentTime = Date.now();
-    }, 1000);
+      const timeUntilTokenExpires = this.$store.state.tokens.accessTokenExpires - this.currentTime;
+      if (timeUntilTokenExpires > 0) {
+        setTimeout(() => {
+          this.updateCurrentTime();
+        }, timeUntilTokenExpires);
+      }
+    },
   },
 };
+
