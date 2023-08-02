@@ -33,7 +33,7 @@
         class="articl-details"><a
           data-tooltip="linkMessage"
           :href="articl.url"
-          target="_blank">{{ articl.journal }}</a> {{ articl.month }}{{ articlDateSlashOrNot }}{{ articl.year }}
+          target="_blank">{{ articl.journal }}</a> {{ monthStr }}{{ articlDateCommaOrNot }}{{ articl.year }}
       </li>
 
       <li
@@ -116,9 +116,9 @@ export default {
     ...mapGetters({
       params: "articlsParams/params",
     }),
-    articlDateSlashOrNot() {
+    articlDateCommaOrNot() {
       if (this.articl.month && this.articl.year) {
-        return "/";
+        return ", ";
       }
       return "";
     },
