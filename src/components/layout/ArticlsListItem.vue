@@ -33,7 +33,8 @@
         class="articl-details"><a
           data-tooltip="linkMessage"
           :href="articl.url"
-          target="_blank">{{ articl.journal }}</a> {{ monthStr }}{{ articlDateCommaOrNot }}{{ articl.year }}
+          target="_blank">{{ articl.journal }}</a>{{ articlJornalCommaOrNot }} {{ monthStr }}{{ articlDateCommaOrNot }}{{
+            articl.year }}
       </li>
 
       <li
@@ -119,6 +120,12 @@ export default {
     articlDateCommaOrNot() {
       if (this.articl.month && this.articl.year) {
         return ", ";
+      }
+      return "";
+    },
+    articlJornalCommaOrNot() {
+      if (this.articl.journal && this.articl.year) {
+        return ",";
       }
       return "";
     },
