@@ -43,6 +43,7 @@ export default {
         throw new Error(error);
       }
     },
+    
     async logout({ dispatch, commit, rootGetters }) {
       try {
         const accessToken = rootGetters["tokens/accessTokenValue"];

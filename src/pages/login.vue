@@ -125,12 +125,6 @@ export default {
 
           this.resetFormErrors();
 
-          this.$cookies.set("accessTokenExpires", this.tokens.accessTokenExpires);
-          this.$cookies.set("accessTokenValue", this.tokens.accessTokenValue);
-          this.$cookies.set("refreshTokenExpires", this.tokens.refreshTokenExpires);
-          this.$cookies.set("refreshTokenValue", this.tokens.refreshTokenValue);
-          this.$cookies.set("user", this.user);
-
           const theme = this.user?.theme !== "dark" ? "light" : "dark";
 
           this.$cookies.set(

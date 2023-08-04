@@ -51,8 +51,6 @@ export default {
       state.breadcrumbs = payload;
     },
   },
-
-
   actions: {
     lastPath: (context, payload) => {
       context.commit("SET_LAST_PATH", payload);
@@ -121,6 +119,8 @@ export default {
     },
   },
   getters: {
+
+    lastPath: (state) => state.lastPath,
 
     slug: (state) => state.slug,
 

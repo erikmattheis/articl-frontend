@@ -37,7 +37,14 @@ const validateEmail = (email) => {
 const login = async ({ username, password }) => {
   try {
     const data = await axiosInstance.post("/auth/login", { username, password });
+
+    this.$cookies.set("accessTokenExpires", this.tokens.accessTokenExpires);
+    this.$cookies.set("accessTokenValue", this.tokens.accessTokenValue);
+    this.$cookies.set("refreshTokenExpires", this.tokens.refreshTokenExpires);
+    this.$cookies.set("refreshTokenValue", this.tokens.refreshTokenValue);
+    this.$cookies.set("user", this.user);
     return data;
+
   } catch (error) {
     throw new Error(error);
   }
@@ -46,8 +53,22 @@ const login = async ({ username, password }) => {
 const logout = async ({ accessToken }) => {
   try {
     await axiosInstance.post("/auth/logout", { accessToken });
+    this.$cookies.remove("accessTokenExpires");
+    this.$cookies.remove("accessTokenValue");
+    this.$cookies.remove("refreshTokenExpires");
+    this.$cookies.remove("refreshTokenValue");
+    this.$cookies.remove("user");
   } catch (error) {
-    throw new Error(error);
+    console.log("Logout error:", error)
+    if (error.response && error.response.data.message === "Token not found") {
+      // Display an error message to the user
+      throw new Error("Token not found during logout:", error);
+      // Optionally, you can redirect the user to the login page or display a user-friendly error message on the front end.
+    } else {
+      // Handle other errors
+      throw new Error("Logout error:", error);
+      // Display a user-friendly error message or take appropriate actions based on the error.
+    }
   }
 };
 
