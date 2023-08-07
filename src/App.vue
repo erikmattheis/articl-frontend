@@ -68,10 +68,6 @@ export default {
     const user = this.$cookies.get("user");
     if (user) {
       this.$store.dispatch("users/setUser", user);
-      /*
-      this.$store.dispatch("resources/articlType", "salad");
-      this.$store.dispatch("resources/slug", "salad");
-      */
     }
   },
 };

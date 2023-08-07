@@ -6,21 +6,16 @@ export default {
 
   state: () => ({
     isEmailVerified: undefined,
-    username: undefined,
-    id: undefined,
     user: undefined,
   }),
 
   mutations: {
     SET_USER(state, user) {
       state.user = user;
-      state.username = user.username;
-      state.id = user.id;
     },
 
     CLEAR_USER(state) {
-      state.username = "";
-      state.id = null;
+      state.user = null;
     },
   },
 

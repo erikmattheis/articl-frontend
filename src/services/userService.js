@@ -1,3 +1,4 @@
+import VueCookies from "vue-cookies";
 import axiosInstance from "@/services/axiosService";
 
 const charCounts = (val) => ({
@@ -36,14 +37,13 @@ const validateEmail = (email) => {
 
 const login = async ({ username, password }) => {
   try {
-    const data = await axiosInstance.post("/auth/login", { username, password });
-
-    this.$cookies.set("accessTokenExpires", this.tokens.accessTokenExpires);
-    this.$cookies.set("accessTokenValue", this.tokens.accessTokenValue);
-    this.$cookies.set("refreshTokenExpires", this.tokens.refreshTokenExpires);
-    this.$cookies.set("refreshTokenValue", this.tokens.refreshTokenValue);
-    this.$cookies.set("user", this.user);
-    return data;
+    const result = await axiosInstance.post("/auth/login", { username, password });
+    VueCookies.set("accessTokenExpires", result?.data.tokens.accessTokenExpires);
+    VueCookies.set("accessTokenValue", result?.data.tokens.accessTokenValue);
+    VueCookies.set("refreshTokenExpires", result?.data.tokens.refreshTokenExpires);
+    VueCookies.set("refreshTokenValue", result?.data.tokens.refreshTokenValue);
+    VueCookies.set("user", result?.data.user);
+    return result;
 
   } catch (error) {
     throw new Error(error);
@@ -53,13 +53,12 @@ const login = async ({ username, password }) => {
 const logout = async ({ accessToken }) => {
   try {
     await axiosInstance.post("/auth/logout", { accessToken });
-    this.$cookies.remove("accessTokenExpires");
-    this.$cookies.remove("accessTokenValue");
-    this.$cookies.remove("refreshTokenExpires");
-    this.$cookies.remove("refreshTokenValue");
-    this.$cookies.remove("user");
+    VueCookies.remove("accessTokenExpires");
+    VueCookies.remove("accessTokenValue");
+    VueCookies.remove("refreshTokenExpires");
+    VueCookies.remove("refreshTokenValue");
+    VueCookies.remove("user");
   } catch (error) {
-    console.log("Logout error:", error)
     if (error.response && error.response.data.message === "Token not found") {
       // Display an error message to the user
       throw new Error("Token not found during logout:", error);

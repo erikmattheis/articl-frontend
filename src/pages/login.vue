@@ -76,9 +76,9 @@ export default {
     });
   },
   beforeRouteLeave(to, from, next) {
-    const lastVisitedRoute = this.lastPath === "/login" ? "/" : this.lastPath;
-    console.log("beforeRouteLeave", lastVisitedRoute)
-    next(lastVisitedRoute);
+    const lastVisitedPath = this.lastPath === "/login" ? "/" : this.lastPath;
+    console.log("beforeRouteLeave doing next", lastVisitedPath)
+    next(lastVisitedPath);
     /*
   console.log("beforeRouteLeave")
   if (this.$route.meta.keepAlive && !this.user.isAuthenticated) {
@@ -145,7 +145,7 @@ export default {
           );
 
           const redirectTo = this.$store.state.lastPath || "/";
-          console.log("redirectTo", redirectTo);
+          console.log("redirecting lastPath or / if undefined", redirectTo);
           this.$router.push(redirectTo);
 
         } else {
