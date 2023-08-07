@@ -10,7 +10,7 @@ const app = express();
 
 app.use(compression());
 app.use(serveStatic(path.join(__dirname, 'dist')));
-
+console.log('process.env.PORT', process.env.PORT);
 const port = process.env.PORT || 3000;
 
 app.listen(port);
