@@ -75,22 +75,6 @@ export default {
       titleHtml: "Articl Login",
     });
   },
-  beforeRouteLeave(to, from, next) {
-    const lastVisitedPath = this.lastPath === "/login" ? "/" : this.lastPath;
-    console.log("beforeRouteLeave doing next", lastVisitedPath)
-    next(lastVisitedPath);
-    /*
-  console.log("beforeRouteLeave")
-  if (this.$route.meta.keepAlive && !this.user.isAuthenticated) {
-    // If the previous route is kept alive and the user is not authenticated,
-    // allow navigation without redirecting to the previous route.
-    next();
-  } else {
-    
-  }
-  */
-  },
-
   methods: {
     resetFormErrors() {
       this.errorMessage = "";
@@ -144,8 +128,7 @@ export default {
             fontSize,
           );
 
-          const redirectTo = this.$store.state.lastPath || "/";
-          console.log("redirecting lastPath or / if undefined", redirectTo);
+          const redirectTo = this.lastPath || "/";
           this.$router.push(redirectTo);
 
         } else {

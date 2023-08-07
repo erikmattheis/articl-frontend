@@ -178,12 +178,7 @@ const router = createRouter({
 */
 router.beforeEach((to, from, next) => {
   if (to.name !== "LoginPage") {
-    console.log("setting lastPath", to.fullPath);
     store.dispatch("resources/lastPath", to.fullPath);
-  }
-  else {
-    console.log("not setting last path to / because user is on login  page");
-    store.dispatch("resources/lastPath", "/");
   }
   next();
 });

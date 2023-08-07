@@ -53,7 +53,6 @@ export default {
       this.sortArticlsByAnyKey(this.articlType, e.target.value);
     },
     sortArticlsByAnyKey(key, sortBy) {
-      console.log("dispatch", key);
       this.$store.dispatch("resources/sortArticlsByAnyKey", key, sortBy);
     },
     updateArticlsOrderValues() {

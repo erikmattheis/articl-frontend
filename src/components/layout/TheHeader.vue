@@ -1,6 +1,6 @@
 <template>
   <header>
-    <article>
+    <article>lastPath:{{ lastPath }}
       <nav>
         <ul>
           <li class="brand">
@@ -164,6 +164,7 @@ export default {
     ...mapGetters({
       articlCount: "resources/count",
       accessTokenExpires: "tokens/accessTokenExpires",
+      lastPath: "resources/lastPath",
     }),
     countMessage() {
       return `${this.articlCount} articles`;
@@ -227,7 +228,6 @@ export default {
       this.$store.dispatch("tokens/clearTokens", false);
       VueCookies.remove("data-theme");
       VueCookies.remove("font-size");
-      this.$router.push("/");
     },
   },
 };

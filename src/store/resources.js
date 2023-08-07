@@ -103,7 +103,6 @@ export default {
       context.commit("SET_NOTES", newNotes);
     },
     sortArticlsByAnyKey: (context) => (key) => {  
-      console.log('sortArticlsByAnyKey', key  )
       const articls = context.state.articls.slice(); // Create a shallow copy of the original array
       articls.sort((a, b) => {
         if (a[key] > b[key]) {
