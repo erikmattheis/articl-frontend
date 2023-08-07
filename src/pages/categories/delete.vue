@@ -36,16 +36,18 @@ export default {
   }),
   async mounted() {
     this.id = this.$route.params.id;
-    await this.getCurrentCategory(this.id);
+    console.log('mounted');
+    await this.getCurrentCategory(this.$route.params.slug);
     this.setTitleAndDescriptionMixin({ title: "Delete Category and Descendents" });
   },
   methods: {
-    async getCurrentCategory(id) {
+    async getCurrentCategory(slug) {
       try {
         this.isLoading = true;
 
-        const result = await this.getCategory(id);
+        const result = await this.getCategory(slug);
         Object.assign(this, result.data);
+        console.log('result.data?.category', result);
         this.title = result.data?.category[0]?.title;
         this.parentSlug = result.data?.category[0]?.parentSlug;
         this.isLoading = false;
@@ -53,10 +55,10 @@ export default {
         this.$store.dispatch("errors/setError", error);
       }
     },
-    async getCategory(id) {
+    async getCategory(slug) {
       return axiosInstance({
         method: "GET",
-        url: `/categories/${id}`,
+        url: `/resource/${slug}`,
       });
     },
     async deleteCategory() {
