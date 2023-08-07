@@ -1,12 +1,12 @@
 import express from 'express';
 import compression from 'compression';
 import serveStatic from 'serve-static';
+import { fileURLToPath } from 'url';
 import path from 'path';
 
-const express = require('express');
-const serveStatic = require("serve-static")
-const path = require('path');
-app = express();\
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const app = express();
 
 app.use(compression());
 app.use(serveStatic(path.join(__dirname, 'dist')));
