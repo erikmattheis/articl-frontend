@@ -1,8 +1,10 @@
 <template>
-  <div
-    v-for="(item, index) in categories"
-    :key="item.id">
-    <categories-list-item :category="item" :tree-level="treeLevel"></categories-list-item>
+  <div>categories list
+    <div
+      v-for="(item, index) in categories"
+      :key="item.id">
+      <categories-list-item :category="item" :tree-level="treeLevel"></categories-list-item>
+    </div>
   </div>
 </template>
 

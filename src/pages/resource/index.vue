@@ -1,9 +1,8 @@
 <template>
-  <section>
+  <section>resource/index
     <the-breadcrumbs />
     <h1>{{ title }}</h1>
-    <categories-list />
-    <articls-list v-if="treeLevel === 4" />
+    <router-view></router-view>
   </section>
 </template>
 <script>
@@ -28,6 +27,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      categories: "resources/categories",
       treeLevel: "resources/treeLevel",
     }),
   },
@@ -48,6 +48,7 @@ export default {
   methods: {
 
     async getCategoryResources(slug) {
+      console.log('getCategoryResources', slug);
       try {
         this.isLoading = true;
         const results = await this.fetchData(slug);

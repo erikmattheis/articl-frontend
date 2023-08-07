@@ -23,83 +23,95 @@ import ForbiddenPage from "@/pages/ForbiddenPage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
-
   routes: [
-
+    {
+      name: "HomePage",
+      path: "/",
+      component: ResourceIndex,
+      children: [
+        {
+          name: "CategoriesListHome", // Use a different name for this child route
+          path: "",
+          component: CategoriesList,
+        },
+      ],
+    },
+    
     {
       name: "ResourceIndex",
-      path: "/resource/:slug?",
+      path: "/resource/:slug",
       component: ResourceIndex,
-      children: [{
-        name: "CategoriesList",
-        path: "",
-        component: CategoriesList,
-        alias: ['/:slug?']
-      },
-      
-      {
-        name: "TabNotes",
-        path: "notes",
-        component: TabNotes,
-        children: [
-          {
-            name: "EditNote",
-            path: "edit/:id",
-            component: EditNote,
-          },
-          {
-            name: "EditNoteSuccess",
-            path: "edited/:id",
-            component: EditNote,
-          },
-          {
-            name: "DeleteNote",
-            path: "delete/:id",
-            component: DeleteNote,
-          }],
-      },
-      {
-        name: "editCategory",
-        path: "categories/edit/:id?",
-        component: ResourceIndex,
-      },
+      children: [
+        {
+          name: "CategoriesList",
+          path: "",
+          component: CategoriesList,
+        },
+        {
+          name: "editCategory",
+          path: "categories/edit/:id?",
+          component: CreateCategoryPage,
+        },
+  
+        {
+          name: "CreateCategoryPage",
+          path: "categories/create",
+          component: CreateCategoryPage,
+        },
+        
+        {
+          name: "DeleteCategoryPage",
+          path: "categories/delete/:id?",
+          component: DeleteCategoryPage,
+        },
+        {
+          name: "editArticl",
+          path: "articls/edit/:editId",
+          component: CreateArticlPage,
+          props: true,
+        },
+    
+        {
+          name: "CreateArticlPage",
+          path: "articls/create/:id",
+          component: CreateArticlPage,
+        },
+    
+        {
+          name: "DeleteArticlPage",
+          path: "articls/delete/:id",
+          component: DeleteArticlPage,
+          props: true,
+        },
+        
+        {
+          name: "ArticlsList",
+          path: "articls/:articlType?",
+          component: ArticlsList,
+        },
 
-      {
-        name: "CreateCategoryPage",
-        path: "categories/:id?",
-        component: CreateCategoryPage,
-      },
-      
-      {
-        name: "DeleteCategoryPage",
-        path: "categories/delete/:id?",
-        component: DeleteCategoryPage,
-      },
-      {
-        name: "editArticl",
-        path: "articls/edit/:editId",
-        component: CreateArticlPage,
-        props: true,
-      },
-  
-      {
-        name: "CreateArticlPage",
-        path: "articls/create/:id",
-        component: CreateArticlPage,
-      },
-  
-      {
-        name: "DeleteArticlPage",
-        path: "articls/delete/:id",
-        component: DeleteArticlPage,
-        props: true,
-      },
-      
-      {
-        name: "ArticlsList",
-        path: "articls/:articlType?",
-        component: ArticlsList,
-      }],
+        {
+          name: "TabNotes",
+          path: "notes",
+          component: TabNotes,
+          children: [
+            {
+              name: "EditNote",
+              path: "edit/:id",
+              component: EditNote,
+            },
+            {
+              name: "EditNoteSuccess",
+              path: "edited/:id",
+              component: EditNote,
+            },
+            {
+              name: "DeleteNote",
+              path: "delete/:id",
+              component: DeleteNote,
+            }],
+        },
+      ],
 
     },
 

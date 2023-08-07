@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article>categories/index
     <h1 v-if="!success">
       {{ formAction }} category
     </h1>

@@ -3,7 +3,7 @@
 
     <router-link
       role="button"
-      :to="{ name: 'editCategory', params: { id } }">
+      :to="{ name: 'editCategory', params: { id, slug } }">
       <vue-feather
         size="0.7rem"
         type="edit"
@@ -12,7 +12,7 @@
 
     <router-link
       role="button"
-      :to="{ name: 'DeleteCategoryPage', params: { slug: decodeURIComponent(slug) } }">
+      :to="{ name: 'DeleteCategoryPage', params: { slug: decodeURIComponent(slug), id } }">
       <vue-feather
         size="0.7rem"
         type="delete"

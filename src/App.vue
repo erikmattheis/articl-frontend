@@ -9,9 +9,9 @@
       </router-view>
     </main>
     <the-footer />
+    <modal-error />
+    <modal-success />
   </div>
-  <modal-error />
-  <modal-success />
 </template>
 
 <script>
