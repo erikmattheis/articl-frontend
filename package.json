@@ -7,12 +7,14 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "vite"
+    "start": "node index.js"
   },
   "dependencies": {
     "@picocss/pico": "^1.5.10",
+    "@vitejs/plugin-vue": "^4.1.0",
     "axios": "^1.4.0",
     "compression": "^1.7.4",
+    "connect-history-api-fallback": "^2.0.0",
     "dayjs": "^1.11.8",
     "express": "^4.18.2",
     "lodash": "^4.17.21",
@@ -27,7 +29,6 @@
     "vuex": "^4.1.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.1.0",
     "sass": "^1.63.6",
     "vite": "^4.3.9"
   }
