@@ -14,10 +14,11 @@
 </template>
 
 <script>
-
+import { mapGetters } from "vuex";
 import CategoryActions from "@/components/layout/CategoryActions.vue";
 
 export default {
+
   name: "CategoriesListItem",
 
   components: {
@@ -28,14 +29,13 @@ export default {
       type: Object,
       default: undefined,
     },
-    treeLevel: {
-      type: Number,
-      default: 0,
-    },
   },
   computed: {
+    ...mapGetters({
+      treeLevel: "resources/treeLevel",
+    }),
     tabName() {
-      return this.treeLevel !== 3 ? "ResourceIndex" : "ArticlsList";
+      return this.treeLevel !== 3 ? "CategoriesList" : "ArticlsList";
     },
   },
   methods: {

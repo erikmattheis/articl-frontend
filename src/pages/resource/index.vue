@@ -37,18 +37,22 @@ export default {
     this.$store.dispatch("resources/articlType", this.$route.params.articlType);
   },
   beforeRouteUpdate(to, from) {
-    if (to.params.articlType !== from.params.articlType) {
-      this.$store.dispatch("resources/articlType", to.params.articlType);
-    }
-    if (to.params.slug !== from.params.slug) {
-      this.$store.dispatch("resources/slug", to.params.slug);
-      this.getCategoryResources(to.params.slug);
-    }
+    this.navigate(to, from);
+  },
+  beforeRouteLeave(to, from) {
+    this.navigate(to, from);
   },
   methods: {
-
+    navigate(to, from) {
+      if (to.params.articlType !== from.params.articlType) {
+        this.$store.dispatch("resources/articlType", to.params.articlType);
+      }
+      if (to.params.slug !== from.params.slug) {
+        this.$store.dispatch("resources/slug", to.params.slug);
+        this.getCategoryResources(to.params.slug);
+      }
+    },
     async getCategoryResources(slug) {
-      console.log('getCategoryResources', slug);
       try {
         this.isLoading = true;
         const results = await this.fetchData(slug);

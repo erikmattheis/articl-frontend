@@ -30,7 +30,7 @@ const router = createRouter({
       component: ResourceIndex,
       children: [
         {
-          name: "CategoriesListHome", // Use a different name for this child route
+          name: "CategoriesListHome",
           path: "",
           component: CategoriesList,
         },

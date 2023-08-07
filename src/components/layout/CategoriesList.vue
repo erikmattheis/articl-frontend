@@ -1,5 +1,5 @@
 <template>
-  <div>categories list
+  <div>o: {{ categories.length }}
     <div
       v-for="(item, index) in categories"
       :key="item.id">
