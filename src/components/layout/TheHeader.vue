@@ -1,6 +1,6 @@
 <template>
   <header>
-    <article>lastPath:{{ lastPath }}
+    <article>
       <nav>
         <ul>
           <li class="brand">
