@@ -463,6 +463,7 @@ export default {
               this.$store.dispatch("modals/setSuccessMessage", `Please click on the link in the verification email that was sent to ${this.email}.`);
 
               this.$router.push("/");
+              this.$router.push({ name: "ArticlsList", params: { slug, articlType } });
 
             } else {
               this.$store.dispatch("modals/setSuccessTitle", "User Updated");

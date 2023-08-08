@@ -1,5 +1,5 @@
 <template>
-  <section>resource/index
+  <section>
     <the-breadcrumbs />
     <h1>{{ title }}</h1>
     <router-view></router-view>
