@@ -98,15 +98,15 @@ section div {
 }
 
 .tab {
-  width: 6rem;
-  height: 6rem;
+  width: 4rem;
+  height: 4rem;
 }
 
 #app > div > dialog > article > section > div.info {
-  max-width: calc(100% - 6rem);
-  min-height: 6rem;
+  max-width: calc(100% - 4rem);
+  min-height: 4rem;
   padding: 1rem;
-  color: #0071001a;
+  color: #71001a;
   background-color: #cfa;
 }
 
@@ -118,7 +118,7 @@ dialog article button {
 
 dialog article header a,
 #app > div > dialog > article > header > a {
-  color: #cfa;
+  color: #fff;
 }
 
 dialog article header,
@@ -149,15 +149,7 @@ html[data-theme="dark"] article {
 }
 
 html[data-theme="dark"] #app > div > dialog > article > section > div.info,
-html[data-theme="dark"]
-#app
-> div
-> dialog
-> article
-> section
-> div.info
-ul
-li {
+html[data-theme="dark"] #app > div > dialog > article > section > div.info ul li {
   color: black !important;
   background-color: #cfa;
 }

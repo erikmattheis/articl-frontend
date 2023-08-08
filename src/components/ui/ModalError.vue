@@ -108,13 +108,13 @@ section div {
 }
 
 .tab {
-  width: 6rem;
-  height: 6rem;
+  width: 4rem;
+  height: 4rem;
 }
 
 #app > div > dialog > article > section > div.info {
-  max-width: calc(100% - 6rem);
-  min-height: 6rem;
+  max-width: calc(100% - 4rem);
+  min-height: 4rem;
   padding: 1rem;
   color: #dd2c00;
   background-color: #fca;
@@ -148,15 +148,7 @@ dialog article ul li {
 }
 
 html[data-theme="dark"] #app > div > dialog > article > section > div.info,
-html[data-theme="dark"]
-#app
-> div
-> dialog
-> article
-> section
-> div.info
-ul
-li {
+html[data-theme="dark"] #app > div > dialog > article > section > div.info ul li {
   color: var(--contrast) !important;
 }
 

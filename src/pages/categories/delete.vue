@@ -44,7 +44,10 @@ export default {
     }),
   },
   async mounted() {
-    await this.getCurrentCategory(this.$route.params.slug);
+    this.id = this.$route.params.id;
+    this.slug = this.$route.params.slug;
+    this.articlType = this.$route.params.articlType;
+    await this.getCurrentCategory(this.slug);
 
   },
   methods: {
@@ -95,10 +98,7 @@ export default {
     async submitDelete(id) {
       return axiosInstance({
         method: "DELETE",
-        url: "/categories",
-        data: {
-          id,
-        },
+        url: `/categories/${id}`
       });
     },
   },
