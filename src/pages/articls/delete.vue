@@ -1,10 +1,10 @@
 <template>
   <article v-if="!deleted">
     <h1>Delete Articl</h1>
-    <p>Really delete "{{ title }}"?</p>
+    <p>Really delete the articl "{{ title }}"?</p>
     <form>
       <button :aria-busy="buttonDisabled"
-        @click.prevent="$router.push({ name: 'ArticlsList', params: { slug } })">Cancel</button>
+        @click.prevent="$router.push({ name: 'ArticlsList', params: { slug, articlType } })">Cancel</button>
       <button :aria-busy="buttonDisabled"
         @click.prevent="deleteArticl()">Delete</button>
     </form>
@@ -34,6 +34,8 @@ export default {
   }),
   async mounted() {
     this.id = this.$route.params.id;
+    this.slug = this.$route.params.slug;
+    this.articlType = this.$route.params.articlType;
 
     await this.getCurrentArticl(this.id);
 
@@ -57,7 +59,7 @@ export default {
         this.$store.dispatch("modals/setSuccessTitle", "Deletion successful.");
 
         this.$store.dispatch("modals/setSuccessMessage", `The articl "${this.title}" has been permanently deleted.`);
-        this.deleted = true;
+
       } catch (error) {
         this.$store.dispatch("errors/setError", error);
       } finally {
@@ -76,13 +78,8 @@ export default {
         this.isLoading = true;
 
         const result = await this.getArticl(id);
-        Object.assign(this, result.data);
-        this.title = result.data?.category[0]?.title;
-        this.parentSlug = result.data?.category[0]?.parentSlug;
-        this.id = result.data?.category[0]?.id;
-        this.slug = this.data.slug;
-        this.articlType = this.$route.params.articlType;
-        this.title = this.$route.params.title;
+
+        this.title = result.data?.title;
 
         this.isLoading = false;
       } catch (error) {

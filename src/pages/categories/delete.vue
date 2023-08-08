@@ -2,12 +2,13 @@
   <article>
     <h1>Delete Category</h1>
 
-    <p>Really delete "{{ title }}"? This will remove {{ categories.length }} descendent categories from category
-      navigation.</p>
+    <p>Really delete "{{ title }}"? This will permanently delete the category and make child categories and articls
+      permanantly unreachable. There are {{ categories.length }} descendent categories and {{ articls.length }} articls.
+    </p>
 
     <form>
       <button :aria-busy="buttonDisabled"
-        @click.prevent="$router.push({ name: 'ResourceIndex', params: { slug } })">Cancel</button>
+        @click.prevent="$router.push({ name: 'CategoriesList', params: { slug: parentSlug } })">Cancel</button>
       <button
         v-if="slug"
         :aria-busy="buttonDisabled"
@@ -19,6 +20,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import axiosInstance from "@/services/axiosService";
 
 export default {
@@ -29,16 +31,21 @@ export default {
   data: () => ({
     buttonDisabled: false,
     categories: [],
+    articls: [],
     title: "",
     slug: "",
     parentSlug: "",
     id: "",
   }),
+  computed: {
+    ...mapGetters({
+      filteredArticls: "resources/filteredArticls",
+      articlType: "resources/articlType",
+    }),
+  },
   async mounted() {
-    this.id = this.$route.params.id;
-    console.log('mounted');
     await this.getCurrentCategory(this.$route.params.slug);
-    this.setTitleAndDescriptionMixin({ title: "Delete Category and Descendents" });
+
   },
   methods: {
     async getCurrentCategory(slug) {
@@ -47,8 +54,9 @@ export default {
 
         const result = await this.getCategory(slug);
         Object.assign(this, result.data);
-        console.log('result.data?.category', result);
         this.title = result.data?.category[0]?.title;
+        this.articls = result.data?.articls?.length;
+        this.setTitleAndDescriptionMixin({ title: `Delete ${this.title} and Descendent Categories` });
         this.parentSlug = result.data?.category[0]?.parentSlug;
         this.isLoading = false;
       } catch (error) {
