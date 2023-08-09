@@ -277,6 +277,14 @@ ul li {
   list-style-type: none !important;
 }
 
+section ul li,
+.grid > ul li {
+  width: 100%;
+  margin-bottom: 0 !important;
+}
+
+
+
 .fade-enter-active,
 .fade-leave-active {
   /*background-color: #f00;*/
@@ -293,5 +301,15 @@ ul li {
   .fade-leave-to,
   .fade-enter-from {
     opacity: 1;
+  }
+}
+
+@if map-get($breakpoints, "xs") {
+  @media (min-width: map-get($breakpoints, "xs")) {
+    main,
+    header,
+    footer {
+      margin-left:var(--block-spacing-horizontal);
+    }
   }
 }

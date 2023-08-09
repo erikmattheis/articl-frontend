@@ -1,5 +1,5 @@
 <template>
-  <li class="container">
+  <div class="container">
     <router-link
       class="box"
       :to="{ name: tabName, params: { slug: category.slug } }">
@@ -10,7 +10,7 @@
       :id="category.id"
       class="box"
       :slug="category.slug" />
-  </li>
+  </div>
 </template>
 
 <script>
@@ -45,24 +45,4 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
-.container {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: minmax(min-content, 1fr) min-content;
-  color: #444;
-}
 
-li {
-  width: 100%;
-  padding: 0 !important;
-
-  a {
-    cursor: pointer;
-  }
-}
-
-li:hover {
-  background-color: var(--primary-nav-background);
-}
-</style>

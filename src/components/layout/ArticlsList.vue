@@ -1,6 +1,6 @@
 <template>
   <div>
-    <articl-type-tabs />articlType:{{ articlType }}
+    <articl-type-tabs />
     <ul class="nav-inner-content">
       <li><select
           v-model="sortBy"

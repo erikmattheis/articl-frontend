@@ -1,9 +1,11 @@
 <template>
-  <div
-    v-for="(item, index) in categories"
-    :key="item.id">
-    <categories-list-item :category="item" :tree-level="treeLevel"></categories-list-item>
-  </div>
+  <ul>
+    <li class="container"
+      v-for="(item, index) in categories"
+      :key="index">
+      <categories-list-item :category="item" :tree-level="treeLevel"></categories-list-item>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -82,12 +84,25 @@ export default {
 
 </script>
 
-<style scoped>
-li {
-  overflow-x: hidden;
+<style scoped lang="scss">
+.container {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: minmax(min-content, 1fr) min-content;
+  color: #444;
 }
 
-a {
-  cursor: pointer;
+li {
+  width: 100%;
+  padding: 0 !important;
+  overflow-x: hidden;
+
+  a {
+    cursor: pointer;
+  }
+}
+
+li:hover {
+  background-color: var(--primary-nav-background);
 }
 </style>

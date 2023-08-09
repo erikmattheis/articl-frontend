@@ -203,7 +203,7 @@ li:hover {
 }
 
 details {
-  margin-bottom: calc(vsr(--typography-spacing-vertical) * 0.25);
+  margin-bottom: calc(var(--typography-spacing-vertical) * 0.25);
   border-bottom: 0;
 }
 
@@ -228,10 +228,5 @@ strong:not([class="not-strong"]) {
   padding: 0.2rem 0.1rem;
   color: black;
   background-color: #749157;
-}
-
-.grid > ul li {
-  width: 100%;
-  margin-bottom: 0;
 }
 </style>
