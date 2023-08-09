@@ -1,5 +1,5 @@
 <template>
-  <span>{{ name }} </span>
+  <span> {{ name }}{{ commaOrEmpty }} </span>
 </template>
 
 <script>
@@ -31,7 +31,7 @@ export default {
     name() {
       if (typeof this.author === 'string') return this.author;
       if (!this.author?.nameLast) return 'No nameLast set';
-      return `${this.author.nameFirst} ${this.author.nameLast}${this.affilliations}${this.commaOrEmpty}`;
+      return `${this.author.nameFirst} ${this.author.nameLast}${this.affilliations}${this.commaOrEmpty} `;
     },
   },
 }

@@ -24,7 +24,8 @@
           v-for="(author, index) in articl.authors"
           :author="author"
           :key="index"
-          :last="index < articl.authors.length - 1" />
+          :last="index === articl.authors.length - 1" />
+
 
       </li>
 
