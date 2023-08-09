@@ -1,5 +1,5 @@
 <template>
-  <article>categories/index
+  <article>
     <h1 v-if="!success">
       {{ formAction }} category
     </h1>
@@ -308,7 +308,6 @@ export default {
             titleHtml: this.titleHtml,
             slug: this.slug,
             description: this.selectedDescription,
-            AISummaries: this.AISummaries,
             parentSlug: this.parentSlug,
           };
 

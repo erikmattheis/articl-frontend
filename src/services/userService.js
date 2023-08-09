@@ -26,12 +26,9 @@ const validateEmail = (email) => {
   if (!email) {
     return false;
   }
-
   return email.match(
-
     // eslint-disable-next-line
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
   );
 };
 
