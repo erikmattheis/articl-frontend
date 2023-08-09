@@ -36,7 +36,6 @@ export default {
 <style scoped>
 body ul.breadcrumbs {
   display: inline !important;
-  align-items: flex-start !important;
 }
 
 body ul.breadcrumbs li {
@@ -46,7 +45,5 @@ body ul.breadcrumbs li {
   vertical-align: top !important;
   list-style-type: none !important;
   display: inline !important;
-  flex-basis: auto !important;
-  gap: var(--nav-element-spacing-horizontall) !important;
 }
 </style>

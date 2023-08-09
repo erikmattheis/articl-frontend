@@ -271,6 +271,8 @@ main form {
 ul {
   list-style-type: none !important;
   padding-left: 0;
+  margin-left: 0 !important;
+  margin-block-start: 0 !important;
 }
 
 ul li {
@@ -281,9 +283,8 @@ section ul li,
 .grid > ul li {
   width: 100%;
   margin-bottom: 0 !important;
+  padding-left: 0 !important;
 }
-
-
 
 .fade-enter-active,
 .fade-leave-active {
