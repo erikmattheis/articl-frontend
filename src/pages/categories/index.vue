@@ -50,7 +50,7 @@
         <label for="slug">Slug
           <input
             id="slug"
-            :value="articlSlug"
+            :value="slug"
             type="text"
             name="slug"></label>
         <label for="parentSlug">Parent slug

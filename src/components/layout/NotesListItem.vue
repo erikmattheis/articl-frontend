@@ -82,7 +82,7 @@ export default {
       return toFormattedUserDateTime(this.note.createdAt);
     },
   },
-  beforeMount() {
+  created() {
     if (this.passedNote.id) {
       this.note = this.passedNote;
       this.noteIsUsers = this.passedNote?.author?.id === this.user?.id;
