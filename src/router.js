@@ -88,6 +88,7 @@ const router = createRouter({
           name: "ArticlsList",
           path: "articls/:articlType?",
           component: ArticlsList,
+          alias: ":articlType?",
         },
 
         {
