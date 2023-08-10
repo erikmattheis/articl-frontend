@@ -30,7 +30,7 @@ export default {
   name: "ArticlsList",
   data() {
     return {
-      sortBy: "createdAt",
+      sortBy: this.$route.query.createdAt || "createdAt",
       isLoading: false,
     };
   },
@@ -51,6 +51,7 @@ export default {
     sortArticlsBy(e) {
       this.sortBy = e.target.value;
       this.sortArticlsByAnyKey(this.articlType, e.target.value);
+      this.$router.push({ query: { sortBy: e.target.value } });
     },
     sortArticlsByAnyKey(key, sortBy) {
       this.$store.dispatch("resources/sortArticlsByAnyKey", key, sortBy);

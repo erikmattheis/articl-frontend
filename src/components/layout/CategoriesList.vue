@@ -1,5 +1,5 @@
 <template>
-  <div>categories.length: {{ categories.length }}
+  <div>
     <vue-draggable-next
       :list="categories"
       tag="ul"

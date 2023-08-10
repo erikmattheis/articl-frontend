@@ -63,7 +63,6 @@
 
 <script>
 import axiosInstance from "@/services/axiosService";
-import DraggableItems from "@/components/layout/DraggableItems.vue";
 import QuestionAnswerActions from "@/components/layout/QuestionAnswerActions.vue";
 
 export default {
@@ -87,7 +86,6 @@ export default {
     },
   },
   components: {
-    DraggableItems,
     QuestionAnswerActions,
   },
   emits: ["QandAs-updated"],
