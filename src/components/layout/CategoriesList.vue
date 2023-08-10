@@ -1,15 +1,24 @@
 <template>
-  <ul>
-    <li class="container"
-      v-for="(item, index) in categories"
-      :key="index">
-      <categories-list-item :category="item" :tree-level="treeLevel"></categories-list-item>
-    </li>
+  <ul>categories: {{ categories.length }} {{ typeof categories }}
+    <draggable
+      @change="onUpdateOrderValues"
+      v-model="categories"
+      group="articlType"
+      @start="drag = true"
+      @end="drag = false"
+      item-key="id">
+
+      <template #item="{ element }">
+        element: {{ element }}
+        <categories-list-item :category="element" :tree-level="treeLevel"></categories-list-item>
+      </template>
+    </draggable>
+
   </ul>
 </template>
 
 <script>
-
+import { VueDraggableNext as Draggable } from 'vue-draggable-next';
 import { mapGetters } from "vuex";
 import CategoriesListItem from "@/components/layout/CategoriesListItem.vue";
 import axiosInstance from "@/services/axiosService";
@@ -18,10 +27,12 @@ export default {
   name: "CategoriesList",
   components: {
     CategoriesListItem,
+    Draggable
   },
   data() {
     return {
       TabName: "",
+      drag: false,
     };
   },
   computed: {

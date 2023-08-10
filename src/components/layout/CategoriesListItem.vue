@@ -27,7 +27,7 @@ export default {
   props: {
     category: {
       type: Object,
-      default: undefined,
+      default: {},
     },
   },
   computed: {

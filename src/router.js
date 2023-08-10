@@ -190,6 +190,7 @@ const router = createRouter({
     },
 */
 router.beforeEach((to, from, next) => {
+  console.log("router.beforeEach");
   if (to.name !== "LoginPage") {
     store.dispatch("resources/lastPath", to.fullPath);
   }
