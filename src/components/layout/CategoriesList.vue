@@ -1,24 +1,25 @@
 <template>
-  <ul>categories: {{ categories.length }} {{ typeof categories }}
-    <draggable
-      @change="onUpdateOrderValues"
-      v-model="categories"
-      group="articlType"
-      @start="drag = true"
-      @end="drag = false"
-      item-key="id">
-
-      <template #item="{ element }">
-        element: {{ element }}
-        <categories-list-item :category="element" :tree-level="treeLevel"></categories-list-item>
-      </template>
-    </draggable>
-
-  </ul>
+  <div>categories.length: {{ categories.length }}
+    <vue-draggable-next
+      :list="categories"
+      tag="ul"
+      item-key="id"
+      handle=".handle"
+      ghost-class="ghost"
+      @change="onUpdateOrderValues">
+      <div v-for="element in categories">
+        <categories-list-item
+          :category="element"
+          class="list-item"
+          :tree-level="treeLevel"
+          :tab-name="TabName" />
+      </div>
+    </vue-draggable-next>
+  </div>
 </template>
 
 <script>
-import { VueDraggableNext as Draggable } from 'vue-draggable-next';
+import { VueDraggableNext } from 'vue-draggable-next';
 import { mapGetters } from "vuex";
 import CategoriesListItem from "@/components/layout/CategoriesListItem.vue";
 import axiosInstance from "@/services/axiosService";
@@ -27,15 +28,25 @@ export default {
   name: "CategoriesList",
   components: {
     CategoriesListItem,
-    Draggable
+    VueDraggableNext
   },
   data() {
     return {
+      myArray: [1, 2, 3],
+
       TabName: "",
       drag: false,
     };
   },
   computed: {
+    categories: {
+      get() {
+        return this.$store.resources.categories;
+      },
+      set(value) {
+        this.$store.dispatch("resources/categories", value);
+      }
+    },
     ...mapGetters({
       categories: "resources/categories",
       treeLevel: "resources/treeLevel",

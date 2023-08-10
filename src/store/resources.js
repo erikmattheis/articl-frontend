@@ -3,7 +3,7 @@ export default {
 
   state: () => ({
     lastPath: "",
-    slug: "",
+    slug: 0,
     articlType: "",
     articls: [],
     articlTypes: [],
@@ -11,7 +11,7 @@ export default {
     categories: [],
     notes: [],
     QAndAs: [],
-    treeLevel: undefined,
+    treeLevel: 0,
     breadcrumbs: [],
     count: 0,
   }),

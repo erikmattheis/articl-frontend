@@ -88,7 +88,7 @@ const router = createRouter({
           name: "ArticlsList",
           path: "articls/:articlType?",
           component: ArticlsList,
-          alias: ":articlType?",
+          alias: ":articlType",
         },
 
         {
@@ -190,9 +190,14 @@ const router = createRouter({
     },
 */
 router.beforeEach((to, from, next) => {
-  console.log("router.beforeEach");
+  
   if (to.name !== "LoginPage") {
     store.dispatch("resources/lastPath", to.fullPath);
+  }
+  if (!from.name) {
+    console.log("router.beforeEach", from);
+    store.dispatch("resources/slug", to.params.slug);
+    store.dispatch("resources/articlType", to.params.articlType);
   }
   next();
 });
