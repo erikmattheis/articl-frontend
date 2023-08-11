@@ -178,16 +178,14 @@ export default {
   color: #444;
 }
 
-li {
+.articl > ul > li {
+  padding: 0.5rem;
   width: 100%;
+  margin: 0;
 
   a {
     cursor: pointer;
   }
-}
-
-li:hover {
-  background-color: var(--primary-nav-background);
 }
 
 .articl {
