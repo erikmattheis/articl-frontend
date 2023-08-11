@@ -39,8 +39,11 @@ const router = createRouter({
     
     {
       name: "ResourceIndex",
-      path: "/resource/:slug",
+      path: "/resource/:slug?",
       component: ResourceIndex,
+      props: route => ({
+        slug: route.params.slug || 0
+      }),
       children: [
         {
           name: "CategoriesList",
