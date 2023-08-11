@@ -11,8 +11,7 @@
         <categories-list-item
           :category="element"
           class="list-item"
-          :tree-level="treeLevel"
-          :tab-name="TabName" />
+          :tree-level="treeLevel" />
       </div>
     </vue-draggable-next>
   </div>
@@ -28,13 +27,10 @@ export default {
   name: "CategoriesList",
   components: {
     CategoriesListItem,
-    VueDraggableNext
+    VueDraggableNext,
   },
   data() {
     return {
-      myArray: [1, 2, 3],
-
-      TabName: "",
       drag: false,
     };
   },

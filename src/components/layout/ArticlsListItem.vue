@@ -8,7 +8,6 @@
           class="box"
           target="_blank">{{ articl.title }}
         </a>
-
         <articl-actions
           v-if="isLoggedInMixin"
           :id="articl.id"

@@ -73,13 +73,13 @@ const router = createRouter({
     
         {
           name: "CreateArticlPage",
-          path: "articls/create/:id",
+          path: "articls/create/:id?",
           component: CreateArticlPage,
         },
     
         {
           name: "DeleteArticlPage",
-          path: "articls/delete/:id",
+          path: "articls/delete/:id?",
           component: DeleteArticlPage,
           props: true,
         },

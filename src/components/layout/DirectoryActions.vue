@@ -8,7 +8,7 @@
     </router-link>
 
     <router-link
-      v-if="treeLevel === 4"
+      v-else
       :to="{ name: 'CreateArticlPage', query: { articlType: $route.params.articlType || '', slug: $route.params.slug || '0' } }"
       role="button">
       <small>New Articl Here</small>
@@ -17,14 +17,16 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
+
   name: "DirectoryActions",
-  props: {
-    treeLevel: {
-      type: Number,
-      default: 0,
-    },
+  computed: {
+    ...mapGetters({
+      treeLevel: "resources/treeLevel",
+    }),
   },
+
 };
 </script>
 
