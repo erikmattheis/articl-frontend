@@ -92,6 +92,7 @@ section {
 
 section div {
   display: flex;
+  flex: 4rem 1;
   align-items: center;
   justify-content: center;
   float: left;
@@ -102,7 +103,11 @@ section div {
   height: 4rem;
 }
 
-#app > div > dialog > article > section > div.info {
+.grid > div {
+  display: flex;
+}
+
+div.info {
   max-width: calc(100% - 4rem);
   min-height: 4rem;
   padding: 1rem;

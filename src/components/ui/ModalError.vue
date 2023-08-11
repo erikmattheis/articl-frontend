@@ -22,13 +22,14 @@
             @click.prevent="close()" />
           <h2>Error</h2>
         </header>
-        <section>
+        <section class="flex">
           <div
             class="tab"
             title="error">
             <vue-feather
               size="3rem"
-              type="alert-triangle" />
+              type="alert-triangle"
+              aria-label="Alert" />
           </div>
           <div class="info">
             <ul>
@@ -100,8 +101,9 @@ section {
 
 }
 
-section div {
+.flex {
   display: flex;
+  flex: 4rem 1;
   align-items: center;
   justify-content: center;
   float: left;
@@ -110,20 +112,17 @@ section div {
 .tab {
   width: 4rem;
   height: 4rem;
-}
-
-#app > div > dialog > article > section > div.info {
-  max-width: calc(100% - 4rem);
-  min-height: 4rem;
-  padding: 1rem;
-  color: #dd2c00;
-  background-color: #fca;
+  padding: 0.5rem;
 }
 
 .tab,
 dialog article button {
   color: #fff;
   background-color: #dd2c00;
+}
+
+.info {
+  padding: 0.5rem;
 }
 
 dialog article header a,
