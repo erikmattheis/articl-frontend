@@ -1,6 +1,6 @@
 <template>
   <article>
-    <h1>Forgot Password</h1>
+    <h1>Change Password Using Email</h1>
     <form>
       <label for="email">Email
         <input
@@ -14,7 +14,7 @@
         type="submit"
         :aria-busy="buttonDisabled"
         @click.prevent="submitForm()">
-        <span v-if="!buttonDisabled">Reset</span>
+        <span v-if="!buttonDisabled">Send Email</span>
       </button>
     </form>
     <p v-if="result">
@@ -28,7 +28,7 @@ import validateEmail from "@/services/emailValidationService";
 import axiosInstance from "@/services/axiosService";
 
 export default {
-  name: "ForgotPass",
+  name: "SendChangePassEmail",
   data: () => ({
     email: null,
     emailInvalid: null,
@@ -38,7 +38,7 @@ export default {
   }),
   mounted() {
     this.setTitleAndDescriptionMixin({
-      titleHtml: "Forgot pass",
+      titleHtml: "Change Password via Email Link",
     });
   },
   methods: {
@@ -65,7 +65,7 @@ export default {
 
           const result = await axiosInstance({
             method: "POST",
-            url: "/auth/forgot-password",
+            url: "/auth/send-change-pass-email",
             data: {
               email: this.email,
             },

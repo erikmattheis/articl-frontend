@@ -6,14 +6,14 @@ import SearchArticls from "@/pages/articls/search.vue";
 import DeleteCategoryPage from "@/pages/categories/delete.vue";
 import CreateCategoryPage from "@/pages/categories/index.vue";
 import ResourceIndex from "@/pages/resource/index.vue";
-import ForgotPassPage from "@/pages/forgot-pass.vue";
+import SendChangePassEmail from "@/pages/send-change-pass-email.vue";
 import ForgotUsernamePage from "@/pages/forgot-username.vue";
 import LoginPage from "@/pages/login.vue";
 import DeleteNote from "@/components/layout/NotesDelete.vue";
 import EditNote from "@/components/layout/NotesForm.vue";
 import NotFound from "@/pages/NotFound.vue";
 import TabQuestionsAnswers from "@/components/layout/QAndAList.vue";
-import ResetPasswordPage from "@/pages/change-password.vue";
+import ChangePasswordLoggedIn from "@/pages/change-password-logged-in.vue";
 import UsersPage from "@/pages/users/index.vue";
 import VerifyEmailPage from "@/pages/verify-email.vue";
 import CategoriesList from "@/components/layout/CategoriesList.vue";
@@ -137,13 +137,13 @@ const router = createRouter({
     {
       name: "sendVerificationEmail",
       path: "/send-verification-email",
-      component: ResetPasswordPage,
+      component: VerifyEmailPage,
     },
 
     {
-      name: "ForgotPassPage",
-      path: "/forgot-pass",
-      component: ForgotPassPage,
+      name: "SendChangePassEmail",
+      path: "/send-change-pass-email",
+      component: SendChangePassEmail,
     },
 
     {
@@ -153,9 +153,9 @@ const router = createRouter({
     },
 
     {
-      name: "ResetPasswordPage",
-      path: "/change-password",
-      component: ResetPasswordPage,
+      name: "ChangePasswordLoggedIn",
+      path: "/change-password-logged-in",
+      component: ChangePasswordLoggedIn,
     },
 
     {

@@ -29,7 +29,7 @@
         <span v-if="!buttonDisabled">Login</span>
       </button>
     </form>
-    Forgot <router-link to="/forgot-pass">
+    Forgot <router-link to="/send-change-pass-email">
       password
     </router-link>
     or

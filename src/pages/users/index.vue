@@ -163,7 +163,7 @@
         </button>
         <router-link
           v-if="isLoggedInMixin"
-          to="/change-password">
+          :to="{ name: 'ChangePasswordLoggedIn' }">
           Change password
         </router-link>
         <a

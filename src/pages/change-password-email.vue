@@ -1,8 +1,7 @@
 <template>
   <article>
-    <h1>Change Password</h1>
+    <h1>Change Password While Loggenin L</h1>
     <form>
-
       <label for="newPassword">New password
         <small
           v-if="passwordComplexity < 3"
@@ -37,7 +36,7 @@
             @show="newPassword2Type = newPassword2Type === 'text' ? 'password' : 'text'" />
         </div>
       </label>
-      <input type="hidden" name="username" autocomplete="username">
+      <input type="hidden" name="username" v-model="username">
       <button
         id="reset"
         type="submit"
@@ -55,17 +54,17 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import theButtonToggleHidden from "@/components/ui/TheButtonToggleHidden.vue";
 import { scoreChars } from "@/services/userService";
 import axiosInstance from "@/services/axiosService";
 
 export default {
-  name: "PasswordReset",
+  name: "ChangePasswordEmail",
   components: {
     theButtonToggleHidden,
   },
   data: () => ({
-    password: null,
     newPassword: null,
     newPassword2: null,
     passwordType: "password",
@@ -77,7 +76,11 @@ export default {
     success: false,
     result: null,
     chrs: 0,
+    username: ""
   }),
+  computed: {
+    ...mapGetters({ user: "users/user" }),
+  },
   watch: {
     newPassword: {
       handler(val) {
@@ -86,11 +89,11 @@ export default {
     },
   },
   created() {
+    this.username = this.user.username;
     this.setTitleAndDescriptionMixin({
       titleHtml: "Change Password",
     });
   },
-  // eslint-disable-next-line no-undef
   methods: {
     checkForm() {
       let passed = true;
@@ -119,10 +122,9 @@ export default {
 
           await axiosInstance({
             method: "POST",
-            url: "/auth/change-password",
+            url: "/auth/change-pass",
             data: {
-              token: this.$route.query.token,
-              password: this.newPassword,
+              password: this.$route.query.token,
             },
           });
 

@@ -37,7 +37,6 @@ export default {
     this.$store.dispatch("resources/articlType", this.$route.params.articlType);
   },
   beforeRouteUpdate(to, from) {
-    console.log("resource.beforeRouteUpdate");
     this.navigate(to, from);
   },
   beforeRouteLeave(to, from) {
