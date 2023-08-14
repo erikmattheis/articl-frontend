@@ -6,13 +6,14 @@ import SearchArticls from "@/pages/articls/search.vue";
 import DeleteCategoryPage from "@/pages/categories/delete.vue";
 import CreateCategoryPage from "@/pages/categories/index.vue";
 import ResourceIndex from "@/pages/resource/index.vue";
-import SendChangePassEmail from "@/pages/send-change-pass-email.vue";
 import ForgotUsernamePage from "@/pages/forgot-username.vue";
 import LoginPage from "@/pages/login.vue";
 import DeleteNote from "@/components/layout/NotesDelete.vue";
 import EditNote from "@/components/layout/NotesForm.vue";
 import NotFound from "@/pages/NotFound.vue";
 import TabQuestionsAnswers from "@/components/layout/QAndAList.vue";
+import SendChangePassEmail from "@/pages/send-change-password-email.vue";
+import ChangePassEmail from "@/pages/change-password-email.vue";
 import ChangePasswordLoggedIn from "@/pages/change-password-logged-in.vue";
 import UsersPage from "@/pages/users/index.vue";
 import VerifyEmailPage from "@/pages/verify-email.vue";
@@ -144,6 +145,12 @@ const router = createRouter({
       name: "SendChangePassEmail",
       path: "/send-change-pass-email",
       component: SendChangePassEmail,
+    },
+
+    {
+      name: "ChangePassEmail",
+      path: "/change-pass-email",
+      component: ChangePassEmail,
     },
 
     {

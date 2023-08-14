@@ -1,7 +1,7 @@
 <template>
   <article>
     <h1>Change Password While Logged In</h1>
-    <form>
+    <form v-if="success">
       <label for="password">Current Password
         <div class="toggle-password">
           <input
@@ -62,6 +62,10 @@
         {{ result }}
       </p>
     </form>
+    <p v-else class="valid">
+      You have successfully changed your password. Please <router-link :to="{ name: 'LoginPage' }">sign in with your new
+        password</router-link>.
+    </p>
   </article>
 </template>
 
@@ -81,7 +85,6 @@ export default {
     newPassword: null,
     newPassword2: null,
     oldPasswordType: "password",
-    passwordType: "password",
     newPasswordType: "password",
     newPassword2Type: "password",
     buttonDisabled: false,
