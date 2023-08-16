@@ -7,6 +7,7 @@
   </section>
 </template>
 <script>
+
 import { mapGetters } from 'vuex';
 import axiosInstance from "@/services/axiosService";
 import TheBreadcrumbs from "@/components/layout/TheBreadcrumbs.vue";

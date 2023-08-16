@@ -1,7 +1,7 @@
 <template>
   <article>
-    <h1>Change Password While Logged In</h1>
-    <form v-if="success">
+    <h1>Change Password</h1>
+    <form v-if="!success">
       <label for="password">Current Password
         <div class="toggle-password">
           <input
@@ -145,7 +145,7 @@ export default {
 
           await axiosInstance({
             method: "POST",
-            url: "/auth/change-pass-logged-in",
+            url: "/auth/change-password-logged-in",
             data: {
               token: this.tokens?.accessTokenValue,
               oldPassword: this.oldPassword,
@@ -160,6 +160,9 @@ export default {
             "modals/setSuccessMessage",
             "You have successfully changed your password.",
           );
+
+          this.success = true;
+
         } else {
           this.$store.dispatch("errors/setError", this.errorMessage);
         }

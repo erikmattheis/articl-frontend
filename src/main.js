@@ -1,5 +1,3 @@
-
-
 import { createApp } from "vue";
 import VueCookies from "vue-cookies";
 
@@ -55,6 +53,7 @@ axiosInstance.interceptors.request.use(
   (error) => error,
 );
 
+const BAD_REQUEST = 400;
 const HTTP_UNAUTHORIZED = 401;
 const HTTP_FORBIDDEN = 403;
 
@@ -62,23 +61,34 @@ const HTTP_FORBIDDEN = 403;
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const { status } = error;
+    console.log("Interceptor error:", error);
+
+    const { status } = error.response || {};
+    console.log("Response status:", status);
+
     if (status === HTTP_UNAUTHORIZED) {
+      console.log("Attempting to refresh session");
       try {
         // Attempt to refresh the access token
         await store.dispatch("tokens/refreshSession");
+        console.log("Access token refreshed");
+
         // Retry the original request
         return axiosInstance(error.config);
       } catch (err) {
+        console.log("Error refreshing session:", err);
+
         // Logout user and redirect to login page
         store.dispatch("users/logout");
         router.push({ name: "login" });
         return Promise.reject(error);
       }
     }
+
     return Promise.reject(error);
-  },
+  }
 );
+
 
 // Register forbidden HTTP error interceptor
 axiosInstance.interceptors.response.use(

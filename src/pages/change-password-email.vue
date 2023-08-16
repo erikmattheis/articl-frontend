@@ -1,7 +1,7 @@
 <template>
   <article>
-    <h1>Change Password While Loggenin L</h1>
-    <form>
+    <h1>Change Password</h1>
+    <form v-if="!success">
       <label for="newPassword">New password
         <small
           v-if="passwordComplexity < 3"
@@ -44,12 +44,11 @@
         @click.prevent="submitForm()">
         <span v-if="!buttonDisabled">Change Password</span>
       </button>
-      <p
-        v-if="result"
-        class="invalid">
-        {{ result }}
-      </p>
     </form>
+    <p v-else class="valid">
+      You have successfully changed your password. Please <router-link :to="{ name: 'LoginPage' }">sign in with your new
+        password</router-link>.
+    </p>
   </article>
 </template>
 
@@ -74,7 +73,6 @@ export default {
     passwordComplexity: 0,
     errorMessage: "",
     success: false,
-    result: null,
     chrs: 0,
     username: ""
   }),
@@ -120,20 +118,17 @@ export default {
         if (this.checkForm() === true) {
           this.buttonDisabled = true;
 
-          await axiosInstance({
+          const result = await axiosInstance({
             method: "POST",
-            url: "/auth/change-pass",
+            url: "/auth/change-password-email",
             data: {
-              password: this.$route.query.token,
+              token: this.$route.query.token,
+              password: this.newPassword,
+              password2: this.newPassword2,
             },
           });
 
-          this.$store.dispatch("modals/setSuccessTitle", "Password updated");
-
-          this.$store.dispatch(
-            "modals/setSuccessMessage",
-            "You have successfully changed your password.",
-          );
+          this.success = true;
         } else {
           this.$store.dispatch("errors/setError", this.errorMessage);
         }

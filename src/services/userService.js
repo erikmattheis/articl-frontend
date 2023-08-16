@@ -35,6 +35,7 @@ const validateEmail = (email) => {
 const login = async ({ username, password }) => {
   try {
     const result = await axiosInstance.post("/auth/login", { username, password });
+    console.log("login result:", result)
     VueCookies.set("accessTokenExpires", result?.data.tokens.accessTokenExpires);
     VueCookies.set("accessTokenValue", result?.data.tokens.accessTokenValue);
     VueCookies.set("refreshTokenExpires", result?.data.tokens.refreshTokenExpires);

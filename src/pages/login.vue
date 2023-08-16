@@ -2,6 +2,12 @@
   <article>
     <h1>Log in</h1>
     <form>
+      <p class="error invalid" v-if="errorMessage">
+        {{ errorMessage }}
+      </p>
+      <p class="error invalid" v-if="logInError">
+        {{ logInError }}
+      </p>
       <label for="username">User Name
         <input
           id="username"
@@ -29,7 +35,7 @@
         <span v-if="!buttonDisabled">Login</span>
       </button>
     </form>
-    Forgot <router-link to="/send-change-pass-email">
+    Forgot <router-link to="/send-change-password-email">
       password
     </router-link>
     or
@@ -62,12 +68,14 @@ export default {
     showPassword: false,
     buttonDisabled: false,
     passwordType: "password",
+    errorMessage: "",
   }),
   computed: {
     ...mapGetters({
       user: "users/user",
       tokens: "tokens/tokens",
       lastPath: "resources/lastPath",
+      logInError: "users/logInError",
     }),
   },
   mounted() {
@@ -75,9 +83,13 @@ export default {
       titleHtml: "Articl Login",
     });
   },
+  onBeforeUnmount() {
+    this.$store.dispatch("users/clearLogInError");
+  },
   methods: {
     resetFormErrors() {
       this.errorMessage = "";
+      this.$store.dispatch("users/clearLogInError");
     },
     checkForm() {
       let passed = true;
@@ -102,10 +114,12 @@ export default {
         if (this.checkForm() === true) {
           this.buttonDisabled = true;
 
-          await this.$store.dispatch("users/login", {
+          this.$store.dispatch("users/login", {
             password: this.password,
             username: this.username,
           });
+
+          console.log("r", r);
 
           this.resetFormErrors();
 
@@ -131,8 +145,6 @@ export default {
           const redirectTo = this.lastPath || "/";
           this.$router.push(redirectTo);
 
-        } else {
-          this.$store.dispatch("errors/setError", this.errorMessage);
         }
       } catch (error) {
         this.$store.dispatch("errors/setError", error);

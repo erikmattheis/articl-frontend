@@ -1,7 +1,7 @@
 <template>
   <article>
     <h1>Change Password Using Email</h1>
-    <form>
+    <form v-if="!success">
       <label for="email">Email
         <input
           id="email"
@@ -17,8 +17,8 @@
         <span v-if="!buttonDisabled">Send Email</span>
       </button>
     </form>
-    <p v-if="result">
-      {{ result }}
+    <p v-else>
+      An email has been sent to {{ email }} with instructions on how to reset your password.
     </p>
   </article>
 </template>
@@ -34,7 +34,7 @@ export default {
     emailInvalid: null,
     errorMessage: "",
     buttonDisabled: false,
-    result: null,
+    success: null,
   }),
   mounted() {
     this.setTitleAndDescriptionMixin({
@@ -65,21 +65,13 @@ export default {
 
           const result = await axiosInstance({
             method: "POST",
-            url: "/auth/send-change-pass-email",
+            url: "/auth/send-change-password-email",
             data: {
               email: this.email,
             },
           });
 
-          this.$store.dispatch("modals/setSuccessTitle", "Email sent");
-
-          this.$store.dispatch("modals/setSuccessMessage", "Check your email for instructions how to reset your password.");
-
-          if (result?.data?.message) {
-            this.result = result.data.message;
-          } else {
-            this.result = result.response;
-          }
+          this.success = true;
         } else {
           this.$store.dispatch("errors/setError", this.errorMessage);
         }

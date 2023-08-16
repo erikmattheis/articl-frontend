@@ -7,6 +7,7 @@ export default {
   state: () => ({
     isEmailVerified: undefined,
     user: undefined,
+    logInError: undefined,
   }),
 
   mutations: {
@@ -17,6 +18,10 @@ export default {
     CLEAR_USER(state) {
       state.user = null;
     },
+
+    SET_LOG_IN_ERROR(state, error) {
+      state.logInError = `Login error: ${error}`;
+    },
   },
 
   actions: {
@@ -25,18 +30,22 @@ export default {
       context.commit("SET_USER", user);
     },
 
-    async login({ dispatch }, { username, password }) {
+    async login({ dispatch, commit }, { username, password }) {
       try {
         const response = await userLogin({ username, password });
 
         const { data } = response;
         const tokens = convertStringDatesToMS(data.tokens);
         dispatch("tokens/setTokens", tokens, { root: true });
-        dispatch("setUser", data.user);
+        commit("SET_USER", data.user);
 
       } catch (error) {
-        throw new Error(error);
+        commit("SET_LOG_IN_ERROR", error);
       }
+    },
+
+    clearLogInError({ commit }) {
+        commit("SET_LOG_IN_ERROR", "");
     },
     
     async logout({ dispatch, commit, rootGetters }) {
@@ -55,11 +64,13 @@ export default {
 
     isEmailVerified: (state) => state.isEmailVerified,
 
-    user: (state) => JSON.parse(state.user || "{}"),
+    user: (state) => state.user || {},
 
     id: (state) => state.id,
 
     username: (state) => state.username,
+
+    logInError: (state) => state.logInError,
 
   },
 };
