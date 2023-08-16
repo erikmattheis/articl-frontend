@@ -119,8 +119,6 @@ export default {
             username: this.username,
           });
 
-          console.log("r", r);
-
           this.resetFormErrors();
 
           const theme = this.user?.theme !== "dark" ? "light" : "dark";

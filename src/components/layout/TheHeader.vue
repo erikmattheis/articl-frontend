@@ -38,18 +38,19 @@
             </router-link>
           </li>
 
-          <li v-if="!isLoggedInMixin">
+          <li v-if="!isLoggedInMixin && $route.name !== 'LoginPage'">
             <router-link
-              to="/login">
-              <span class="sr">User</span>
-              <vue-feather
-                size="2rem"
-                type="user"
-                aria-label="User" />
+              :to="{ name: 'LoginPage' }">
+              <button>Log In or Create Account
+                <vue-feather
+                  size=" 1rem"
+                  type="log-in"
+                  aria-label="User" />
+              </button>
             </router-link>
           </li>
 
-          <li v-else>
+          <li v-else-if="$route.name !== 'LoginPage'">
             <details role="list">
               <summary aria-haspopup="listbox">
                 <div role="link">
