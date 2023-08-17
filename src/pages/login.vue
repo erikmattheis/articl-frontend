@@ -29,7 +29,6 @@
       </label>
       <button
         id="Login"
-        type="submit"
         :aria-busy="buttonDisabled"
         @click.prevent="submitForm()">
         <span v-if="!buttonDisabled">Login</span>
@@ -121,6 +120,7 @@ export default {
 
           if (!user) {
             this.errorMessage = this.$store.getters["users/logInError"];
+            return false;
           }
 
           this.resetFormErrors();

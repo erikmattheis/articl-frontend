@@ -35,11 +35,8 @@ const validateEmail = (email) => {
 const login = async ({ username, password }) => {
   try {
     const result = await axiosInstance.post("/auth/login", { username, password });
-
     setSuccessfulLoginCookies(result?.data?.tokens);
-
     return result;
-
   } catch (error) {
     throw Error(error);
   }
