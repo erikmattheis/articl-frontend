@@ -36,6 +36,7 @@ const login = async ({ username, password }) => {
   try {
     const result = await axiosInstance.post("/auth/login", { username, password });
     setSuccessfulLoginCookies(result?.data?.tokens);
+    setSuccessfulLoginUser(result?.data?.user);
     return result;
   } catch (error) {
     throw Error(error);
@@ -50,7 +51,10 @@ const setSuccessfulLoginCookies = (tokens) => {
     VueCookies.set("accessTokenValue", tokens.accessTokenValue);
     VueCookies.set("refreshTokenExpires", tokens.refreshTokenExpires);
     VueCookies.set("refreshTokenValue", tokens.refreshTokenValue);
-    VueCookies.set("user", result?.data.user);
+}
+
+const setSuccessfulLoginUser = (user) =>{
+  VueCookies.set("user", user);
 }
 
 const logout = async ({ accessToken }) => {
@@ -60,7 +64,6 @@ const logout = async ({ accessToken }) => {
     VueCookies.remove("accessTokenValue");
     VueCookies.remove("refreshTokenExpires");
     VueCookies.remove("refreshTokenValue");
-    VueCookies.remove("user");
   } catch (error) {
     if (error.response && error.response.data.message === "Token not found") {
       // Display an error message to the user

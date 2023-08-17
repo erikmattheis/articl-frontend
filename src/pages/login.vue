@@ -2,9 +2,6 @@
   <article>
     <h1>Log in</h1>
     <form>
-      <p class="error invalid" v-if="errorMessage">
-        {{ errorMessage }}
-      </p>
       <p class="error invalid" v-if="logInError">
         {{ logInError }}
       </p>
@@ -117,9 +114,8 @@ export default {
             password: this.password,
             username: this.username,
           });
-
+          console.log('user', user);
           if (!user) {
-            this.errorMessage = this.$store.getters["users/logInError"];
             return false;
           }
 
@@ -143,7 +139,7 @@ export default {
             "font-size",
             fontSize,
           );
-
+          console.log('trying redirect...');
           const redirectTo = this.lastPath || "/";
           this.$router.push(redirectTo);
 

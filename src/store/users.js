@@ -20,7 +20,7 @@ export default {
     },
 
     SET_LOG_IN_ERROR(state, error) {
-      state.logInError = `Login error: ${error}`;
+      state.logInError = `${error}` ;
     },
   },
 
@@ -43,9 +43,10 @@ export default {
         const tokens = convertStringDatesToMS(data.tokens);
         dispatch("tokens/setTokens", tokens, { root: true });
         commit("SET_USER", data.user);
-
+        return true;
       } catch (error) {
         commit("SET_LOG_IN_ERROR", error);
+        return false;
       }
     },
 
@@ -56,9 +57,10 @@ export default {
     async logout({ dispatch, commit, rootGetters }) {
       try {
         const accessToken = rootGetters["tokens/accessTokenValue"];
+        await userLogout({ accessToken });
         dispatch("tokens/clearTokens", { rememberMe: true }, { root: true });
         commit("CLEAR_USER");
-        await userLogout({ accessToken });
+        
       } catch (error) {
         dispatch("errors/setError", error, { root: true });
       }

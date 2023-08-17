@@ -44,8 +44,6 @@ export default {
   methods: {
     resetForm() {
       this.emailInvalid = null;
-
-      this.result = null;
     },
     checkForm() {
       if (!this.email || !validateEmail.validateEmail(this.email)) {
@@ -63,7 +61,7 @@ export default {
         if (this.checkForm() === true) {
           this.buttonDisabled = true;
 
-          const result = await axiosInstance({
+          await axiosInstance({
             method: "POST",
             url: "/auth/send-change-password-email",
             data: {
