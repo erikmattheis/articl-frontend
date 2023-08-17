@@ -45,9 +45,7 @@ export default {
         commit("SET_USER", data.user);
 
       } catch (error) {
-        console.error("login error:", error)
         commit("SET_LOG_IN_ERROR", error);
-        
       }
     },
 
