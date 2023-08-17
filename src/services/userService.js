@@ -35,18 +35,26 @@ const validateEmail = (email) => {
 const login = async ({ username, password }) => {
   try {
     const result = await axiosInstance.post("/auth/login", { username, password });
-    console.log("login result:", result)
-    VueCookies.set("accessTokenExpires", result?.data.tokens.accessTokenExpires);
-    VueCookies.set("accessTokenValue", result?.data.tokens.accessTokenValue);
-    VueCookies.set("refreshTokenExpires", result?.data.tokens.refreshTokenExpires);
-    VueCookies.set("refreshTokenValue", result?.data.tokens.refreshTokenValue);
-    VueCookies.set("user", result?.data.user);
+
+    setSuccessfulLoginCookies(result?.data?.tokens);
+
     return result;
 
   } catch (error) {
-    throw new Error(error);
+    throw Error(error);
   }
 };
+
+const setSuccessfulLoginCookies = (tokens) => {
+    if (!tokens) {
+      return;
+    }
+    VueCookies.set("accessTokenExpires", tokens.accessTokenExpires);
+    VueCookies.set("accessTokenValue", tokens.accessTokenValue);
+    VueCookies.set("refreshTokenExpires", tokens.refreshTokenExpires);
+    VueCookies.set("refreshTokenValue", tokens.refreshTokenValue);
+    VueCookies.set("user", result?.data.user);
+}
 
 const logout = async ({ accessToken }) => {
   try {

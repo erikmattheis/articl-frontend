@@ -114,10 +114,14 @@ export default {
         if (this.checkForm() === true) {
           this.buttonDisabled = true;
 
-          this.$store.dispatch("users/login", {
+          const user = await this.$store.dispatch("users/login", {
             password: this.password,
             username: this.username,
           });
+
+          if (!user) {
+            this.errorMessage = this.$store.getters["users/logInError"];
+          }
 
           this.resetFormErrors();
 

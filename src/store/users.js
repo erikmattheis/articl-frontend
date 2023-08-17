@@ -35,11 +35,17 @@ export default {
         const response = await userLogin({ username, password });
 
         const { data } = response;
+
+        if (data.error) {
+          commit("SET_LOG_IN_ERROR", data.error);
+          return false;
+        }
         const tokens = convertStringDatesToMS(data.tokens);
         dispatch("tokens/setTokens", tokens, { root: true });
         commit("SET_USER", data.user);
-
+        return true;
       } catch (error) {
+        console.error("login error:", error)
         commit("SET_LOG_IN_ERROR", error);
       }
     },
