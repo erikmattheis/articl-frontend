@@ -67,11 +67,11 @@ const logout = async ({ accessToken }) => {
   } catch (error) {
     if (error.response && error.response.data.message === "Token not found") {
       // Display an error message to the user
-      throw new Error("Token not found during logout:", error);
+      throw new Error("Token not found during logout:", error || "Unknown");
       // Optionally, you can redirect the user to the login page or display a user-friendly error message on the front end.
     } else {
       // Handle other errors
-      throw new Error("Logout error:", error);
+      throw new Error("Logout error:", error || "Unknown");
       // Display a user-friendly error message or take appropriate actions based on the error.
     }
   }

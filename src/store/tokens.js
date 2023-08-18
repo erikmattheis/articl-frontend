@@ -42,11 +42,9 @@ export default {
     clearTokens: (context, payload) => {
       context.commit("SET_ACCESS_TOKEN_EXPIRES", "");
       context.commit("SET_ACCESS_TOKEN_VALUE", "");
-      if (!payload.rememberMe) {
-        context.commit("SET_REFRESH_TOKEN_EXPIRES", "");
-        context.commit("SET_REFRESH_TOKEN_VALUE", "");
-        clearJWTTokens(payload.rememberMe);
-      }
+      context.commit("SET_REFRESH_TOKEN_EXPIRES", "");
+      context.commit("SET_REFRESH_TOKEN_VALUE", "");
+      clearJWTTokens(payload.rememberMe);
     },
     accessTokenExpires: (context, payload) => {
       context.commit("SET_ACCESS_TOKEN_EXPIRES", payload);

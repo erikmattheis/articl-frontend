@@ -56,12 +56,18 @@ axiosInstance.interceptors.request.use(
 const BAD_REQUEST = 400;
 const HTTP_UNAUTHORIZED = 401;
 const HTTP_FORBIDDEN = 403;
+const TOO_MANY_REQUESTS = 429;
 
 // Register unauthorized HTTP error interceptor
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     console.log("Interceptor error:", error);
+
+    if (error.response.status === TOO_MANY_REQUESTS) {
+      console.log("Too many requests");
+      return Promise.reject(error);
+    }
 
     if (error.response.status === HTTP_UNAUTHORIZED) {
       console.log("Attempting to refresh session");
@@ -76,12 +82,12 @@ axiosInstance.interceptors.response.use(
         console.log("Error refreshing session:", err);
         console.log('router.currentRoute.name', router.currentRoute.name);  
         // Logout user and redirect to login page
-        store.dispatch("users/logout");
-
-        if (router.currentRoute.name !== "login") {
+        if (this.$route.name && this.$route.name !== "login") {
+          store.dispatch("users/logout");
           router.push({ name: "login" });
-        }
-        return Promise.reject(error);
+          return Promise.reject(error);
+      }
+        
       }
     }
     if (status === HTTP_FORBIDDEN) {

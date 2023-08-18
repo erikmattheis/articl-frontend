@@ -60,7 +60,6 @@ console.log('response', response)
         await userLogout({ accessToken });
         dispatch("tokens/clearTokens", { rememberMe: true }, { root: true });
         commit("CLEAR_USER");
-        
       } catch (error) {
         dispatch("errors/setError", error, { root: true });
       }
