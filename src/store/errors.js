@@ -23,12 +23,20 @@ export default {
 
   actions: {
     setError: (context, payload) => {
+      console.log("Error:", payload)
       let errorMessage = payload;
       let errorStack = "";
       if (!payload.okFunction) {
         context.commit("SET_OK_FUNCTION", () => { });
       }
-      if (payload?.response?.data?.message) {
+      if (payload?.data?.message) {
+        errorMessage = payload.response.data.message;
+      }
+
+      if (payload?.data?.stack) {
+        errorStack = payload.response.data.stack;
+      }
+      if (payload?.data?.message) {
         errorMessage = payload.response.data.message;
       }
 

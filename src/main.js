@@ -63,10 +63,7 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     console.log("Interceptor error:", error);
 
-    const { status } = error.response || {};
-    console.log("Response status:", response.status);
-
-    if (response.status === HTTP_UNAUTHORIZED) {
+    if (error.response.status === HTTP_UNAUTHORIZED) {
       console.log("Attempting to refresh session");
       try {
         // Attempt to refresh the access token
@@ -87,22 +84,12 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
       }
     }
-
-    return Promise.reject(error);
-  }
-);
-
-
-// Register forbidden HTTP error interceptor
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    const { status } = error;
     if (status === HTTP_FORBIDDEN) {
       router.push({ name: "Forbidden" });
     }
+
     return Promise.reject(error);
-  },
+  }
 );
 
 app.mount("#app");
