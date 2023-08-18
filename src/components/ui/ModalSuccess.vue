@@ -8,7 +8,7 @@
       open
       class="modal"
       @click.stop>
-      <article class="max-container-width">
+      <article>
         <header>
           <a
             href="#close"
@@ -19,19 +19,16 @@
         </header>
         <section>
           <div
-            class="tab"
+            class="tab left"
             title="success">
             <vue-feather
               size="3rem"
               type="check"
               aria-label="Check mark" />
           </div>
-          <div class="info">
-            <ul>
-              <li v-if="successMessage">
-                <small>{{ successMessage }}</small>
-              </li>
-            </ul>
+          <div class="tab right info">
+            <small>{{ successMessage }} {{ successMessage }} {{ successMessage }} {{ successMessage }} {{
+              successMessage }} {{ successMessage }} {{ successMessage }} {{ successMessage }}</small>
           </div>
         </section>
         <button @click.prevent="close()">
@@ -82,34 +79,30 @@ export default {
 }
 
 article {
-  max-width: 100%;
+  width: 100%;
 }
 
 section {
-  overflow: auto;
-  white-space: nowrap;
-}
-
-section div {
   display: flex;
-  flex: 4rem 1;
-  align-items: center;
-  justify-content: center;
-  float: left;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: 100%;
 }
 
 .tab {
-  width: 4rem;
-  height: 4rem;
-}
-
-.grid > div {
+  min-width: 3rem;
+  min-height: 3rem;
   display: flex;
+  padding: 0.5rem;
 }
 
-div.info {
-  max-width: calc(100% - 4rem);
-  min-height: 4rem;
+tab.left {
+  flex: 0 0 3rem;
+}
+
+div.tab.right {
+  flex: 1;
   padding: 1rem;
   color: #71001a;
   background-color: #cfa;

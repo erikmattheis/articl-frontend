@@ -64,9 +64,9 @@ axiosInstance.interceptors.response.use(
     console.log("Interceptor error:", error);
 
     const { status } = error.response || {};
-    console.log("Response status:", status);
+    console.log("Response status:", response.status);
 
-    if (status === HTTP_UNAUTHORIZED) {
+    if (response.status === HTTP_UNAUTHORIZED) {
       console.log("Attempting to refresh session");
       try {
         // Attempt to refresh the access token
@@ -77,10 +77,13 @@ axiosInstance.interceptors.response.use(
         return axiosInstance(error.config);
       } catch (err) {
         console.log("Error refreshing session:", err);
-
+        console.log('router.currentRoute.name', router.currentRoute.name);  
         // Logout user and redirect to login page
         store.dispatch("users/logout");
-        router.push({ name: "login" });
+
+        if (router.currentRoute.name !== "login") {
+          router.push({ name: "login" });
+        }
         return Promise.reject(error);
       }
     }

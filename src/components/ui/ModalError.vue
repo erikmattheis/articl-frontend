@@ -22,16 +22,16 @@
             @click.prevent="close()" />
           <h2>Error</h2>
         </header>
-        <section class="flex">
+        <section>
           <div
-            class="tab"
+            class="tab left"
             title="error">
             <vue-feather
               size="3rem"
               type="alert-triangle"
               aria-label="Alert" />
           </div>
-          <div class="info">
+          <div class="tab right info">
             <ul>
               <li v-if="errorMessage">
                 {{ errorMessage }}
@@ -78,6 +78,7 @@ export default {
 
 <style scoped lang="scss">
 .modal-container {
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -92,37 +93,39 @@ export default {
 }
 
 article {
-  max-width: 100%;
+  width: 100%;
 }
 
 section {
-  overflow: visible;
-  white-space: nowrap;
-
-}
-
-.flex {
   display: flex;
-  flex: 4rem 1;
-  align-items: center;
-  justify-content: center;
-  float: left;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: 100%;
 }
 
 .tab {
-  width: 4rem;
-  height: 4rem;
+  min-width: 3rem;
+  min-height: 3rem;
+  display: flex;
   padding: 0.5rem;
+}
+
+tab.left {
+  flex: 0 0 3rem;
+}
+
+div.tab.right {
+  flex: 1;
+  padding: 1rem;
+  color: #71001a;
+  background-color: #fee;
 }
 
 .tab,
 dialog article button {
   color: #fff;
   background-color: #dd2c00;
-}
-
-.info {
-  padding: 0.5rem;
 }
 
 dialog article header a,
@@ -139,11 +142,6 @@ dialog article button:hover {
 dialog article header h2 {
   margin-bottom: 0;
   color: #fff;
-}
-
-dialog article ul li {
-  word-break: break-all;
-  white-space: pre-wrap;
 }
 
 html[data-theme="dark"] #app > div > dialog > article > section > div.info,
