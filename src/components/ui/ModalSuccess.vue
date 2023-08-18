@@ -27,8 +27,7 @@
               aria-label="Check mark" />
           </div>
           <div class="tab right info">
-            <small>{{ successMessage }} {{ successMessage }} {{ successMessage }} {{ successMessage }} {{
-              successMessage }} {{ successMessage }} {{ successMessage }} {{ successMessage }}</small>
+            <small>{{ successMessage }}</small>
           </div>
         </section>
         <button @click.prevent="close()">
