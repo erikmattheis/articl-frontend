@@ -48,7 +48,7 @@
             @show="newPassword2Type = newPassword2Type === 'text' ? 'password' : 'text'" />
         </div>
       </label>
-      <input type="hidden" name="username" v-model="username">
+      <input type="hidden" name="username" v-model="username" autocomplete="username">
       <button
         id="reset"
         type="submit"

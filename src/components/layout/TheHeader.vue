@@ -41,7 +41,7 @@
           <li v-if="!isLoggedInMixin && $route.name !== 'LoginPage'">
             <router-link
               :to="{ name: 'LoginPage' }">
-              <button>Log In or Create Account
+              <button class="bright-button">Log In or Create Account
                 <vue-feather
                   size=" 1rem"
                   type="log-in"
