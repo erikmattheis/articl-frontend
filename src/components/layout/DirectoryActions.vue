@@ -1,18 +1,22 @@
 <template>
-  <div class="row-admin-box actions-column">
+  <div>
     <router-link
       v-if="treeLevel !== 4"
-      :to="{ name: 'CreateCategoryPage', query: { parentSlug: $route.params.slug || '0' } }"
-      role="button">
-      <small>New Category Here</small>
+      :to="{ name: 'CreateCategoryPage', query: { parentSlug: $route.params.slug || '0' } }">
+      <button class="bright-button">
+        New Category Here<vue-feather
+          size=" 1rem"
+          type="new"
+          aria-label="New" />
+      </button>
     </router-link>
 
     <router-link
       v-else
-      :to="{ name: 'CreateArticlPage', query: { articlType: $route.params.articlType || '', slug: $route.params.slug || '0' } }"
-      role="button">
-      <small>New Articl Here</small>
+      :to="{ name: 'CreateArticlPage', query: { articlType: $route.params.articlType || '', slug: $route.params.slug || '0' } }">
+      <button class="bright-button">New Articl Here</button>
     </router-link>
+
   </div>
 </template>
 
@@ -31,8 +35,7 @@ export default {
 </script>
 
 <style scoped>
-.actions-column {
-  margin-top: var(--nav-element-spacing-vertical);
-  grid-template-columns: max-content max-content;
+button {
+  font-size: 0.7rem;
 }
 </style>

@@ -3,7 +3,6 @@
     <the-breadcrumbs />
     <h1>{{ title }}</h1>
     <router-view></router-view>
-    <directory-actions />
   </section>
 </template>
 <script>
@@ -11,12 +10,11 @@
 import { mapGetters } from 'vuex';
 import axiosInstance from "@/services/axiosService";
 import TheBreadcrumbs from "@/components/layout/TheBreadcrumbs.vue";
-import DirectoryActions from "@/components/layout/DirectoryActions.vue";
+
 
 export default {
   components: {
     TheBreadcrumbs,
-    DirectoryActions
   },
   data() {
     return {

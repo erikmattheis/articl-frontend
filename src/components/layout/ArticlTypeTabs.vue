@@ -12,15 +12,22 @@
         @keyup.enter.prevent="changeArticlType(t)">
         {{ t }}</a>
     </li>
+    <li>
+      <directory-actions />
+    </li>
   </ul>
 </template>
 
 
 <script>
 import { mapGetters } from "vuex";
+import directoryActions from "@/components/layout/DirectoryActions.vue";
 
 export default {
   name: "ArticlTypeTabs",
+  components: {
+    directoryActions,
+  },
   data() {
     return {
 
