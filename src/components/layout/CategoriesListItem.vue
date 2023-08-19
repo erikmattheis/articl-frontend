@@ -2,14 +2,14 @@
   <div class="container">
     <router-link
       class="box"
-      :to="{ name: tabName, params: { slug: category.slug } }">
+      :to="{ name: tabName, params: { slug: category.slug || '0' } }">
       {{ category.title }}
     </router-link>
     <category-actions
       v-if="isLoggedInMixin"
       :id="category.id"
       class="box"
-      :slug="category.slug" />
+      :slug="category.slug || '0'" />
   </div>
 </template>
 

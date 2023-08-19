@@ -27,15 +27,15 @@
         <ul class="right">
 
           <li>
-            <router-link
+
+            <vue-feather
+              size="2rem"
+              type="search"
+              role="searchbox"
+              aria-label="Search" />
+            <!-- <router-link
               :to="{ name: 'SearchArticls' }"
-              class="search-articls">
-              <vue-feather
-                size="2rem"
-                type="search"
-                role="searchbox"
-                aria-label="Search" />
-            </router-link>
+              class="search-articls"></router-link> -->
           </li>
 
           <li v-if="!isLoggedInMixin && $route.name !== 'LoginPage'">

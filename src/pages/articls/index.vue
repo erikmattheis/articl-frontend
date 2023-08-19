@@ -172,7 +172,7 @@ export default {
       authors: [],
       buttonDisabled: false,
       buttonFetchDisabled: false,
-      slug: this.$route.query.slug,
+      slug: this.$route.query.slug || '0',
       formAction: "",
       isLoading: true,
       journal: "",

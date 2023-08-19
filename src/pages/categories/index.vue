@@ -50,7 +50,7 @@
         <label for="slug">Slug
           <input
             id="slug"
-            :value="slug"
+            v-model="slug"
             type="text"
             name="slug"></label>
         <label for="parentSlug">Parent slug
@@ -101,8 +101,8 @@ export default {
     errorMessage: "",
     formAction: "",
     isLoading: null,
-    slug: null,
-    parentSlug: null,
+    slug: 0,
+    parentSlug: 0,
     result: null,
     success: false,
     title: null,
