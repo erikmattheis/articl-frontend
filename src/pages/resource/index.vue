@@ -11,7 +11,6 @@ import { mapGetters } from 'vuex';
 import axiosInstance from "@/services/axiosService";
 import TheBreadcrumbs from "@/components/layout/TheBreadcrumbs.vue";
 
-
 export default {
   components: {
     TheBreadcrumbs,

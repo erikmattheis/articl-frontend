@@ -13,7 +13,7 @@
         {{ t }}</a>
     </li>
     <li>
-      <directory-actions />
+      <button-new-articl />
     </li>
   </ul>
 </template>
@@ -21,12 +21,12 @@
 
 <script>
 import { mapGetters } from "vuex";
-import directoryActions from "@/components/layout/DirectoryActions.vue";
+import ButtonNewArticl from "@/components/ui/ButtonNewArticl.vue";
 
 export default {
   name: "ArticlTypeTabs",
   components: {
-    directoryActions,
+    ButtonNewArticl,
   },
   data() {
     return {

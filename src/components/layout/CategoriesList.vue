@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <vue-draggable-next
       :list="categories"
       tag="ul"
@@ -14,6 +15,7 @@
           :tree-level="treeLevel" />
       </div>
     </vue-draggable-next>
+    <button-new-category />
   </div>
 </template>
 
@@ -21,6 +23,7 @@
 import { VueDraggableNext } from 'vue-draggable-next';
 import { mapGetters } from "vuex";
 import CategoriesListItem from "@/components/layout/CategoriesListItem.vue";
+import ButtonNewCategory from "@/components/ui/ButtonNewCategory.vue";
 import axiosInstance from "@/services/axiosService";
 
 export default {
@@ -28,6 +31,7 @@ export default {
   components: {
     CategoriesListItem,
     VueDraggableNext,
+    ButtonNewCategory,
   },
   data() {
     return {
