@@ -38,6 +38,7 @@ body ul.breadcrumbs {
   display: inline !important;
 }
 
+
 body ul.breadcrumbs li {
   font-size: 0.9rem;
   padding-top: 0;

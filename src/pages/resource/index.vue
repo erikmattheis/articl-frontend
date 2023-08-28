@@ -19,7 +19,6 @@ export default {
     return {
       isLoading: true,
       results: {},
-      title: "",
       slug: "",
     };
   },
@@ -27,6 +26,7 @@ export default {
     ...mapGetters({
       categories: "resources/categories",
       treeLevel: "resources/treeLevel",
+      treeLtitleevel: "resources/htmlTitle",
     }),
   },
   created() {
@@ -63,6 +63,7 @@ export default {
         this.isLoading = false;
       }
     },
+
 
     updateValues(results) {
 
@@ -102,12 +103,11 @@ export default {
           titleHtml: this.titleHtml,
           description,
         });
+
       } catch (error) {
         this.$store.dispatch("errors/setError", error);
       }
     },
-
-
     async fetchData(slug) {
       const result = await axiosInstance({
         method: "GET",
@@ -124,6 +124,6 @@ export default {
       };
     },
   },
-
 }
+
 </script>

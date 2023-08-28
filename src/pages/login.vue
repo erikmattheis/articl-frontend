@@ -139,7 +139,7 @@ export default {
             "font-size",
             fontSize,
           );
-          console.log('trying redirect...');
+
           const redirectTo = this.lastPath || "/";
           this.$router.push(redirectTo);
 

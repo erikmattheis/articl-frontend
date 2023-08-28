@@ -1,13 +1,11 @@
 <template>
   <div class="vertical-container">
     <the-header />
-    <main>
-      <router-view v-slot="{ Component }">
-        <transition name="fade">
-          <component :is="Component" />
-        </transition>
-      </router-view>
-    </main>
+    <router-view v-slot="{ Component }">
+      <transition>
+        <component :is="Component" />
+      </transition>
+    </router-view>
     <the-footer />
     <modal-error />
     <modal-success />
@@ -50,7 +48,7 @@ export default {
     TheHeader,
     TheFooter,
     ModalError,
-    ModalSuccess,
+    ModalSuccess
   },
   data() {
     return {
@@ -63,7 +61,11 @@ export default {
       articlType: "resources/articlType",
     }),
   },
-
+  /*
+  beforeRouteUpdate(to, from, next) {
+    console.log(to);
+    console.log(from);
+  }, */
   mounted() {
     const user = this.$cookies.get("user");
     if (user) {
