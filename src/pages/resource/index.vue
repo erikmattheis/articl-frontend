@@ -26,11 +26,12 @@ export default {
     ...mapGetters({
       categories: "resources/categories",
       treeLevel: "resources/treeLevel",
-      treeLtitleevel: "resources/htmlTitle",
+      htmlTitle: "resources/htmlTitle",
     }),
   },
   created() {
     this.getCategoryResources(this.$route.params.slug);
+    this.importArticls();
     this.$store.dispatch("resources/slug", this.$route.params.slug);
     this.$store.dispatch("resources/articlType", this.$route.params.articlType);
   },
@@ -122,6 +123,13 @@ export default {
         articls: result.data.articls,
         notes: result.data.notes,
       };
+    },
+    async importArticls() {
+      const result = await axiosInstance({
+        method: "GET",
+        url: `/imports/import-articls/batch`,
+      });
+      console.log('result', result);
     },
   },
 }

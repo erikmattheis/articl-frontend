@@ -8,9 +8,7 @@ export default {
   }),
 
   mutations: {
-    SET_OK_FUNCTION: (state, payload) => {
-      state.okFunction = payload;
-    },
+
 
     SET_ERROR_MESSAGE: (state, payload) => {
       state.errorMessage = payload;
@@ -23,12 +21,8 @@ export default {
 
   actions: {
     setError: (context, payload) => {
-      console.log("Error:", payload)
       let errorMessage = payload;
       let errorStack = "";
-      if (!payload.okFunction) {
-        context.commit("SET_OK_FUNCTION", () => { });
-      }
       if (payload?.data?.message) {
         errorMessage = payload.response.data.message;
       }

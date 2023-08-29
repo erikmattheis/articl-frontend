@@ -63,34 +63,27 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     console.log("Interceptor error:", error);
 
+    if (status === HTTP_FORBIDDEN) {
+      console.log('Forbidden')
+      return router.push({ name: "Forbidden" });
+    }
+
     if (error.response.status === TOO_MANY_REQUESTS) {
       console.log("Too many requests");
+
       return Promise.reject(error);
     }
 
-    if (error.response.status === HTTP_UNAUTHORIZED) {
-      console.log("Attempting to refresh session");
-      try {
-        // Attempt to refresh the access token
-        await store.dispatch("tokens/refreshSession");
-        console.log("Access token refreshed");
-
+    if (error.response.status === HTTP_UNAUTHORIZED && !error.config.url.includes("/auth/refresh-tokens")) {
+      console.log("Access token is invalid or has expired.");
+      const success = await store.dispatch("tokens/refreshSession");
+      if (success) {
         // Retry the original request
-        return axiosInstance(error.config);
-      } catch (err) {
-        console.log("Error refreshing session:", err);
-        console.log('router.currentRoute.name', router.currentRoute.name);  
-        // Logout user and redirect to login page
-        if (this.$route.name && this.$route.name !== "login") {
-          store.dispatch("users/logout");
-          router.push({ name: "login" });
-          return Promise.reject(error);
+        return axiosInstance.request(error.config);
+      } else {
+        console.log("Error refreshing session.");
+        return router.push({ name: "LoginPage" });
       }
-        
-      }
-    }
-    if (status === HTTP_FORBIDDEN) {
-      router.push({ name: "Forbidden" });
     }
 
     return Promise.reject(error);

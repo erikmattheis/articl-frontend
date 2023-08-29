@@ -63,10 +63,24 @@ export default {
     },
 
     async refreshSession({ state }) {
-      const { refreshTokenValue } = state;
-      const tokens = await refreshJWTSession(refreshTokenValue);
-      setJWTTokens(tokens);
-    },
+      try {
+        const { refreshTokenValue } = state;
+        const tokens = await refreshJWTSession(refreshTokenValue);
+
+        if (tokens) {
+          setJWTTokens(tokens);
+          return true;
+        } else {
+          // Token refresh was unsuccessful, handle the error here
+          console.error("Token refresh failed.");
+          return false;
+        }
+      } catch (error) {
+        // Handle any errors that occur during the refresh process
+        console.error("An error occurred during token refresh:", error);
+        return false;
+      }
+    }
 
   },
 

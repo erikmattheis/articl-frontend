@@ -39,21 +39,22 @@ const login = async ({ username, password }) => {
     setSuccessfulLoginUser(result?.data?.user);
     return result;
   } catch (error) {
+    console.log("error from server:", error);
     throw Error(error);
   }
 };
 
 const setSuccessfulLoginCookies = (tokens) => {
-    if (!tokens) {
-      return;
-    }
-    VueCookies.set("accessTokenExpires", tokens.accessTokenExpires);
-    VueCookies.set("accessTokenValue", tokens.accessTokenValue);
-    VueCookies.set("refreshTokenExpires", tokens.refreshTokenExpires);
-    VueCookies.set("refreshTokenValue", tokens.refreshTokenValue);
+  if (!tokens) {
+    return;
+  }
+  VueCookies.set("accessTokenExpires", tokens.accessTokenExpires);
+  VueCookies.set("accessTokenValue", tokens.accessTokenValue);
+  VueCookies.set("refreshTokenExpires", tokens.refreshTokenExpires);
+  VueCookies.set("refreshTokenValue", tokens.refreshTokenValue);
 }
 
-const setSuccessfulLoginUser = (user) =>{
+const setSuccessfulLoginUser = (user) => {
   VueCookies.set("user", user);
 }
 
