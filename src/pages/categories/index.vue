@@ -22,10 +22,10 @@
             name="titleHtml"></label>
         <div v-for="(summary, index) in AISummaries"
           :key="index">
-          <label for="selectedDescription">
+          <label for="selectedAIDescriptionIndex">
             <input type="radio"
               name="selectedAIDescriptionIndex"
-              id="selectedDescription"
+              id="selectedAIDescriptionIndex"
               :value="index"
               v-model="selectedAIDescriptionIndex">
             {{ summary.message?.content }}</label>
@@ -107,6 +107,8 @@ export default {
     success: false,
     title: null,
     titleHtml: null,
+    description: null,
+    descriptionInvalid: null,
     titleHtmlInvalid: null,
     slugInvalid: null,
     parentIdInvalid: null,
@@ -133,7 +135,7 @@ export default {
             }
           ]
         }
-      }
+      },
     },
     editingSlug: {
       get() {
@@ -195,7 +197,9 @@ export default {
         this.isLoading = true;
 
         const result = await this.getCategory(id);
-        this.selectedDescription = result.data.description;
+        this.selectedDescription = this.description = result.data.description;
+        this.selectedAIDescriptionIndex = 0;
+        this.aiButtonMessage = "Get More AI Summaries";
         this.order = result.data.order;
         this.parentSlug = result.data.parentSlug;
         this.title = result.data.title;
@@ -260,6 +264,12 @@ export default {
         this.errorMessage = "Please select a parent category.";
 
         passed = false;
+      } else if (!this.description) {
+        this.descriptionInvalid = true;
+
+        this.errorMessage = "Please select or enter a description.";
+
+        passed = false;
       }
 
       return passed;
@@ -312,17 +322,17 @@ export default {
             parentSlug: this.parentSlug,
           };
 
-          const titleVerb = id ? "Edited" : "Created";
-
-          this.setTitleAndDescriptionMixin({ title: `Category ${titleVerb}` });
-
           await axiosInstance({
             method: verb,
             url: `/categories/${possiblyEmtyId}`,
             data,
           });
 
+          const titleVerb = id ? "Edited" : "Created";
+
           this.success = true;
+
+          this.setTitleAndDescriptionMixin({ title: `Category ${titleVerb}` });
 
           this.$store.dispatch("modals/setSuccessTitle", `Category ${titleVerb}`);
 
