@@ -50,7 +50,7 @@
         <label for="slug">Slug
           <input
             id="slug"
-            v-model="slug"
+            v-model="editingSlug"
             type="text"
             name="slug"></label>
         <label for="parentSlug">Parent slug
@@ -138,11 +138,11 @@ export default {
     editingSlug: {
       get() {
         let str = this.title || this.titleHtml;
-        if (!this.titleHtml || !this.title) {
+        if (!str) {
           return "";
         }
 
-        str = this.titleHtml.replace(
+        str = str.replace(
           /\s/g,
           "-",
         );
@@ -156,6 +156,7 @@ export default {
         return str;
       },
       set(newValue) {
+        console.log(newValue)
         return newValue;
       },
     },
@@ -199,7 +200,7 @@ export default {
         this.parentSlug = result.data.parentSlug;
         this.title = result.data.title;
         this.titleHtml = result.data.titleHtml || result.data.title;
-        this.slug = result.data.slug;
+        this.slug = this.editingSlug = result.data.slug;
 
       } catch (error) {
         this.$store.dispatch("errors/setError", error);
@@ -247,7 +248,7 @@ export default {
         this.errorMessage = "Please enter a HTML title.";
 
         passed = false;
-      } else if (!this.slug) {
+      } else if (!this.editingSlug) {
         this.slugInvalid = true;
 
         this.errorMessage = "Please enter a slug.";
@@ -306,7 +307,7 @@ export default {
           const data = {
             title: this.title,
             titleHtml: this.titleHtml,
-            slug: this.slug,
+            slug: this.editingSlug,
             description: this.selectedDescription,
             parentSlug: this.parentSlug,
           };

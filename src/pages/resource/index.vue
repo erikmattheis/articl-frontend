@@ -20,6 +20,7 @@ export default {
       isLoading: true,
       results: {},
       slug: "",
+      title: "",
     };
   },
   computed: {
@@ -39,7 +40,6 @@ export default {
     this.navigate(to, from);
   },
   beforeRouteLeave(to, from) {
-    console.log("resource.beforeRouteLeave");
     this.navigate(to, from);
   },
   methods: {
@@ -102,7 +102,7 @@ export default {
 
         this.setTitleAndDescriptionMixin({
           titleHtml: this.titleHtml,
-          description,
+          description: description,
         });
 
       } catch (error) {
