@@ -30,8 +30,8 @@ export default {
     }),
   },
   created() {
+    // this.importArticls();
     this.getCategoryResources(this.$route.params.slug);
-    this.importArticls();
     this.$store.dispatch("resources/slug", this.$route.params.slug);
     this.$store.dispatch("resources/articlType", this.$route.params.articlType);
   },

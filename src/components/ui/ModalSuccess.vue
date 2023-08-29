@@ -49,7 +49,7 @@ export default {
   computed: {
     ...mapGetters({
       successTitle: "modals/successTitle",
-      successMessage: "modals/successMessage",
+      successMessage: "modals/successMessage"
     }),
   },
   methods: {
