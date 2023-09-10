@@ -9,7 +9,7 @@ const getId = (url) => {
   if (url.charAt(url.length - 1) === "/") {
     id = url.slice(0, Math.max(0, url.length - 1));
   }
-
+  console.log('id', id.slice(Math.max(0, id.lastIndexOf("/") + 1)))
   return id.slice(Math.max(0, id.lastIndexOf("/") + 1));
 };
 const getDB = (url) => {
@@ -83,7 +83,7 @@ const api = async (surl) => {
     authorsOrig: "",
     authors: [],
   };
-
+  console.log('responseDocument', responseDocument);
   switch (database) {
     case "pmc": {
       result.title = responseDocument.querySelectorAll("article-title")[0]?.textContent;

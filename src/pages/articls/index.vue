@@ -183,7 +183,7 @@ export default {
       year: "",
     };
   },
-  mounted() {
+  async mounted() {
     this.id = this.editId;
     this.formAction = this.id ? "Edit" : "Create";
     if (!this.id) {
@@ -201,6 +201,14 @@ export default {
     this.setTitleAndDescriptionMixin({
       titleHtml: `${this.formAction} Articl`,
     });
+
+    /*
+        const insert = await axiosInstance({
+          method: "GET",
+          url: `/imports/import-articls/batch`,
+        });
+    */
+
   },
   methods: {
     async getCurrentArticl(id) {
