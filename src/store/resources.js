@@ -102,7 +102,7 @@ export default {
       const newNotes = notes.filter((note) => note.id !== payload);
       context.commit("SET_NOTES", newNotes);
     },
-    sortArticlsByAnyKey: (context) => (key) => {  
+    sortArticlsByAnyKey: (context) => (key) => {
       const articls = context.state.articls.slice(); // Create a shallow copy of the original array
       articls.sort((a, b) => {
         if (a[key] > b[key]) {
@@ -113,7 +113,7 @@ export default {
         }
         return 0;
       });
-    
+
       context.commit("SET_ARTICLS", articls);
     },
   },
@@ -130,7 +130,7 @@ export default {
     categories: (state) => state.categories,
 
     filteredArticls: (state) => (articlType, sortBy) => {
-      
+
       let articls;
       if (!articlType) {
         articls = state.articls;
@@ -147,12 +147,12 @@ export default {
             return -1;
           }
           return 0;
-        } );
+        });
       }
-      return articls; 
+      return articls;
     },
 
-    articlTypes: (state) => [...new Set(state.articls.map(articl => articl.articlType))] || [],
+    articlTypes: (state) => [...new Set(state.articls.map(articl => articl.resourceType))] || [],
 
     initialArticlType: (state, getters) => getters.articlTypes[0],
 
