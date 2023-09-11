@@ -43,6 +43,16 @@
       </li>
 
       <li
+        v-if="articl.affilliations"
+        class="articl-details">Affilliations: {{ articl.affilliations }}
+      </li>
+
+      <li
+        v-if="articl.institution"
+        class="articl-details">Institution: {{ articl.institution }}
+      </li>
+
+      <li
         v-if="articl.source"
         class="articl-details">{{ articl.source }}
       </li>

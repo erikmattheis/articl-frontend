@@ -78,6 +78,11 @@
               autocomplete="off" /></label>
         </fieldset>
 
+        <label for="institution">Institution <input id="institution"
+            v-model="institution"
+            name="institution"
+            autocomplete="off" /></label>
+
         <label for="journal">Journal <input id="journal"
             v-model="journal"
             name="journal"
@@ -170,6 +175,7 @@ export default {
       url: "",
       authorsOrig: "",
       authors: [],
+      institution: "",
       buttonDisabled: false,
       buttonFetchDisabled: false,
       slug: this.$route.query.slug || '0',
@@ -289,6 +295,7 @@ export default {
               url: this.url,
               articlType: this.articlType,
               authors: this.authors,
+              institution: this.institution,
               slug: this.slug,
               journal: this.journal,
               month: this.month,
