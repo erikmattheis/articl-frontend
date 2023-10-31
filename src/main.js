@@ -67,8 +67,8 @@ axiosInstance.interceptors.response.use(
       console.log('Forbidden')
       return router.push({ name: "Forbidden" });
     }
-
-    if (error.response.status === TOO_MANY_REQUESTS) {
+    console.log("error.status", error)
+    if (error.status === TOO_MANY_REQUESTS) {
       console.log("Too many requests");
 
       return Promise.reject(error);
