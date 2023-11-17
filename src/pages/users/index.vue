@@ -9,57 +9,28 @@
     <form>
       <template v-if="!isLoading">
         <label for="username">Username
-          <input
-            id="username"
-            v-model="username"
-            type="text"
-            name="username"
-            autocomplete="username"
-            :aria-invalid="usernameInvalid"
-            maxlen="64"
-            @keyup="removeUsernameWhiteSpace"
-            @focus="usernameFocused"
+          <input id="username" v-model="username" type="text" name="username" autocomplete="off"
+            :aria-invalid="usernameInvalid" maxlen="64" @keyup="removeUsernameWhiteSpace" @focus="usernameFocused"
             @blur="elementBlurred"></label>
 
-        <label
-          v-if="!isLoggedInMixin"
-          for="password">Password
-          <small
-            v-if="passwordInvalid"
-            class="left-space">
-            Must be 8 or more characters and contain at least one uppercase letter, one lowercase letter and a digit.
+        <label v-if="!isLoggedInMixin" for="password">Password
+          <small v-if="passwordInvalid" class="left-space">
+            Must be 12 or more characters using characters from at least two of these groups: uppercase letters, lowercase
+            letters, digits and special characters.
           </small>
 
           <div class="toggle-password">
-            <input
-              id="password"
-              v-model="password"
-              :type="passwordType"
-              :aria-invalid="passwordInvalid"
-              maxlen="64"
-              name="password"
-              autocomplete="new-password"
-              @blur="elementBlurred">
-            <the-button-toggle-hidden
-              class="toggle-password-mask"
+            <input id="password" v-model="password" :type="passwordType" :aria-invalid="passwordInvalid" maxlen="64"
+              name="password" autocomplete="new-password" @blur="elementBlurred">
+            <the-button-toggle-hidden class="toggle-password-mask"
               @show="passwordType = passwordType === 'text' ? 'password' : 'text'" />
           </div>
         </label>
-        <label
-          v-if="!isLoggedInMixin"
-          for="password2">Confirm password
+        <label v-if="!isLoggedInMixin" for="password2">Confirm password
           <div class="toggle-password">
-            <input
-              id="password2"
-              v-model="password2"
-              :type="password2Type"
-              maxlen="64"
-              name="password2"
-              :aria-invalid="password2Invalid"
-              autocomplete="new-password"
-              @blur="elementBlurred">
-            <the-button-toggle-hidden
-              class="toggle-password-mask"
+            <input id="password2" v-model="password2" :type="password2Type" maxlen="64" name="password2"
+              :aria-invalid="password2Invalid" autocomplete="new-password" @blur="elementBlurred">
+            <the-button-toggle-hidden class="toggle-password-mask"
               @show="password2Type = password2Type === 'text' ? 'password' : 'text'" />
           </div>
         </label>
@@ -67,48 +38,23 @@
         <fieldset class="grid">
           <div>
             <label for="nameFirst">First Name
-              <input
-                id="nameFirst"
-                v-model="nameFirst"
-                type="text"
-                name="nameFirst"
-                :aria-invalid="nameFirstInvalid"
-                autocomplete="given-name"
-                @blur="elementBlurred"></label>
+              <input id="nameFirst" v-model="nameFirst" type="text" name="nameFirst" :aria-invalid="nameFirstInvalid"
+                autocomplete="given-name" @blur="elementBlurred"></label>
           </div>
           <div>
             <label for="nameLast">Last Name
-              <input
-                id="nameLast"
-                v-model="nameLast"
-                type="text"
-                name="nameLast"
-                :aria-invalid="nameLastInvalid"
-                autocomplete="family-name"
-                @blur="elementBlurred"></label>
+              <input id="nameLast" v-model="nameLast" type="text" name="nameLast" :aria-invalid="nameLastInvalid"
+                autocomplete="family-name" @blur="elementBlurred"></label>
           </div>
         </fieldset>
 
         <label for="email">Email
-          <input
-            id="email"
-            v-model="email"
-            type="text"
-            name="email"
-            :aria-invalid="emailInvalid"
-            autocomplete="email"
+          <input id="email" v-model="email" type="text" name="email" :aria-invalid="emailInvalid" autocomplete="email"
             @blur="elementBlurred"></label>
 
         <label for="position">Current position
-          <select
-            id="position"
-            v-model="position"
-            name="position"
-            :aria-invalid="positionInvalid"
-            @blur="elementBlurred">
-            <option
-              disabled
-              value="">
+          <select id="position" v-model="position" name="position" :aria-invalid="positionInvalid" @blur="elementBlurred">
+            <option disabled value="">
               Please select one
             </option>
             <option value="Student">Student</option>
@@ -119,59 +65,26 @@
           </select>
         </label>
         <label for="education">School
-          <input
-            id="education"
-            v-model="education"
-            type="text"
-            name="education"
-            :aria-invalid="educationInvalid"
-            autocomplete="education"
-            @blur="elementBlurred"></label>
+          <input id="education" v-model="education" type="text" name="education" :aria-invalid="educationInvalid"
+            autocomplete="education" @blur="elementBlurred"></label>
         <label for="institution">Current Institution
-          <input
-            id="institution"
-            v-model="institution"
-            type="text"
-            name="institution"
-            :aria-invalid="institutionInvalid"
-            autocomplete="organization"
-            @blur="elementBlurred"></label>
+          <input id="institution" v-model="institution" type="text" name="institution" :aria-invalid="institutionInvalid"
+            autocomplete="organization" @blur="elementBlurred"></label>
         <label for="city">City
-          <input
-            id="city"
-            v-model="city"
-            type="text"
-            name="city"
-            :aria-invalid="cityInvalid"
-            autocomplete="address-level2"
-            @blur="elementBlurred"></label>
-        <select-countries
-          id="country"
-          :country="country"
-          :aria-invalid="countryInvalid"
-          @change-country="changeCountry"
+          <input id="city" v-model="city" type="text" name="city" :aria-invalid="cityInvalid"
+            autocomplete="address-level2" @blur="elementBlurred"></label>
+        <select-countries id="country" :country="country" :aria-invalid="countryInvalid" @change-country="changeCountry"
           @focusout="elementBlurred" />
 
-        <button
-          id="Update"
-          type="submit"
-          :aria-busy="buttonDisabled"
-          :disabled="buttonDisabled"
+        <button id="Update" type="submit" :aria-busy="buttonDisabled" :disabled="buttonDisabled"
           @click.prevent="submitForm">
           <span v-if="!buttonDisabled && method === 'PATCH'">Update Account</span>
           <span v-else-if="!buttonDisabled">Create Account</span>
         </button>
-        <router-link
-          v-if="isLoggedInMixin"
-          :to="{ name: 'ChangePasswordLoggedIn' }">
+        <router-link v-if="isLoggedInMixin" :to="{ name: 'ChangePasswordLoggedIn' }">
           Change password
         </router-link>
-        <a
-          v-if="isLoggedInMixin"
-          href
-          class="right"
-          @keyup="logout()"
-          @click="logout()">
+        <a v-if="isLoggedInMixin" href class="right" @keyup="logout()" @click="logout()">
           Log out
         </a>
       </template>
@@ -202,7 +115,6 @@ export default {
     passwordType: "password",
     password2: "",
     password2Type: "password",
-    passwordComplexity: 0,
     nameFirst: "",
     nameLast: "",
     email: "",
@@ -217,6 +129,7 @@ export default {
     isLoading: true,
     errorMessage: "",
     result: "",
+    slug: this.$route.query.slug || "0",
   }),
   computed: {
     usernameInvalid() {
@@ -230,13 +143,13 @@ export default {
         return null;
       }
 
-      return this.scoreChars(this.password) < 4;
+      return this.scoreChars(this.password) < 2;
     },
     password2Invalid() {
       if (this.focusedElements.indexOf("password2") === -1) {
         return null;
       }
-      return (this.password.length > 0 && this.password2 !== this.password) || this.scoreChars(this.password2) < 4;
+      return (this.password2.length && this.password.length > 11 && this.password2 !== this.password) || this.scoreChars(this.password2) < 2;
     },
     nameFirstInvalid() {
       if (this.focusedElements.indexOf("nameFirst") === -1) {

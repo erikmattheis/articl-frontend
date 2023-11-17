@@ -4,7 +4,7 @@ import axiosInstance from "@/services/axiosService";
 const charCounts = (val) => ({
   numUpper: val.length - val.replace(/[A-Z]/g, "").length,
   numLower: val.length - val.replace(/[a-z]/g, "").length,
-  numDigit: val.length - val.replace(/[0-9]/g, "").length,
+  numDigit: val.length - val.replace(/d/g, "").length,
   numSpecial: val.length - val.replace(/\W|_/g, "").length,
 });
 
@@ -17,7 +17,7 @@ const scoreChars = (val) => {
   const a = chars.numUpper > 0 ? 1 : 0;
   const b = chars.numLower > 0 ? 1 : 0;
   const c = chars.numDigit > 0 ? 1 : 0;
-  const d = val.length > 7 ? 1 : 0;
+  const d = chars.numSpecial > 0 ? 1 : 0;
 
   return a + b + c + d;
 };

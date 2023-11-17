@@ -5,16 +5,11 @@
       <h1>Articl Created</h1>
       <ul>
         <li>
-          <a tabindex="0"
-            href
-            @click.prevent="$router.go()"
-            @keyup.enter.prevent="$router.go()">Create another articl in the same category</a>
+          <a tabindex="0" href @click.prevent="$router.go()" @keyup.enter.prevent="$router.go()">Create another articl in
+            the same category</a>
         </li>
         <li>
-          <a
-            tabindex="0"
-            href
-            @click.prevent="$router.push(`/resource/${slug}/articls`)"
+          <a tabindex="0" href @click.prevent="$router.push(`/resource/${slug}/articls`)"
             @keyup.enter.prevent="$router.push(`/resource/${slug}/articls`)">Return to Category Page
           </a>
         </li>
@@ -24,90 +19,50 @@
     <template v-if="!isLoading && !success">
       <form>
         <template v-if="!id">
-          <label for="url">URL <input id="url"
-              v-model="url"
-              type="text"
-              name="url" /></label>
-          <button type="button"
-            :aria-busy="buttonFetchDisabled"
-            @click.prevent="getData()">
+          <label for="url">URL <input id="url" v-model="url" type="text" name="url" /></label>
+          <button type="button" :aria-busy="buttonFetchDisabled" @click.prevent="getData()">
             FETCH DATA
           </button>
         </template>
         <label for="title">Title
-          <input id="title"
-            v-model="title"
-            name="title"
-            autocomplete="off" />
+          <input id="title" v-model="title" name="title" autocomplete="off" />
         </label>
 
-        <label v-if="doi"
-          for="doi">DOI
-          <input id="doi"
-            v-model="doi"
-            name="doi"
-            autocomplete="off" />
+        <label v-if="doi" for="doi">DOI
+          <input id="doi" v-model="doi" name="doi" autocomplete="off" />
         </label>
 
-        <fieldset v-for="(author, index) in authors"
-          :key="author.id">
+        <fieldset v-for="(author, index) in authors" :key="author.id">
           <div class="grid">
             <label for="`nameFirst${index}`">First name
-              <input
-                :id="`nameFirst${index}`"
-                v-model="author.nameFirst"
-                :name="`nameFirst${index}`"
+              <input :id="`nameFirst${index}`" v-model="author.nameFirst" :name="`nameFirst${index}`"
                 autocomplete="off" /></label>
             <label for="`nameLast${index}`">Last name
-              <input
-                :id="`nameLast${index}`"
-                v-model="author.nameLast"
-                :name="`nameLast${index}`"
+              <input :id="`nameLast${index}`" v-model="author.nameLast" :name="`nameLast${index}`"
                 autocomplete="off" /></label>
           </div>
 
-          <label
-            v-for="(affiliation, affilIndex) in author.affilliations"
-            :key="affiliation"
+          <label v-for="(affiliation, affilIndex) in author.affilliations" :key="affiliation"
             for="`affiliation${affilIndex}`">Affiliation
 
-            <input
-              id="`affiliation${affilIndex}`"
-              v-model="author.affilliations[affilIndex]"
-              name="`affiliation${affilIndex}`"
-              autocomplete="off" /></label>
+            <input id="`affiliation${affilIndex}`" v-model="author.affilliations[affilIndex]"
+              name="`affiliation${affilIndex}`" autocomplete="off" /></label>
         </fieldset>
 
-        <label for="institution">Institution <input id="institution"
-            v-model="institution"
-            name="institution"
+        <label for="institution">Institution <input id="institution" v-model="institution" name="institution"
             autocomplete="off" /></label>
 
-        <label for="journal">Journal <input id="journal"
-            v-model="journal"
-            name="journal"
-            autocomplete="off" /></label>
+        <label for="journal">Journal <input id="journal" v-model="journal" name="journal" autocomplete="off" /></label>
 
-        <label for="year">Publication Year <input id="year"
-            v-model="year"
-            name="year"
-            autocomplete="off" /></label>
+        <label for="year">Publication Year <input id="year" v-model="year" name="year" autocomplete="off" /></label>
 
-        <label for="month">Publication Month <input id="month"
-            v-model="month"
-            name="month"
-            autocomplete="off" /></label>
+        <label for="month">Publication Month <input id="month" v-model="month" name="month" autocomplete="off" /></label>
 
-        <label for="abstract">Abstract <input id="abstract"
-            v-model="abstract"
-            name="abstract"
+        <label for="abstract">Abstract <input id="abstract" v-model="abstract" name="abstract"
             autocomplete="off" /></label>
 
         <label for="articlType">Resource type
-          <select id="articlType"
-            v-model="articlType"
-            name="articlType"
-            autocomplete="off">
+          <select id="articlType" v-model="articlType" name="articlType" autocomplete="off">
             <optgroup value="Resources">
               <option value="Review (OA)">Review (OA)</option>
               <option value="Review (OA)">Review (PA)</option>
@@ -126,19 +81,12 @@
           </select></label>
 
 
-        <input-typeahead
-          src="/categories/titles"
-          query="category"
-          :input-value="slug"
-          label-value="Category slug"
-          @update-value="onTypeaheadHit"
-          @keyup="onTypeaheadHit" />
+        <input-typeahead src="/categories/titles" query="category" :input-value="slug" label-value="Category slug"
+          @update-value="onTypeaheadHit" @keyup="onTypeaheadHit" />
 
         <button :aria-busy="buttonDisabled"
           @click.prevent="$router.push({ name: 'ArticlsList', params: { slug } })">Cancel</button>
-        <button type="button"
-          :aria-busy="buttonDisabled"
-          @click.prevent="submitForm(id)">
+        <button type="button" :aria-busy="buttonDisabled" @click.prevent="submitForm(id)">
           {{ !id ? "Create" : "Edit" }} Articl
         </button>
       </form>

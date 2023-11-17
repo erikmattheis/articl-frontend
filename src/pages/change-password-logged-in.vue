@@ -4,61 +4,39 @@
     <form v-if="!success">
       <label for="password">Current Password
         <div class="toggle-password">
-          <input
-            id="oldPassword"
-            v-model="oldPassword"
-            name="oldPassword"
-            :type="oldPasswordType"
-            autocomplete="current-password"><the-button-toggle-hidden
-            class="toggle-password-mask"
+          <input id="oldPassword" v-model="oldPassword" name="oldPassword" :type="oldPasswordType"
+            autocomplete="current-password"><the-button-toggle-hidden class="toggle-password-mask"
             @show="oldPasswordType = oldPasswordType === 'text' ? 'password' : 'text'" />
         </div>
       </label>
-      <label for="newPassword">New password
-        <small
-          v-if="passwordComplexity < 3"
-          class="lighter left-space">
-          Use upper- and lowercase, numerical and special characters.
+
+      <label v-if="!isLoggedInMixin" for="password">Password
+        <small v-if="passwordInvalid" class="left-space">
+          Must be 12 or more characters using characters from at least two of these groups: uppercase letters, lowercase
+          letters, digits and special characters.
         </small>
-        <small
-          v-else-if="newPassword.length < 8"
-          class="lighter left-space">
-          Please use 8 or more characters.
-        </small>
+
         <div class="toggle-password">
-          <input
-            id="newPassword"
-            v-model="newPassword"
-            :type="newPasswordType"
-            autocomplete="new-password">
-          <the-button-toggle-hidden
-            class="toggle-password-mask"
-            @show="newPasswordType = newPasswordType === 'text' ? 'password' : 'text'" />
+          <input id="password" v-model="password" :type="passwordType" :aria-invalid="passwordInvalid" maxlen="64"
+            name="password" autocomplete="new-password" @blur="elementBlurred">
+          <the-button-toggle-hidden class="toggle-password-mask"
+            @show="passwordType = passwordType === 'text' ? 'password' : 'text'" />
         </div>
       </label>
-      <label for="newPassword2">Confirm new new password
+      <label v-if="!isLoggedInMixin" for="password2">Confirm password
         <div class="toggle-password">
-          <input
-            id="newPassword2"
-            v-model="newPassword2"
-            :type="newPassword2Type"
-            autocomplete="new-password">
-          <the-button-toggle-hidden
-            class="toggle-password-mask"
-            @show="newPassword2Type = newPassword2Type === 'text' ? 'password' : 'text'" />
+          <input id="password2" v-model="password2" :type="password2Type" maxlen="64" name="password2"
+            :aria-invalid="password2Invalid" autocomplete="new-password" @blur="elementBlurred">
+          <the-button-toggle-hidden class="toggle-password-mask"
+            @show="password2Type = password2Type === 'text' ? 'password' : 'text'" />
         </div>
       </label>
+
       <input type="hidden" name="username" v-model="username" autocomplete="username">
-      <button
-        id="reset"
-        type="submit"
-        :aria-busy="buttonDisabled"
-        @click.prevent="submitForm()">
+      <button id="reset" type="submit" :aria-busy="buttonDisabled" @click.prevent="submitForm()">
         <span v-if="!buttonDisabled">Change Password</span>
       </button>
-      <p
-        v-if="result"
-        class="invalid">
+      <p v-if="result" class="invalid">
         {{ result }}
       </p>
     </form>
