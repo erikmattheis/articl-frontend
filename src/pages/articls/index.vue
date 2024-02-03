@@ -126,7 +126,6 @@ export default {
       institution: "",
       buttonDisabled: false,
       buttonFetchDisabled: false,
-      slug: this.$route.query.slug || '0',
       formAction: "",
       isLoading: true,
       journal: "",
@@ -164,6 +163,9 @@ export default {
     */
 
   },
+  slug() {
+      return this.$route.query.slug || "0"
+    },
   methods: {
     async getCurrentArticl(id) {
       try {

@@ -62,12 +62,12 @@ export default {
       yearsStart: this.$store.state.articlsParams.yearsStart,
       yearComparisons: this.$store.state.articlsParams.yearComparisons,
       year: null,
-      q: this.$route.query.q || "",
       allSearchFields: ["titleHtml", "author", "journal", "institution", "abstract"],
-      searchFields: this.$route.query.searchFields?.split(",") || ["title"],
     };
   },
   computed: {
+    q: this.$route.query.q || "",
+    searchFields: this.$route.query.searchFields?.split(",") || ["title"],
     ...mapGetters({
       years: "articlsParams/years",
     }),

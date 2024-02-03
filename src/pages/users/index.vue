@@ -129,9 +129,11 @@ export default {
     isLoading: true,
     errorMessage: "",
     result: "",
-    slug: this.$route.query.slug || "0",
   }),
   computed: {
+    slug() {
+      return this.$route.query.slug || "0"
+    },
     usernameInvalid() {
       if (this.focusedElements.indexOf("username") === -1) {
         return null;
