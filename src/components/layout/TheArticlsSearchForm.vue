@@ -66,8 +66,12 @@ export default {
     };
   },
   computed: {
-    q: this.$route.query.q || "",
-    searchFields: this.$route.query.searchFields?.split(",") || ["title"],
+    q() {
+      return this.$route.query.q || ""
+    },
+    searchFields() {
+      return this.$route.query.searchFields?.split(",") || ["title"]
+    },
     ...mapGetters({
       years: "articlsParams/years",
     }),
@@ -113,6 +117,7 @@ export default {
 
     this.articls = await this.SearchArticls(this.q, this.searchFields);
   },
+
   methods: {
     async SearchArticls(q, fields) {
       if (this.urlParamIsFalsy(q)) {

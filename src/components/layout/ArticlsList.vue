@@ -38,7 +38,9 @@ export default {
     ArticlTypeTabs,
   },
   computed: {
-    sortBy: this.$route.query.createdAt || "createdAt",
+    sortBy() {
+      this.$route.query.createdAt || "createdAt"
+    },
     ...mapGetters({
       filteredArticls: "resources/filteredArticls",
       articlType: "resources/articlType",
