@@ -21,7 +21,7 @@
 
           <div class="toggle-password">
             <input id="password" v-model="password" :type="passwordType" :aria-invalid="passwordInvalid" maxlen="64"
-              name="password" autocomplete="new-password" @blur="elementBlurred">
+              name="password" autocomplete="new-password">
             <the-button-toggle-hidden class="toggle-password-mask"
               @show="passwordType = passwordType === 'text' ? 'password' : 'text'" />
           </div>
@@ -29,7 +29,7 @@
         <label v-if="!isLoggedInMixin" for="password2">Confirm password
           <div class="toggle-password">
             <input id="password2" v-model="password2" :type="password2Type" maxlen="64" name="password2"
-              :aria-invalid="password2Invalid" autocomplete="new-password" @blur="elementBlurred">
+              :aria-invalid="password2Invalid" autocomplete="new-password">
             <the-button-toggle-hidden class="toggle-password-mask"
               @show="password2Type = password2Type === 'text' ? 'password' : 'text'" />
           </div>
@@ -229,6 +229,7 @@ export default {
       await this.$store.dispatch("users/logout");
     },
     elementBlurred(e) {
+      console.log('blurred', e.target.name)
       if (this.focusedElements.indexOf(e.target.name) === -1) {
         this.focusedElements.push(e.target.name);
       }
