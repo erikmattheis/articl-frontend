@@ -22,16 +22,22 @@
           <div class="toggle-password">
             <input id="password" v-model="password" :type="passwordType" :aria-invalid="passwordInvalid" maxlen="64"
               name="password" autocomplete="new-password">
-            <the-button-toggle-hidden class="toggle-password-mask"
-              @show="passwordType = passwordType === 'text' ? 'password' : 'text'" />
+             <a href @click.prevent="togglePassword()"><vue-feather
+          size="1.2rem"
+          :type="passwordType = passwordType === 'password' ? 'eye' : 'eye-off'"
+          aria-label="Hide password"
+           /></a>
           </div>
         </label>
         <label v-if="!isLoggedInMixin" for="password2">Confirm password
           <div class="toggle-password">
             <input id="password2" v-model="password2" :type="password2Type" maxlen="64" name="password2"
               :aria-invalid="password2Invalid" autocomplete="new-password">
-            <the-button-toggle-hidden class="toggle-password-mask"
-              @show="password2Type = password2Type === 'text' ? 'password' : 'text'" />
+              <vue-feather
+          size="1.2rem"
+          :type="password2Type = password2Type === 'password' ? 'eye' : 'eye-off'"
+          aria-label="Hide password"
+          @click.prevent="togglePassword2()" />
           </div>
         </label>
 
@@ -99,12 +105,14 @@ import theButtonToggleHidden from "@/components/ui/TheButtonToggleHidden.vue";
 import { scoreChars, validateEmail } from "@/services/userService";
 import axiosInstance from "@/services/axiosService";
 import isLoggedInMixin from "@/mixins/isLoggedInMixin";
+import VueFeather from "vue-feather";
 
 export default {
   name: "UsersPage",
   components: {
     selectCountries,
     theButtonToggleHidden,
+    VueFeather
   },
 
   data: () => ({
@@ -203,6 +211,7 @@ export default {
     },
   },
   mounted() {
+
     if (this.isLoggedInMixin) {
       this.method = "GET";
 
@@ -225,6 +234,12 @@ export default {
   },
   mixins: [isLoggedInMixin],
   methods: {
+    togglePassword() {
+      this.passwordType = this.passwordType === "password" ? "text" : "password";
+    },
+    togglePassword2() {
+      this.password2Type = this.password2Type === "password" ? "text" : "password";
+    },
     async logout() {
       await this.$store.dispatch("users/logout");
     },
