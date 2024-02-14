@@ -37,7 +37,7 @@ const router = createRouter({
         },
       ],
     },
-    
+
     {
       name: "ResourceIndex",
       path: "/resource/:slug?",
@@ -56,13 +56,13 @@ const router = createRouter({
           path: "categories/edit/:id?",
           component: CreateCategoryPage,
         },
-  
+
         {
           name: "CreateCategoryPage",
           path: "categories/create",
           component: CreateCategoryPage,
         },
-        
+
         {
           name: "DeleteCategoryPage",
           path: "categories/delete/:id?",
@@ -74,20 +74,20 @@ const router = createRouter({
           component: CreateArticlPage,
           props: true,
         },
-    
+
         {
           name: "CreateArticlPage",
           path: "articls/create/:id?",
           component: CreateArticlPage,
         },
-    
+
         {
           name: "DeleteArticlPage",
           path: "articls/delete/:id?",
           component: DeleteArticlPage,
           props: true,
         },
-        
+
         {
           name: "ArticlsList",
           path: "articls/:articlType?",
@@ -203,7 +203,7 @@ const router = createRouter({
     },
 */
 router.beforeEach((to, from, next) => {
-  
+
   if (to.name !== "LoginPage") {
     store.dispatch("resources/lastPath", to.fullPath);
   }
