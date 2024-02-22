@@ -25,6 +25,12 @@ app.use(VueCookies, {
 
 app.use(store);
 
+app.set('view engine', 'ejs');
+
+app.get('/', (req, res) => {
+  res.render('index', { title: 'My Website', message: 'Welcome to my website!' });
+});
+
 /*
 app.config.errorHandler = (error) => {
   store.dispatch('errors/setError', error);
