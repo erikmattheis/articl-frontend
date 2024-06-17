@@ -107,10 +107,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$primary-nav-background: #eeeeee; // Replace with your color
+
 .container {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: minmax(min-content, 1fr) min-content;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
   color: #444;
 }
 
@@ -119,12 +121,12 @@ li {
   padding: 0 !important;
   overflow-x: hidden;
 
+  &:hover {
+    background-color: $primary-nav-background;
+  }
+
   a {
     cursor: pointer;
   }
-}
-
-li:hover {
-  background-color: var(--primary-nav-background);
 }
 </style>
