@@ -13,7 +13,7 @@ export default {
     author: {
       type: [Object, String],
       required: true,
-      default: () => ({ affilliations }),
+      default: () => ({}),
     },
     last: {
       type: Boolean,
@@ -25,13 +25,10 @@ export default {
     commaOrEmpty() {
       return this.last ? '' : ', ';
     },
-    affilliations() {
-      return this.author?.affilliations?.length ? ` (${this.author?.affilliations?.join(", ")})` : '';
-    },
-    name() {
+     name() {
       if (typeof this.author === 'string') return this.author;
       if (!this.author?.nameLast) return 'No nameLast set';
-      return `${this.author.nameFirst} ${this.author.nameLast}${this.affilliations}${this.commaOrEmpty} `;
+      return `${this.author.nameFirst} ${this.author.nameLast}${this.commaOrEmpty}`;
     },
   },
 }
