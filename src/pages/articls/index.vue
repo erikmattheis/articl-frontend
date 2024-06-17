@@ -65,7 +65,7 @@
           <select id="articlType" v-model="articlType" name="articlType" autocomplete="off">
             <optgroup value="Resources">
               <option value="Review (OA)">Review (OA)</option>
-              <option value="Review (OA)">Review (PA)</option>
+              <option value="Review (PA)">Review (PA)</option>
               <option value="Research (OA)">Research (OA)</option>
               <option value="Research (PA)">Research (PA)</option>
               <option value="Web">Web</option>
