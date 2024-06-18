@@ -32,7 +32,7 @@ button {
 }
 
 .modern-button:hover {
-  background-color: #0056b3; /* Darker shade on hover */
+  background-color: #66912b; /* Darker shade on hover */
 }
 
 .modern-button:focus {
