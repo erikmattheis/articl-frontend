@@ -184,7 +184,7 @@ export default {
 }
 
 .articl > ul > li {
-  padding: 0.5rem;
+  padding: 0.1rem 0.5rem;
   width: 100%;
   margin: 0;
 
