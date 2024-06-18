@@ -12,10 +12,8 @@
         @keyup.enter.prevent="changeArticlType(t)">
         {{ t }}</a>
     </li>
-    <li>
-      <button-new-articl />
-    </li>
-  </ul>
+    </ul>
+   <button-new-articl />
 </template>
 
 
