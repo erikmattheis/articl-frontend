@@ -17,7 +17,7 @@ button {
 }
 
 .modern-button {
-  background-color: #2ecc71; /* Primary color */
+  background-color: #83ba37; /* Primary color */
   color: #FFFFFF; /* White text */
   margin: 0.5rem;
   border: none; /* Remove border */
