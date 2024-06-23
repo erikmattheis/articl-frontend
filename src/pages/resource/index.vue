@@ -21,6 +21,7 @@ export default {
       results: {},
       slug: "",
       title: "",
+      titleHtml: "",
     };
   },
   computed: {
