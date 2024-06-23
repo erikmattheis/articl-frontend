@@ -14,7 +14,7 @@
             v-model="title"
             type="text"
             name="title"></label>
-        <label for="title">HTML Title
+        <label for="titleHtml">HTML Title
           <input
             id="titleHtml"
             v-model="titleHtml"
