@@ -108,6 +108,7 @@ export default {
     title: null,
     titleHtml: null,
     description: null,
+    selectedDescription: "",
     descriptionInvalid: null,
     titleHtmlInvalid: null,
     slugInvalid: null,
@@ -118,25 +119,21 @@ export default {
     aiButtonDisabled() {
       return this.buttonDisabled || this.isLoading;
     },
-    selectedDescription: {
-      get() {
-        return this.AISummaries[this.selectedAIDescriptionIndex]?.message.content
-      },
-      set(newValue) {
-        if (this.AISummaries[this.selectedAIDescriptionIndex]?.message.content) {
-          this.AISummaries[this.selectedAIDescriptionIndex].message.content = newValue;
-        }
-        else {
-          this.AISummaries = [
-            {
-              message: {
-                content: newValue,
-              },
-            }
-          ]
-        }
-      },
+  selectedDescription: {
+    get() {
+      if (this.selectedAIDescriptionIndex !== null && this.AISummaries[this.selectedAIDescriptionIndex]) {
+        return this.AISummaries[this.selectedAIDescriptionIndex].message.content;
+      }
+      return this.description; // Default to the original description
     },
+    set(newValue) {
+      if (this.selectedAIDescriptionIndex !== null && this.AISummaries[this.selectedAIDescriptionIndex]) {
+        this.AISummaries[this.selectedAIDescriptionIndex].message.content = newValue;
+      } else {
+        this.description = newValue; // Update the description if no AI summary is selected
+      }
+    }
+  },
     editingSlug: {
       get() {
         let str = this.title || this.titleHtml;
@@ -274,37 +271,37 @@ export default {
 
       return passed;
     },
-    async getAISummaries() {
-      try {
-        this.buttonDisabled = true;
-        this.AIError = "";
-        const data = {
-          category: this.categoryStringFromTitle,
-          parentCategory: this.breadcrumbs[this.breadcrumbs.length - 2]?.title || "",
-        };
+  async getAISummaries() {
+    try {
+      this.buttonDisabled = true;
+      this.AIError = "";
+      const data = {
+        category: this.categoryStringFromTitle,
+        parentCategory: this.breadcrumbs[this.breadcrumbs.length - 2]?.title || "",
+      };
 
-        const result = await axiosInstance({
-          method: "POST",
-          url: "/categories/ai-summary",
-          data,
-        });
+      const result = await axiosInstance({
+        method: "POST",
+        url: "/categories/ai-summary",
+        data,
+      });
 
-        if (result.data?.status === 200 && result.data?.message instanceof Array) {
-          this.AISummaries.push(...result.data.message);
-          this.aiButtonMessage = "Get More AI Summaries";
-        } else if (result.data?.message) {
-          this.AIError = `Error status ${result.data?.status}: ${result.data.message}`;
-        } else {
-          this.AIError = "There was an unknown error generating AI summaries.";
-        }
-
-      } catch (error) {
-        this.$store.dispatch("errors/setError", error);
-      } finally {
-        this.buttonDisabled = false;
+      if (result.data?.status === 200 && result.data?.message instanceof Array) {
+        this.AISummaries.push(...result.data.message);
+        this.selectedAIDescriptionIndex = 0; // Ensure the first summary is selected
+        this.aiButtonMessage = "Get More AI Summaries";
+      } else if (result.data?.message) {
+        this.AIError = `Error status ${result.data?.status}: ${result.data.message}`;
+      } else {
+        this.AIError = "There was an unknown error generating AI summaries.";
       }
 
-    },
+    } catch (error) {
+      this.$store.dispatch("errors/setError", error);
+    } finally {
+      this.buttonDisabled = false;
+    }
+  },
     async submitForm(id) {
       try {
         this.resetFormErrors();
