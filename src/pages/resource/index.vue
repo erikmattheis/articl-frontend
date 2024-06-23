@@ -1,7 +1,7 @@
 <template>
   <section>
     <the-breadcrumbs />
-    <h1>{{ title }}</h1>
+    <h1>{{ titleHtml }}</h1>
     <router-view></router-view>
   </section>
 </template>
