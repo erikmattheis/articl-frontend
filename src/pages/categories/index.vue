@@ -136,7 +136,7 @@ export default {
   },
     editingSlug: {
       get() {
-        let str = this.title || this.titleHtml;
+        let str = this.titleHtml;
         if (!str) {
           return "";
         }
