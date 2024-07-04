@@ -102,29 +102,17 @@ export default {
       const newNotes = notes.filter((note) => note.id !== payload);
       context.commit("SET_NOTES", newNotes);
     },
-   sortArticlsByAnyKey: (context) => (key) => {
+   sortArticlsByAnyKey: (context, key) => {
     const articls = context.state.articls.slice(); // Create a shallow copy of the original array
     articls.sort((a, b) => {
       if (key === "year" || key === "createdAt") {
         // Sort by descending order for Year Published and Date Added
-        if (a[key] < b[key]) {
-          return 1;
-        }
-        if (a[key] > b[key]) {
-          return -1;
-        }
+        return b[key] - a[key];
       } else {
         // Sort by ascending order for Title
-        if (a[key] > b[key]) {
-          return 1;
-        }
-        if (a[key] < b[key]) {
-          return -1;
-        }
+        return a[key].localeCompare(b[key]);
       }
-      return 0;
     });
-
     context.commit("SET_ARTICLS", articls);
   },
   },
@@ -150,23 +138,10 @@ export default {
     if (sortBy) {
       articls.sort((a, b) => {
         if (sortBy === "year" || sortBy === "createdAt") {
-          // Sort by descending order for Year Published and Date Added
-          if (a[sortBy] < b[sortBy]) {
-            return 1;
-          }
-          if (a[sortBy] > b[sortBy]) {
-            return -1;
-          }
+          return b[sortBy] - a[sortBy];
         } else {
-          // Sort by ascending order for Title
-          if (a[sortBy] > b[sortBy]) {
-            return 1;
-          }
-          if (a[sortBy] < b[sortBy]) {
-            return -1;
-          }
+          return a[sortBy].localeCompare(b[sortBy]);
         }
-        return 0;
       });
     }
     return articls;
