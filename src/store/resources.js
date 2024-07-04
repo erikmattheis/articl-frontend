@@ -102,20 +102,29 @@ export default {
       const newNotes = notes.filter((note) => note.id !== payload);
       context.commit("SET_NOTES", newNotes);
     },
-   sortArticlsByAnyKey: (context, { articlType, sortBy }) => {
-    let articls = context.state.articls.slice(); // Create a shallow copy of the original array
-    if (articlType) {
-      articls = articls.filter((articl) => articl.articlType === articlType);
-    }
+   sortArticlsByAnyKey: (context) => (key) => {
+    const articls = context.state.articls.slice(); // Create a shallow copy of the original array
     articls.sort((a, b) => {
-      if (a[sortBy] > b[sortBy]) {
-        return 1;
-      }
-      if (a[sortBy] < b[sortBy]) {
-        return -1;
+      if (key === "year" || key === "createdAt") {
+        // Sort by descending order for Year Published and Date Added
+        if (a[key] < b[key]) {
+          return 1;
+        }
+        if (a[key] > b[key]) {
+          return -1;
+        }
+      } else {
+        // Sort by ascending order for Title
+        if (a[key] > b[key]) {
+          return 1;
+        }
+        if (a[key] < b[key]) {
+          return -1;
+        }
       }
       return 0;
     });
+
     context.commit("SET_ARTICLS", articls);
   },
   },
@@ -131,18 +140,31 @@ export default {
 
     categories: (state) => state.categories,
 
-   filteredArticls: (state) => (articlType, sortBy) => {
-    let articls = state.articls.slice(); // Create a shallow copy of the original array
-    if (articlType) {
-      articls = articls.filter((articl) => articl.articlType === articlType);
+  filteredArticls: (state) => (articlType, sortBy) => {
+    let articls;
+    if (!articlType) {
+      articls = state.articls;
+    } else {
+      articls = state.articls.filter((articl) => articl.articlType === articlType);
     }
     if (sortBy) {
       articls.sort((a, b) => {
-        if (a[sortBy] > b[sortBy]) {
-          return 1;
-        }
-        if (a[sortBy] < b[sortBy]) {
-          return -1;
+        if (sortBy === "year" || sortBy === "createdAt") {
+          // Sort by descending order for Year Published and Date Added
+          if (a[sortBy] < b[sortBy]) {
+            return 1;
+          }
+          if (a[sortBy] > b[sortBy]) {
+            return -1;
+          }
+        } else {
+          // Sort by ascending order for Title
+          if (a[sortBy] > b[sortBy]) {
+            return 1;
+          }
+          if (a[sortBy] < b[sortBy]) {
+            return -1;
+          }
         }
         return 0;
       });
