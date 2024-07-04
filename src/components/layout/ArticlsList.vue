@@ -31,6 +31,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      sortBy: 'createdAt'
     };
   },
   components: {
