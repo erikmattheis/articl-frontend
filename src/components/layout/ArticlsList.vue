@@ -50,14 +50,15 @@ export default {
     }
   },
   methods: {
-    sortArticlsBy(e) {
-      this.sortBy = e.target.value;
-      this.sortArticlsByAnyKey(this.articlType, e.target.value);
-      this.$router.push({ query: { sortBy: e.target.value } });
-    },
-    sortArticlsByAnyKey(key, sortBy) {
-      this.$store.dispatch("resources/sortArticlsByAnyKey", key, sortBy);
-    },
+  sortArticlsBy(e) {
+    this.sortBy = e.target.value;
+    this.$store.dispatch("resources/sortArticlsByAnyKey", { articlType: this.articlType, sortBy: e.target.value });
+    this.$router.push({ query: { sortBy: e.target.value } });
+  },
+  sortArticlsByAnyKey(articlType, sortBy) {
+    console.log('Sorting By:', sortBy); // Debug log
+    this.$store.dispatch("resources/sortArticlsByAnyKey", { articlType, sortBy });
+  },
     updateArticlsOrderValues() {
       try {
         this.articls.forEach((obj, index) => {
