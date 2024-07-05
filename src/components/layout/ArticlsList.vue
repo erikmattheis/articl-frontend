@@ -5,7 +5,6 @@
       <li><select
           v-model="sortBy"
           @change="sortArticlsBy">
-          <option disabled value="">SORT BY</option>
           <option value="title">Title</option>
           <option value="year">Year Published</option>
           <option value="createdAt">Date Added</option>
