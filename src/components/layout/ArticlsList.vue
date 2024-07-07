@@ -1,17 +1,17 @@
 <template>
   <div>
     <articl-type-tabs />
+    <div class="sort-container">
+      <label for="sort-select">Sort By:</label>
+      <select id="sort-select" v-model="sortBy" @change="sortArticlsBy">
+        <option value="title">Title</option>
+        <option value="year">Year Published</option>
+        <option value="createdAt">Date Added</option>
+      </select>
+    </div>
     <ul class="nav-inner-content">
-      <li><select
-          v-model="sortBy"
-          @change="sortArticlsBy">
-          <option value="title">Title</option>
-          <option value="year">Year Published</option>
-          <option value="createdAt">Date Added</option>
-        </select></li>
       <articls-list-item :articl="articl" v-for="(articl, index) in articls" :key="index" />
     </ul>
-
     <div v-if="(articls?.length === 0)">
       No entries yet.
     </div>
@@ -39,10 +39,7 @@ export default {
     ArticlTypeTabs,
   },
   computed: {
-    sortBy() {
-      this.$route.query.createdAt || "createdAt"
-    },
-    ...mapGetters({
+      ...mapGetters({
       filteredArticls: "resources/filteredArticls",
       articlType: "resources/articlType",
     }),
@@ -112,8 +109,33 @@ export default {
 </script>
 
 <style scoped>
+.sort-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+label {
+  margin-right: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
 select {
   max-width: 250px;
-  margin: 0 0 0.5rem 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  font-size: 1rem;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+select:focus {
+  border-color: #007BFF;
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 </style>
