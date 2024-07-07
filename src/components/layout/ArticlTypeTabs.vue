@@ -40,9 +40,12 @@ export default {
   },
   methods: {
      changeArticlType(articlType) {
-    this.$store.dispatch("resources/setArticlType", articlType);
-    this.$router.push({ name: 'ArticlsList', params: { slug: this.slug, articlType } });
-  },
+      //this.$store.dispatch("resources/articlType", articlType);
+
+      this.$router.push({ name: 'ArticlsList', params: { slug: this.slug, articlType } });
+
+
+    },
   },
 };
 
