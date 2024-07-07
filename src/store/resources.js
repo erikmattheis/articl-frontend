@@ -58,9 +58,9 @@ export default {
     slug: (context, payload) => {
       context.commit("SET_SLUG", payload);
     },
-    setArticlType: (context, payload) => {
-    context.commit("SET_ARTICL_TYPE", payload);
-  },
+    articlType: (context, payload) => {
+      context.commit("SET_ARTICL_TYPE", payload);
+    },
     count: (context, payload) => {
       context.commit("SET_COUNT", payload);
     },
