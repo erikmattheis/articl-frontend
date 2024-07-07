@@ -40,7 +40,7 @@ export default {
   },
   methods: {
      changeArticlType(articlType) {
-      //this.$store.dispatch("resources/articlType", articlType);
+      this.$store.dispatch("resources/articlType", articlType);
 
       this.$router.push({ name: 'ArticlsList', params: { slug: this.slug, articlType } });
 
