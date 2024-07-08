@@ -50,7 +50,7 @@ export default {
   methods: {
  sortArticlsBy(e) {
     this.sortBy = e.target.value;
-    this.$store.dispatch('resources/sortArticlsByAnyKey', e.target.value);
+    this.$store.dispatch('resources/sortArticlsByAnyKey', { articlType: this.articlType, key: e.target.value });
     this.$router.push({ query: { sortBy: e.target.value } });
   },
   sortArticlsByAnyKey(articlType, sortBy) {
