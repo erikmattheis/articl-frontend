@@ -59,8 +59,8 @@ export default {
       context.commit("SET_SLUG", payload);
     },
     articlType: (context, payload) => {
-      context.commit("SET_ARTICL_TYPE", payload);
-    },
+    context.commit("SET_ARTICL_TYPE", payload); // Set articl type in state
+  },
     count: (context, payload) => {
       context.commit("SET_COUNT", payload);
     },
@@ -102,14 +102,12 @@ export default {
       const newNotes = notes.filter((note) => note.id !== payload);
       context.commit("SET_NOTES", newNotes);
     },
-   sortArticlsByAnyKey: (context, key) => {
+   sortArticlsByAnyKey: (context, { articlType, key }) => {
     const articls = context.state.articls.slice(); // Create a shallow copy of the original array
     articls.sort((a, b) => {
       if (key === "year" || key === "createdAt") {
-        // Sort by descending order for Year Published and Date Added
         return b[key] - a[key];
       } else {
-        // Sort by ascending order for Title
         return a[key].localeCompare(b[key]);
       }
     });
@@ -128,13 +126,8 @@ export default {
 
     categories: (state) => state.categories,
 
-  filteredArticls: (state) => (articlType, sortBy) => {
-    let articls;
-    if (!articlType) {
-      articls = state.articls;
-    } else {
-      articls = state.articls.filter((articl) => articl.articlType === articlType);
-    }
+ filteredArticls: (state) => (articlType, sortBy) => {
+    let articls = articlType ? state.articls.filter(articl => articl.articlType === articlType) : state.articls;
     if (sortBy) {
       articls.sort((a, b) => {
         if (sortBy === "year" || sortBy === "createdAt") {
