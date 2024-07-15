@@ -155,7 +155,6 @@ export default {
         return str;
       },
       set(newValue) {
-        console.log(newValue)
         return newValue;
       },
     },

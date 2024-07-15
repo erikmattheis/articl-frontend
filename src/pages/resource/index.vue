@@ -130,7 +130,7 @@ export default {
         method: "GET",
         url: `/imports/import-articls/batch`,
       });
-      console.log('result', result);
+      console.log('result2', result);
     },
   },
 }

@@ -61,11 +61,6 @@ export default {
       articlType: "resources/articlType",
     }),
   },
-  /*
-  beforeRouteUpdate(to, from, next) {
-    console.log(to);
-    console.log(from);
-  }, */
   mounted() {
     const user = this.$cookies.get("user");
     if (user) {

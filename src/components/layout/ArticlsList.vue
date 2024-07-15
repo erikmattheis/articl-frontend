@@ -54,7 +54,6 @@ export default {
     this.$router.push({ query: { sortBy: e.target.value } });
   },
   sortArticlsByAnyKey(articlType, sortBy) {
-    console.log('Sorting By:', sortBy); // Debug log
     this.$store.dispatch("resources/sortArticlsByAnyKey", { articlType, sortBy });
   },
     updateArticlsOrderValues() {

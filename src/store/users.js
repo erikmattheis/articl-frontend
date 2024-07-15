@@ -33,7 +33,6 @@ export default {
     async login({ dispatch, commit }, { username, password }) {
       try {
         const response = await userLogin({ username, password });
-console.log('response', response)
         const { data } = response;
 
         if (data.error) {

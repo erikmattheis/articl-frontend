@@ -114,7 +114,6 @@ export default {
             password: this.password,
             username: this.username,
           });
-          console.log('user', user);
           if (!user) {
             return false;
           }
