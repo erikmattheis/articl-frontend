@@ -34,7 +34,7 @@
 
         <fieldset v-for="(author, index) in authors" :key="author.id">
           <div class="grid">
-            <label for="`nameFirst${index}`">First name
+            <label for="`nameFirst${index}`">{{ JSON.stringify(author) }}
               <input :id="`nameFirst${index}`" v-model="author.nameFirst" :name="`nameFirst${index}`"
                 autocomplete="off" /></label>
             <label for="`nameLast${index}`">Last name

@@ -25,16 +25,20 @@ const getDB = (url) => {
 //  Authors as found in Pubmed Data
 const extractAuthorsPMC = (element) => {
   if (!element.querySelector("surname")?.textContent) {
+    console.log("no surname");
     return "";
   }
 
-  let authors = element.querySelector("surname") ? `${element.querySelector("surname")?.textContent} ` : "";
+  console.log("surname", element.querySelector("surname")?.textContent);
 
-  authors += element.querySelector("given-names") ? `${element.querySelector("given-names")?.textContent} ` : "";
+  let author = element.querySelector("surname") ? `${element.querySelector("surname")?.textContent}` : "";
 
-  authors += element.querySelector("degrees") ? `${element.querySelector("degrees")?.textContent}<br><br>` : "";
+  author += element.querySelector("given-names") ? `, ${element.querySelector("given-names")?.textContent}` : "";
 
-  return authors;
+  author += element.querySelector("degrees") ? `, ${element.querySelector("degrees")?.textContent}` : "";
+
+
+  return author;
 };
 const extractAuthorsPubMed = (element) => {
   if (!element.querySelector("LastName")?.textContent) {
@@ -82,17 +86,31 @@ const api = async (surl) => {
     authorsOrig: "",
     authors: [],
   };
+
+  console.log('database', database);
+
   switch (database) {
     case "pmc": {
       result.title = responseDocument.querySelectorAll("article-title")[0]?.textContent;
 
       const authorsPMC = responseDocument.querySelectorAll("contrib");
+      
+      let authors = [];
 
       authorsPMC.forEach((element) => {
-        result.authorsOrig += extractAuthorsPMC(element);
+        const author = extractAuthorsPMC(element);
+        authors.push(author);
       });
 
+      result.authors = authors;
+
+      result.authorsOrig = authors.join("<br><br>");
+
+      console.log('result.authors', result.authorsOrig);
+
       const temporary = responseDocument.querySelectorAll("aff");
+
+      console.log('temporary', temporary);
 
       temporary.forEach((element) => {
         result.affiliation += `${element?.textContent}<br><br>`;

@@ -2,6 +2,7 @@
   <li class="articl">
     <ul>
       <li class="title container">
+        {{JSON.stringify(articl, null, 2)}}
         <a
           :data-tooltip="linkMessage"
           :href="articl.url"
@@ -18,7 +19,6 @@
       </li>
 
       <li class="articl-details">
-
         <articl-author
           v-for="(author, index) in articl.authors"
           :author="author"

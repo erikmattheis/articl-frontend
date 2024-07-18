@@ -1,5 +1,5 @@
 <template>
-  <span> {{ name }}{{ commaOrEmpty }} </span>
+  <span> {{ author }} {{ name }}{{ commaOrEmpty }} </span>
 </template>
 
 <script>
@@ -23,9 +23,11 @@ export default {
   },
   computed: {
     commaOrEmpty() {
+      console.log('last:', this.last);
       return this.last ? '' : ', ';
     },
-     name() {
+    name() {
+      console.log('author:', this.author);
       if (typeof this.author === 'string') return this.author;
       if (!this.author?.nameLast) return 'No nameLast set';
       return `${this.author.nameFirst} ${this.author.nameLast}${this.commaOrEmpty}`;
