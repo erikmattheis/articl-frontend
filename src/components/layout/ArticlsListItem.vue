@@ -19,6 +19,7 @@
       </li>
 
       <li class="articl-details">
+        articl.authors.length: {{ articl.authors.length }}
         <articl-author
           v-for="(author, index) in articl.authors"
           :author="author"

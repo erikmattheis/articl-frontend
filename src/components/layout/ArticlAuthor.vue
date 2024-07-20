@@ -1,5 +1,8 @@
 <template>
-  <span> {{ author }} {{ name }}{{ commaOrEmpty }} </span>
+  <span>
+    <span v-if="string"> {{ author }}{{ commaOrEmpty }} </span>
+    <span v-else>{{ name }} {{  author }}</span>
+  </span>
 </template>
 
 <script>
@@ -22,15 +25,19 @@ export default {
     },
   },
   computed: {
+    string() {
+      return typeof this.author === 'string';
+    },
     commaOrEmpty() {
-      console.log('last:', this.last);
       return this.last ? '' : ', ';
     },
     name() {
       console.log('author:', this.author);
+      /*
       if (typeof this.author === 'string') return this.author;
       if (!this.author?.nameLast) return 'No nameLast set';
-      return `${this.author.nameFirst} ${this.author.nameLast}${this.commaOrEmpty}`;
+      */
+      return `${this.author.nameFirst} ${this.author.nameLast}}`;
     },
   },
 }
