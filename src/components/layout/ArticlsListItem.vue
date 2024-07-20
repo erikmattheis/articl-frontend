@@ -1,8 +1,7 @@
 <template>
   <li class="articl">
     <ul>
-      <li class="title container">
-        {{JSON.stringify(articl, null, 2)}}
+      <li class="articl-title">
         <a
           :data-tooltip="linkMessage"
           :href="articl.url"
@@ -19,7 +18,7 @@
       </li>
 
       <li class="articl-details">
-        articl.authors.length: {{ articl.authors.length }}
+  
         <articl-author
           v-for="(author, index) in articl.authors"
           :author="author"

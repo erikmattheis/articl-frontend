@@ -32,22 +32,29 @@
           <input id="doi" v-model="doi" name="doi" autocomplete="off" />
         </label>
 
-        <fieldset v-for="(author, index) in authors" :key="author.id">
-          <div class="grid">
-            <label for="`nameFirst${index}`">{{ JSON.stringify(author) }}
-              <input :id="`nameFirst${index}`" v-model="author.nameFirst" :name="`nameFirst${index}`"
-                autocomplete="off" /></label>
-            <label for="`nameLast${index}`">Last name
-              <input :id="`nameLast${index}`" v-model="author.nameLast" :name="`nameLast${index}`"
-                autocomplete="off" /></label>
-          </div>
-
-          <label v-for="(affiliation, affilIndex) in author.affilliations" :key="affiliation"
-            for="`affiliation${affilIndex}`">Affiliation
-
-            <input id="`affiliation${affilIndex}`" v-model="author.affilliations[affilIndex]"
-              name="`affiliation${affilIndex}`" autocomplete="off" /></label>
+        <template v-if="authorsOrig && authorsOrig.length">Authors - old field
+          <label for="authorsOrig">
+            <input id="authorsOrig" v-model="authorsOrig" name="authorsOrig" autocomplete="off" />
+          </label>
+        </template>
+        <fieldset>
+          <template v-for="(author, index) in authors" :key="index">Author
+            <div class="grid">
+              <label for="`author${index}`">
+                <input :id="`author${index}`" v-model="authors[index]" :name="`author${index}`"
+                  autocomplete="off" /></label>
+            </div>
+          </template>
         </fieldset>
+        <template v-if="authors.length === 0">
+          <fieldset>Author
+            <div class="grid">
+              <label for="author0">
+                <input id="author0" v-model="authors[0]" name="author0"
+                  autocomplete="off" /></label>
+            </div>
+          </fieldset>
+        </template>
 
         <label for="institution">Institution <input id="institution" v-model="institution" name="institution"
             autocomplete="off" /></label>
@@ -80,15 +87,14 @@
             </optgroup>
           </select></label>
 
-
         <input-typeahead src="/categories/titles" query="category" :input-value="slug" label-value="Category slug"
           @update-value="onTypeaheadHit" @keyup="onTypeaheadHit" />
 
-        <button :aria-busy="buttonDisabled"
-          @click.prevent="$router.push({ name: 'ArticlsList', params: { slug } })">Cancel</button>
         <button type="button" :aria-busy="buttonDisabled" @click.prevent="submitForm(id)">
           {{ !id ? "Create" : "Edit" }} Articl
         </button>
+        <button :aria-busy="buttonDisabled"
+        @click.prevent="$router.push({ name: 'ArticlsList', params: { slug } })">Cancel</button>
       </form>
     </template>
   </article>

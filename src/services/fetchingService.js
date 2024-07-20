@@ -87,8 +87,6 @@ const api = async (surl) => {
     authors: [],
   };
 
-  console.log('database', database);
-
   switch (database) {
     case "pmc": {
       result.title = responseDocument.querySelectorAll("article-title")[0]?.textContent;
@@ -106,15 +104,20 @@ const api = async (surl) => {
 
       result.authorsOrig = authors.join("<br><br>");
 
-      console.log('result.authors', result.authorsOrig);
+      let affiliation = responseDocument.querySelectorAll("#Aff1 institution-wrap institution");
 
-      const temporary = responseDocument.querySelectorAll("aff");
+      if (affiliation.length === 0) {
+        affiliation = '';
+      }
+      else { 
+        affiliation = affiliation[0]?.textContent.trim();
+        
+        if (affiliation[affiliation.length - 1] === ',') {
+          affiliation = affiliation.slice(0, -1);
+        }
+      }
 
-      console.log('temporary', temporary);
-
-      temporary.forEach((element) => {
-        result.affiliation += `${element?.textContent}<br><br>`;
-      });
+      result.institution = affiliation;
 
       result.journal = responseDocument.querySelectorAll("journal-title")[0]?.textContent;
 
