@@ -11,6 +11,7 @@ const getId = (url) => {
   }
   return id.slice(Math.max(0, id.lastIndexOf("/") + 1));
 };
+
 const getDB = (url) => {
   try {
     if (url.includes("pmc")) return "pmc";
@@ -29,7 +30,7 @@ const extractAuthorsPMC = (element) => {
     return "";
   }
 
-  console.log("surname", element.querySelector("surname")?.textContent);
+  console.log("extractAuthorsPMC surname", element.querySelector("surname")?.textContent);
 
   let author = element.querySelector("surname") ? `${element.querySelector("surname")?.textContent}` : "";
 
@@ -54,7 +55,7 @@ const extractAuthorsPubMed = (element) => {
   const hasFirstName = element.querySelector("FirstName")?.textContent;
 
   authors += hasFirstName ? element.querySelector("FirstName").textContent : "<br><br>";
-
+console.log("authors extractAuthorsPubMed", JSON.stringify(authors, null, 2));
   return authors;
 };
 
@@ -74,6 +75,10 @@ const extractAuthorsObjectsPubMed = (element) => {
 };
 // Handle the Async fetch of Pubmed Data
 const api = async (surl) => {
+
+  try {
+
+  
   const baseUrl = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
   const database = getDB(surl);
   const id = getId(surl);
@@ -165,6 +170,11 @@ const api = async (surl) => {
   }
 
   return result;
+  }
+  catch (error) {
+    console.log("error", error);
+    return null;
+  }
 };
 
 async function scrape(surl) {

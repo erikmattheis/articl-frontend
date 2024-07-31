@@ -38,6 +38,9 @@
               class="search-articls"></router-link> -->
           </li>
 
+          <li>
+            {{isLoggedInMixin}}
+          </li>
           <li v-if="!isLoggedInMixin && $route.name !== 'LoginPage'">
             <router-link
               :to="{ name: 'LoginPage' }">
@@ -51,16 +54,15 @@
           </li>
 
           <li v-else-if="$route.name !== 'LoginPage'">
-            <details role="list">
+            <details role="list" class="dropdown">
+
               <summary aria-haspopup="listbox">
                 <div role="link">
                   <span class="sr">User</span>
-                  <vue-feather
-                    size="2rem"
-                    type="user"
-                    aria-label="User" />
+                  <vue-feather size="2rem" type="user" aria-label="User" />
                 </div>
               </summary>
+
 
               <ul role="listbox">
                 <li>
@@ -235,6 +237,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+/*
 details[role=list],
 details summary,
 details[role=list] summary:not([role]):focus {
@@ -242,7 +245,7 @@ details[role=list] summary:not([role]):focus {
   border: 0 !important;
   box-shadow: none !important;
 }
-
+*/
 details summary::after {
   display: none !important;
 }
@@ -275,5 +278,36 @@ li .grid {
 
 .nav-user {
   margin: 0 1rem;
+}
+
+.nav-user a {
+  width: 5rem;
+}
+
+.nav-user {
+  margin: 0 1rem;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown[open] > ul {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: var(--background); /* Use PicoCSS variable for background */
+  border: 1px solid var(--border); /* Use PicoCSS variable for border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visibility */
+  z-index: 1000; /* Ensure it appears above other elements */
+  min-width: 200px; /* Set a minimum width */
+  padding: var(--spacing); /* Use PicoCSS variable for padding */
+  list-style: none; /* Remove default list styling */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
+.dropdown[open] > ul > li {
+  padding: var(--spacing); /* Add padding to list items */
 }
 </style>
