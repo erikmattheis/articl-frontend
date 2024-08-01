@@ -25,6 +25,9 @@ const getDB = (url) => {
 };
 //  Authors as found in Pubmed Data
 const extractAuthorsPMC = (element) => {
+  try {
+
+  
   if (!element.querySelector("surname")?.textContent) {
     console.log("no surname");
     return "";
@@ -40,8 +43,16 @@ const extractAuthorsPMC = (element) => {
 
 
   return author;
+  }
+  catch (error) {
+    store.dispatch(errorAction, error);
+    return "";
+  }
 };
 const extractAuthorsPubMed = (element) => {
+  try {
+
+  
   if (!element.querySelector("LastName")?.textContent) {
     return "";
   }
@@ -57,9 +68,16 @@ const extractAuthorsPubMed = (element) => {
   authors += hasFirstName ? element.querySelector("FirstName").textContent : "<br><br>";
 console.log("authors extractAuthorsPubMed", JSON.stringify(authors, null, 2));
   return authors;
+}
+catch (error) {
+  store.dispatch(errorAction, error);
+  return "";
+}
 };
 
 const extractAuthorsObjectsPubMed = (element) => {
+  try {   
+
   if (!element.querySelector("LastName")?.textContent) {
     return {};
   }
@@ -72,7 +90,14 @@ const extractAuthorsObjectsPubMed = (element) => {
     nameLast: element.querySelector("LastName")?.textContent,
     affilliations: affl.map((ele) => ele?.textContent),
   };
-};
+
+  }
+
+  catch (error) {
+    store.dispatch(errorAction, error);
+    return {};
+  };
+}
 // Handle the Async fetch of Pubmed Data
 const api = async (surl) => {
 
@@ -171,13 +196,15 @@ const api = async (surl) => {
 
   return result;
   }
+
   catch (error) {
-    console.log("error", error);
+    store.dispatch(errorAction, error);
     return null;
   }
 };
 
 async function scrape(surl) {
+  try {
   const url = `https://cors-anywhere.herokuapp.com/${surl}`;
   const database = getDB(surl);
   const response = await fetch(url);
@@ -231,7 +258,7 @@ async function scrape(surl) {
 
         result.abstract = responseDocument.querySelectorAll("#enc-abstract")[0]?.textContent;
       } catch (error) {
-        this.$store.dispatch("errors/setError", error);
+        this.$store.dispatch(errorAction, error);
       }
 
       break;
@@ -239,6 +266,12 @@ async function scrape(surl) {
     default:
       throw new Error("Unknown condition passed to scraper.");
   }
+  }
+  catch (error) {
+    store.dispatch(errorAction, error);
+    return null;
+  }
+
 }
 
 const download = (filename, text) => {
