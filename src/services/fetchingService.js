@@ -308,6 +308,8 @@ const generateJSON = (result) => {
   };
   const jsonOutput = JSON.stringify(object, null, 2); // TypeError: Converting circular structure to JSON
 
+  
+
   // Start file download.
   download(`article_${Date.now()}.json`, jsonOutput);
 };

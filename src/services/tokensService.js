@@ -11,7 +11,7 @@ const clearJWTTokens = (rememberMe) => {
   }
 };
 
-const getJWTToken = (key) => VueCookies.get(key);
+ const getJWTToken = (key) => VueCookies.get(key);
 
 const setJWTToken = (key, value) => VueCookies.set(key, value);
 

@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import VueCookies from "vue-cookies";
 
 import App from "./App.vue";
-import './assets/global.scss';
+import "./assets/global.scss";
 import router from "./router";
 import store from "./store/index";
 import isLoggedInMixin from "./mixins/isLoggedInMixin";
@@ -15,7 +15,10 @@ app.use(router);
 
 let secure = true;
 
-if (window.location.hostname === "192.168.1.130" || window.location.hostname === "localhost") {
+if (
+  window.location.hostname === "192.168.1.130" ||
+  window.location.hostname === "localhost"
+) {
   secure = false;
 }
 
@@ -49,7 +52,7 @@ axiosInstance.interceptors.request.use(
 
     return Promise.resolve(req);
   },
-  (error) => error,
+  (error) => error
 );
 
 const BAD_REQUEST = 400;
@@ -64,17 +67,20 @@ axiosInstance.interceptors.response.use(
     console.log("Interceptor error:", error);
 
     if (status === HTTP_FORBIDDEN) {
-      console.log('Forbidden')
+      console.log("Forbidden");
       return router.push({ name: "Forbidden" });
     }
-    console.log("error.status", error)
+    console.log("error.status", error);
     if (error.status === TOO_MANY_REQUESTS) {
       console.log("Too many requests");
 
       return Promise.reject(error);
     }
 
-    if (error.response.status === HTTP_UNAUTHORIZED && !error.config.url.includes("/auth/refresh-tokens")) {
+    if (
+      error.response.status === HTTP_UNAUTHORIZED &&
+      !error.config.url.includes("/auth/refresh-tokens")
+    ) {
       console.log("Access token is invalid or has expired.");
       const success = await store.dispatch("tokens/refreshSession");
       if (success) {

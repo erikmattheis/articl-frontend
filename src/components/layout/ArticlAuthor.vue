@@ -5,8 +5,10 @@
   </span>
 </template>
 
+
 <script>
-export default {
+export default   {
+
   props: {
     key: {
       type: Number,
