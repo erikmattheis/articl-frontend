@@ -28,7 +28,6 @@ const getDB = (url) => {
 const extractAuthorsPMC = (element) => {
   try {
     if (!element.querySelector("surname")?.textContent) {
-      console.log("no surname");
       return "";
     }
 
@@ -51,13 +50,12 @@ const extractAuthorsPMC = (element) => {
 };
 
 const extractAuthorPubMed = (element) => {
-  console.log("extractAuthorsPubMed");
   try {
     let author = element["nameFirst"];
 
     const hasFirstName = element["nameFirst"];
 
-    author += hasFirstName ? element["nameLast"] : "";
+    author += hasFirstName ? " " + element["nameLast"] : "";
 
     return author;
   } catch (error) {
@@ -71,10 +69,6 @@ const extractAuthorsObjectsPubMed = (element) => {
     if (!element.querySelector("LastName")?.textContent) {
       return {};
     }
-    console.log(
-      "element",
-      element.querySelector("AffiliationInfo Affilliation")
-    );
 
     return {
       nameFirst: element.querySelector("ForeName")
@@ -180,16 +174,10 @@ const api = async (surl) => {
 
           const oneAuthor = extractAuthorPubMed(author);
 
-          console.log("oneAuthor", oneAuthor, JSON.stringify(author, null, 2));
-
           if (
             !result.institution &&
             element.querySelector("Affiliation").textContent
           ) {
-            console.log(
-              "element.querySelector(Affiliation).textContent",
-              JSON.stringify(element.querySelector("Affiliation").textContent)
-            );
             result.institution =
               element.querySelector("Affiliation").textContent;
           }
