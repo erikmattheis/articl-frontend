@@ -51,7 +51,7 @@ const extractAuthorsPMC = (element) => {
 };
 
 const extractAuthorPubMed = (element) => {
-  console.log("extractAuthorsPubMed", element);
+  console.log("extractAuthorsPubMed");
   try {
     let author = element["nameFirst"];
 
@@ -71,16 +71,17 @@ const extractAuthorsObjectsPubMed = (element) => {
     if (!element.querySelector("LastName")?.textContent) {
       return {};
     }
-
-    let affl = element.querySelectorAll("Affiliation");
-    affl = [...affl];
+    console.log(
+      "element",
+      element.querySelector("AffiliationInfo Affilliation")
+    );
 
     return {
       nameFirst: element.querySelector("ForeName")
         ? element.querySelector("ForeName")?.textContent
         : "",
       nameLast: element.querySelector("LastName")?.textContent,
-      affilliations: affl.map((ele) => ele?.textContent),
+      affilliations: element.querySelector("AffiliationInfo Affilliation"),
     };
   } catch (error) {
     store.dispatch(errorAction, error);
@@ -107,6 +108,7 @@ const api = async (surl) => {
     const result = {
       authorsOrig: "",
       authors: [],
+      institution: "",
     };
 
     switch (database) {
@@ -175,8 +177,22 @@ const api = async (surl) => {
 
         authorsPubMed.forEach((element) => {
           const author = extractAuthorsObjectsPubMed(element);
-          // console.log("author", author);
+
           const oneAuthor = extractAuthorPubMed(author);
+
+          console.log("oneAuthor", oneAuthor, JSON.stringify(author, null, 2));
+
+          if (
+            !result.institution &&
+            element.querySelector("Affiliation").textContent
+          ) {
+            console.log(
+              "element.querySelector(Affiliation).textContent",
+              JSON.stringify(element.querySelector("Affiliation").textContent)
+            );
+            result.institution =
+              element.querySelector("Affiliation").textContent;
+          }
 
           result.authors.push(oneAuthor);
 
