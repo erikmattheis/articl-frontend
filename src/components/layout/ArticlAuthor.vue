@@ -39,7 +39,7 @@ export default   {
       if (typeof this.author === 'string') return this.author;
       if (!this.author?.nameLast) return 'No nameLast set';
       */
-      return `${this.author.nameFirst} ${this.author.nameLast}}`;
+      return `${this.author.nameFirst} ${this.author.nameLast}`;
     },
   },
 }
