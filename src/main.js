@@ -55,7 +55,6 @@ axiosInstance.interceptors.request.use(
   (error) => error
 );
 
-const BAD_REQUEST = 400;
 const HTTP_UNAUTHORIZED = 401;
 const HTTP_FORBIDDEN = 403;
 const TOO_MANY_REQUESTS = 429;
@@ -66,7 +65,7 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     console.log("Interceptor error:", error);
 
-    if (status === HTTP_FORBIDDEN) {
+    if (error.status === HTTP_FORBIDDEN) {
       console.log("Forbidden");
       return router.push({ name: "Forbidden" });
     }
@@ -78,7 +77,7 @@ axiosInstance.interceptors.response.use(
     }
 
     if (
-      error.response.status === HTTP_UNAUTHORIZED &&
+      error.response?.status === HTTP_UNAUTHORIZED &&
       !error.config.url.includes("/auth/refresh-tokens")
     ) {
       console.log("Access token is invalid or has expired.");
