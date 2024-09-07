@@ -1,36 +1,15 @@
 {
-  "name": "articl-frontend",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "articl-nuxt-static-as-is",
+  "version": "1.0.0",
+  "description": "This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "dependencies": {
-    "@picocss/pico": "^1.5.10",
-    "@vitejs/plugin-vue": "^4.1.0",
-    "axios": "^1.4.0",
-    "compression": "^1.7.4",
-    "connect-history-api-fallback": "^2.0.0",
-    "dayjs": "^1.11.8",
-    "express": "^4.18.2",
-    "lodash": "^4.17.21",
-    "path": "^0.12.7",
-    "serve-static": "^1.15.0",
-    "url": "^0.11.1",
-    "vue": "^3.2.47",
-    "vue-cookies": "^1.8.3",
-    "vue-draggable-next": "^2.2.1",
-    "vue-feather": "^2.0.0",
-    "vue-router": "^4.2.2",
-    "vuex": "^4.1.0"
-  },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "eslint": "^8.54.0",
-    "sass": "^1.63.6",
-    "vite": "^4.3.9"
+    "express": "^4.19.2"
   }
 }
