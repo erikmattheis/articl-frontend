@@ -1,0 +1,1 @@
+import{c as o,a as e,o as n}from"./CZZvAiAY.js";const u={__name:"404",setup(l){return(a,t)=>(n(),o("article",null,t[0]||(t[0]=[e("article",null,[e("h1",null,"Not found"),e("p",null,"The page or the content requested by the page could not be found.")],-1)])))}};export{u as default};
