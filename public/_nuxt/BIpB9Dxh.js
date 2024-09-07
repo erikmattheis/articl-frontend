@@ -1,0 +1,1 @@
+import{a as u}from"./CdQJ6MTo.js";import{r as a,s as i,H as c,g as m}from"./BI3g6Nse.js";function f(){const e=a(0),n=u(),{accessTokenExpires:t}=i(n),r=c(()=>t.value>e.value),o=()=>{e.value=Date.now();const s=t.value-e.value;s>0&&setTimeout(()=>{o()},s)};return m(()=>{o()}),{isLoggedInMixin:r,updateCurrentTime:o}}export{f as u};
